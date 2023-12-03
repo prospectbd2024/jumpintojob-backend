@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Circular;
 
+use App\Services\FileUploadService;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CircularStoreRequest extends FormRequest
 {
@@ -12,24 +14,23 @@ class CircularStoreRequest extends FormRequest
     }
 
     protected function prepareForValidation(): void
-        {
-            // You can perform data manipulation here
-            $this->merge([
-                'slug' => ucwords(strtolower($this->input('title'))), // Convert name to title case
-                'employer_id' => auth()->user()->employer->id, // Add the authenticated user's employer ID
-                'current_company_name' => auth()->user()->employer->company->name, // Add the authenticated user's company name
-                'created_at' => now(),
-                // Add more data manipulation as needed
-            ]);
-        }
+    {
+        // You can perform data manipulation here
+        $employer = Auth::user()->employer;
+        $this->merge([
+            'slug' => ucwords(strtolower($this->input('title'))), // Convert name to title case
+            'employer_id' => $employer->id, // Add the authenticated user's employer ID
+        ]);
+    }
 
     public function rules(): array
     {
         return [
             'employer_id' => 'nullable|integer',
-            'category_id' => 'required|integer',
+            'category_id' => 'nullable|integer',
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
+            'availability' => 'required',
             'slug' => 'nullable',
             'current_company_name' => 'nullable',
             'location' => 'required',
@@ -37,9 +38,7 @@ class CircularStoreRequest extends FormRequest
             'vacancies' => 'required',
             'employment_type' => 'required',
             'salary' => 'required',
-            'experience_level' => 'required',
             'deadline' => 'required',
-            'is_remote' => 'required',
             'created_at' => 'nullable',
         ];
     }
@@ -47,16 +46,7 @@ class CircularStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'The title field is required.',
-            'description.required' => 'The description field is required.',
-            'location.required' => 'The location field is required.',
-            'location_type.required' => 'The location type field is required.',
-            'vacancies.required' => 'The vacancies field is required.',
-            'employment_type.required' => 'The employment type field is required.',
-            'salary.required' => 'The salary field is required.',
-            'experience_level.required' => 'The experience level field is required.',
-            'deadline.required' => 'The deadline field is required.',
-            'is_remote.required' => 'The is remote field is required.',
+
         ];
     }
 
@@ -75,7 +65,6 @@ class CircularStoreRequest extends FormRequest
         // You can further manipulate the validated data after it has been inserted into the database
         // For example, you can hash the password before storing it in the database
         $this->replace([
-            //
         ]);
     }
 }

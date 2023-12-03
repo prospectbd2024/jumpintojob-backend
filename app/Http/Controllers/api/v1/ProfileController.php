@@ -28,7 +28,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-            $avatarPath = $this->fileUploadService->upload($avatar, 'profile_images', 'profiles', 'avatar', 'public');
+            $avatarPath = $this->fileUploadService->process($avatar, 'profile_images', 'profiles', 'avatar', 'public');
             $user->profile->avatar = $avatarPath; // Update avatar path in profile
         }
 

@@ -18,6 +18,7 @@ class Circular extends Model
         'category_id',
         'title',
         'description',
+        'availability',
         'slug',
         'current_company_name',
         'location',
@@ -25,9 +26,7 @@ class Circular extends Model
         'vacancies',
         'employment_type',
         'salary',
-        'experience_level',
         'deadline',
-        'is_remote',
         'created_at',
     ];
 
@@ -44,22 +43,22 @@ class Circular extends Model
     ];
 
     protected $casts = [
-        'title' => 'encrypted', // Cast 'title' attribute to encrypted
-        'description' => 'encrypted',
-        'current_company_name' => 'encrypted',
-        'location' => 'encrypted',
-        'location_type' => 'encrypted',
-        'vacancies' => 'encrypted',
-        'employment_type' => 'encrypted',
-        'salary' => 'encrypted',
-        'experience_level' => 'encrypted',
+//        'title' => 'encrypted', // Cast 'title' attribute to encrypted
+//        'description' => 'encrypted',
+//        'current_company_name' => 'encrypted',
+//        'location' => 'encrypted',
+//        'location_type' => 'encrypted',
+//        'vacancies' => 'encrypted',
+//        'employment_type' => 'encrypted',
+//        'salary' => 'encrypted',
+//        'experience_level' => 'encrypted',
     ];
 
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => ['current_company_name', 'title'], // Generate slug from 'title' and 'id' attributes
+                'source' => ['title'], // Generate slug from 'title' and 'id' attributes
                 'onUpdate' => true,          // Regenerate slug when the title is updated
             ],
         ];
@@ -68,5 +67,10 @@ class Circular extends Model
     public function employer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Employer::class);
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

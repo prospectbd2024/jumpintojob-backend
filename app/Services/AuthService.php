@@ -131,7 +131,7 @@ class AuthService
 
     public function createCompany(): void
     {
-        $this->company = new Company($this->request->safe()->only(['name', 'company_type', 'slug']));
+        $this->company = new Company($this->request->safe()->only(['name', 'email', 'company_type', 'slug']));
         $this->company->save();
     }
 

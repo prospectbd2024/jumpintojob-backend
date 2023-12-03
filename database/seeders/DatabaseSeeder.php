@@ -37,9 +37,9 @@ class DatabaseSeeder extends Seeder
     {
 
 //        Category::factory(10)->create();
-        Circular::factory(50)->create();
+//        Circular::factory(50)->create();
 
-//        Company::factory(10)->create();
+        Company::factory(10)->create();
 //        $this->call(EmployerSeeder::class);
 //          $this->call(UserPlansTableSeeder::class);
 //        Employer::factory()->count(10)->create();

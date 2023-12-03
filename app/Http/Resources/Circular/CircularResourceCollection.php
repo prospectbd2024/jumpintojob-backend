@@ -8,6 +8,7 @@ class CircularResourceCollection extends ResourceCollection
 {
     public function toArray(Request $request): array
     {
+        $serial = 1;
         return [
             'data' => CircularResource::collection($this->collection),
         ];

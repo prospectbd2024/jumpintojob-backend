@@ -15,21 +15,32 @@ class CircularController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        return CircularResourceCollection::make(Circular::latest()->paginate());
+        return CircularResourceCollection::make(Circular::with('category', 'employer')->latest()->paginate());
     }
 
     // Store a newly created resource in storage.
     public function store(CircularStoreRequest $request)
     {
-        return CircularResource::make(Circular::create($request->validated()));
+        $data = Circular::create($request->validated());
+        if ($data) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Circular created successfully',
+                'data' => CircularResource::make($data)
+            ], Response::HTTP_CREATED);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Circular could not be created'
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     // Display the specified resource.
     public function show($company, $slug)
     {
-        $circular = Circular::where('slug', $slug)
-            ->where('current_company_name', $company)
-            ->firstOrFail();
+//        dd($company, $slug);
+        $circular = Circular::with('category', 'employer')->where('slug', $slug)
+            ->orWhere('current_company_name', $company)->first();
         return CircularResource::make($circular);
     }
 

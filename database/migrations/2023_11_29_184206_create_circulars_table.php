@@ -12,20 +12,21 @@ return new class extends Migration {
     {
         Schema::create('circulars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('employer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->binary('title');
-            $table->binary('description');
+            $table->string('title');
+            $table->string('description');
+            $table->string('availability');
+            $table->string('email');
+            $table->string('phone');
             $table->string('slug')->unique();
-            $table->binary('current_company_name');
-            $table->binary('location');
-            $table->binary('location_type');
-            $table->binary('vacancies');
-            $table->binary('employment_type'); // Full-time, part-time, contract, etc.
-            $table->binary('salary')->nullable(); // Salary range
-            $table->binary('experience_level'); // Entry-level, mid-level, senior, etc.
+            $table->string('current_company_name');
+            $table->string('location');
+            $table->string('location_type');
+            $table->string('vacancies');
+            $table->string('employment_type'); // Full-time, part-time, contract, etc.
+            $table->string('salary'); // Salary range
             $table->date('deadline');
-            $table->boolean('is_remote')->default(0); // Whether the job is remote
             $table->softDeletes();
             $table->timestamps();
         });

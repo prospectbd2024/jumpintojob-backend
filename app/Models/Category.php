@@ -13,4 +13,25 @@ class Category extends Model
     protected $fillable = [
         'category_name',
     ];
+
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    protected array $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $casts = [
+//        'category_name' => 'encrypted',
+    ];
+
+    public function circulars(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Circular::class);
+    }
 }

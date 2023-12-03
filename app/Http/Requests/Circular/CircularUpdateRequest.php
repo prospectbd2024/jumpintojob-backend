@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Circular;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CircularUpdateRequest extends FormRequest
 {
@@ -14,19 +15,27 @@ class CircularUpdateRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         // You can perform data manipulation here
+        $employer = Auth::user()->employer;
         $this->merge([
-            'title' => ucwords(strtolower($this->input('title'))), // Convert name to title case
-            // Add more data manipulation as needed
+            'slug' => ucwords(strtolower($this->input('title'))), // Convert name to title case
         ]);
     }
 
     public function rules(): array
     {
         return [
-            'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:1000',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'availability' => 'required',
             'slug' => 'nullable',
-            // 'image' => 'required|image|mimes:jpeg,png|max:2048', // Example validation rules
+            'current_company_name' => 'nullable',
+            'location' => 'required',
+            'location_type' => 'required',
+            'vacancies' => 'required',
+            'employment_type' => 'required',
+            'salary' => 'required',
+            'deadline' => 'required',
+            'created_at' => 'nullable',
         ];
     }
 
@@ -41,10 +50,8 @@ class CircularUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'title' => 'product title',
-            'description' => 'product description',
-            // 'image' => 'product image',
-            // Define custom attribute names for validation error messages here
+            'title' => 'Circular title',
+            'description' => 'Circular description',
         ];
     }
 

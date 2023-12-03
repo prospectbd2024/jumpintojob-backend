@@ -54,7 +54,6 @@ class EmployeeSignupRequest extends FormRequest
             'company_name.required' => 'Company name is required',
             'company_type.required' => 'Company type is required',
             'slug.unique' => 'Company name is taken',
-            'email' => 'Email must be a valid email address',
             'password.required' => 'Password is required',
             'password.confirmed' => 'Password confirmation does not match',
             'password.min' => 'Minimum 6 digits required for password'

@@ -15,6 +15,7 @@ class LoginResource extends JsonResource
             'token_type' => 'Bearer',
             'expires_at' => now()->addMinutes(config('sanctum.expiration'))->toDateTimeString(), // Add this line,
             'access_token' => $this->resource->createToken('API Token')->plainTextToken,
+            'user_type' => $this->resource->user_type,
             'user' => new UserResource($this->resource)
         ];
     }

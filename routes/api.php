@@ -32,28 +32,29 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('account-deletion', [AuthController::class, 'accountDeletion']);
 
+    Route::middleware('isEmailVerified')->group(function () {
 //profile section
-    Route::group(['prefix' => 'profile'], function () {
-        Route::get('/', [ProfileController::class, 'getUserProfile']);
-        Route::put('update', [ProfileController::class, 'updateProfile']);
-    });
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('/', [ProfileController::class, 'getUserProfile']);
+            Route::put('update', [ProfileController::class, 'updateProfile']);
+        });
 
 //cv section
-    Route::group(['prefix' => 'cv'], function () {
-        Route::post('create', [CVController::class, 'createCV']);
-        Route::put('update/{id}', [CVController::class, 'update']);
-        Route::delete('delete/{CV}', [CVController::class, 'deleteCV']);
-        Route::get('get', [CVController::class, 'getUserCVs']);
-        Route::get('get/all-details/{CV}', [CVController::class, 'getCVDetails']);
-    });
+        Route::group(['prefix' => 'cv'], function () {
+            Route::post('create', [CVController::class, 'createCV']);
+            Route::put('update/{id}', [CVController::class, 'update']);
+            Route::delete('delete/{CV}', [CVController::class, 'deleteCV']);
+            Route::get('get', [CVController::class, 'getUserCVs']);
+            Route::get('get/all-details/{CV}', [CVController::class, 'getCVDetails']);
+        });
 
 // Education Routes
-    Route::group(['prefix' => 'education'], function () {
-        Route::post('add/{education}', [EducationController::class, 'addEducation']);
-        Route::post('get/{education}', [EducationController::class, 'getEducation']);
-        Route::put('update/{education}', [EducationController::class, 'updateEducation']);
-        Route::delete('delete/{education}', [EducationController::class, 'deleteEducation']);
-    });
+        Route::group(['prefix' => 'education'], function () {
+            Route::post('add/{education}', [EducationController::class, 'addEducation']);
+            Route::post('get/{education}', [EducationController::class, 'getEducation']);
+            Route::put('update/{education}', [EducationController::class, 'updateEducation']);
+            Route::delete('delete/{education}', [EducationController::class, 'deleteEducation']);
+        });
 //
 //// Experience Routes
 // Route::group(['prefix' => 'cv/experience'], function () {
@@ -200,42 +201,43 @@ Route::middleware('auth:sanctum')->group(function () {
 //    });
 
 
-    Route::prefix('company')->group(function () {
+        Route::prefix('company')->group(function () {
 
-        Route::get('/', [CompanyController::class, 'index'])->name('company.index');
+            Route::get('/', [CompanyController::class, 'index'])->name('company.index');
 
-        Route::get('show/{slug}', [CompanyController::class, 'show'])->name('company.show');
+            Route::get('show/{slug}', [CompanyController::class, 'show'])->name('company.show');
 
-        Route::post('store', [CompanyController::class, 'store'])->name('company.store');
+            Route::post('store', [CompanyController::class, 'store'])->name('company.store');
 
-        Route::put('update/{company}', [CompanyController::class, 'update'])->name('company.update');
+            Route::put('update/{company}', [CompanyController::class, 'update'])->name('company.update');
 
-        Route::delete('destroy/{company}', [CompanyController::class, 'destroy'])->name('company.destroy');
+            Route::delete('destroy/{company}', [CompanyController::class, 'destroy'])->name('company.destroy');
 
-    });
+        });
 
-    Route::prefix('employer')->group(function () {
+        Route::prefix('employer')->group(function () {
 
-        Route::get('/', [EmployerController::class, 'index'])->name('employer.index');
+            Route::get('/', [EmployerController::class, 'index'])->name('employer.index');
 
-        Route::get('show/{slug}', [EmployerController::class, 'show'])->name('employer.show');
+            Route::get('show/{slug}', [EmployerController::class, 'show'])->name('employer.show');
 
-        Route::post('store', [EmployerController::class, 'store'])->name('employer.store');
+            Route::post('store', [EmployerController::class, 'store'])->name('employer.store');
 
-        Route::put('update/{employer}', [EmployerController::class, 'update'])->name('employer.update');
+            Route::put('update/{employer}', [EmployerController::class, 'update'])->name('employer.update');
 
-        Route::delete('destroy/{employer}', [EmployerController::class, 'destroy'])->name('employer.destroy');
+            Route::delete('destroy/{employer}', [EmployerController::class, 'destroy'])->name('employer.destroy');
 
-    });
+        });
 
-    Route::prefix('circular')->group(function () {
+        Route::middleware('isEmployer')->prefix('circular')->group(function () {
 
-        Route::post('store', [CircularController::class, 'store'])->name('circular.store');
+            Route::post('store', [CircularController::class, 'store'])->name('circular.store');
 
-        Route::put('update/{circular}', [CircularController::class, 'update'])->name('circular.update');
+            Route::put('update/{circular}', [CircularController::class, 'update'])->name('circular.update');
 
-        Route::delete('destroy/{circular}', [CircularController::class, 'destroy'])->name('circular.destroy');
+            Route::delete('destroy/{circular}', [CircularController::class, 'destroy'])->name('circular.destroy');
 
+        });
     });
 });
 Route::prefix('circular')->group(function () {
