@@ -15,7 +15,7 @@ class EmployerController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        return EmployerResourceCollection::make((Employer::paginate()));
+        return EmployerResourceCollection::make((Employer::get()));
     }
 
     // Store a newly created resource in storage.
@@ -48,4 +48,3 @@ class EmployerController extends Controller
         ], Response::HTTP_NO_CONTENT);
     }
 }
-        

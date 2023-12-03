@@ -10,15 +10,9 @@ class EmployerResource extends JsonResource
     {
         $id = $this->id;
         return [
-            'title' => $this->title,
-            'description' => $this->description,
+            'id' => $id,
+            'name' => $this->name,
             'created_at' => $this->created_at->format('d-m-Y'),
-            'links' => [
-                'show' => route('employer.show', $this->slug),
-                'update' => route('employer.update', $id),
-                'delete' => route('employer.destroy', $id),
-            ]
         ];
     }
 }
-        

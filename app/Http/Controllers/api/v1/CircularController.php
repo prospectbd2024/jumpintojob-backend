@@ -38,10 +38,28 @@ class CircularController extends Controller
     // Display the specified resource.
     public function show($company, $slug)
     {
-//        dd($company, $slug);
-        $circular = Circular::with('category', 'employer')->where('slug', $slug)
-            ->orWhere('current_company_name', $company)->first();
-        return CircularResource::make($circular);
+        try {
+            // Fetch circular
+            $circular = Circular::with('category', 'employer')
+                ->where('slug', $slug)
+                ->firstOrFail();
+
+            // Validate company
+            if ($circular->employer->company->name === $company) {
+                return CircularResource::make($circular);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Circular not found for this company'
+            ], Response::HTTP_NOT_FOUND);
+        } catch (\Exception $e) {
+            // Handle exceptions
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Update the specified resource in storage.

@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\CompanyController;
 use App\Http\Controllers\api\EmployerController;
 use App\Http\Controllers\api\v1\AuthController;
+use App\Http\Controllers\api\v1\CategoryController;
 use App\Http\Controllers\api\v1\CircularController;
 use App\Http\Controllers\api\v1\CVController;
 use App\Http\Controllers\api\v1\EducationController;
@@ -240,9 +241,15 @@ Route::middleware('auth:sanctum')->group(function () {
         });
     });
 });
+
+// public section
 Route::prefix('circular')->group(function () {
     Route::get('/', [CircularController::class, 'index'])->name('circular.index');
     Route::get('{company}/{slug}', [CircularController::class, 'show'])->name('circular.show');
 });
 
+Route::get('companies', [CompanyController::class, 'index'])->name('company.list');
 
+Route::get('categories', [CategoryController::class, 'index'])->name('categories.list');
+
+Route::get('employers', [EmployerController::class, 'index'])->name('employer.list');

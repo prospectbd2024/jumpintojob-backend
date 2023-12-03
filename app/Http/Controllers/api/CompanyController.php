@@ -15,7 +15,7 @@ class CompanyController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        return CompanyResourceCollection::make((Company::paginate()));
+        return CompanyResourceCollection::make((Company::get()));
     }
 
     // Store a newly created resource in storage.
@@ -48,4 +48,3 @@ class CompanyController extends Controller
         ], Response::HTTP_NO_CONTENT);
     }
 }
-        
