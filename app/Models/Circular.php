@@ -28,9 +28,12 @@ class Circular extends Model
         'experience_level',
         'deadline',
         'is_remote',
+        'created_at',
     ];
 
     protected $guarded = [
+        'id',
+        'created_at',
         'updated_at',
         'deleted_at',
     ];

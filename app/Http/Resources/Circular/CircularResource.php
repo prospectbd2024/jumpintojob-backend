@@ -11,7 +11,6 @@ class CircularResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'slug' => $this->slug,
@@ -27,8 +26,8 @@ class CircularResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y'),
             'links' => [
                 'show' => route('circular.show', ['company' => $this->current_company_name, 'slug' => $this->slug]),
-//                'update' => route('circular.update', ['circular' => $this->id]),
-//                'delete' => route('circular.destroy', ['circular' => $this->id]),
+                'update' => route('circular.update', ['circular' => $this->id]),
+                'delete' => route('circular.destroy', ['circular' => $this->id]),
             ]
         ];
     }

@@ -15,13 +15,13 @@ class CircularController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        return CircularResourceCollection::make((Circular::latest()->paginate()));
+        return CircularResourceCollection::make(Circular::latest()->paginate());
     }
 
     // Store a newly created resource in storage.
     public function store(CircularStoreRequest $request)
     {
-        return CircularResource::make(new Circular([$request->validated()]));
+        return CircularResource::make(Circular::create($request->validated()));
     }
 
     // Display the specified resource.
