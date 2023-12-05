@@ -29,9 +29,12 @@ class CircularResource extends JsonResource
             'deadline' => $this->deadline,
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y'),
             'links' => [
-                'show' => Route::currentRouteName() !== 'circular.show' ?
-                    route('circular.show', ['company' => $this->employer->company->name, 'slug' => $this->slug]) :
-                    '',
+                'show' => $this->unless(Route::currentRouteName() === 'circular.show', function () {
+                    return route('circular.show', [
+                        'company' => $this->employer->company->name,
+                        'slug' => $this->slug
+                    ]);
+                }),
                 'update' => route('circular.update', ['circular' => $this->id]),
                 'delete' => route('circular.destroy', ['circular' => $this->id]),
             ]
