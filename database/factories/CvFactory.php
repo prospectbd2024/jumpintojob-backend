@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\CV;
+use App\Models\Cv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class CVFactory extends Factory
+class CvFactory extends Factory
 {
-    protected $model = CV::class;
+    protected $model = Cv::class;
 
     public function definition(): array
     {

@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Address;
 use App\Models\Company;
 use App\Models\Employer;
-use App\Models\Profile;
 use App\Models\User;
 use App\Notifications\NewUserEmailVerificationNotification;
 use App\Notifications\WelcomeEmailNotification;
@@ -28,6 +27,23 @@ class AuthService
     {
         $user = new User($this->request->validated());
         $user->save();
+        // $ip = $this->request->ip();
+//        $location = Location::get($ip);
+        $user->update([
+//            'ip' => $location->ip,
+            'first_name' => $this->request->first_name,
+            'last_name' => $this->request->last_name,
+//            'iso_code' => $location->isoCode,
+//            'country' => $location->countryName,
+//            'city' => $location->cityName,
+//            'state' => $location->regionName,
+//            'postal_code' => $location->postalCode,
+//            'lat' => $location->latitude,
+//            'lon' => $location->longitude,
+//            'zip_code' => $location->zipCode,
+//            'timezone' => $location->timezone,
+        ]);
+        $user->save();
         $this->user = $user;
     }
 
@@ -49,36 +65,6 @@ class AuthService
             'address_type' => 'present',
         ]);
         $this->user->addresses()->save($address);
-    }
-
-    public function createProfile(): \Illuminate\Http\JsonResponse
-    {
-        $ip = $this->request->ip();
-        $location = Location::get($ip);
-        $profile = new Profile([
-            'ip' => $location->ip,
-            'user_id' => $this->user->id,
-            'category_id' => 1,
-            'banned' => 0,
-// temporarily commented out
-
-            'iso_code' => $location->isoCode,
-            'country' => $location->countryName,
-            'city' => $location->cityName,
-            'state' => $location->regionName,
-            'postal_code' => $location->postalCode,
-            'lat' => $location->latitude,
-            'lon' => $location->longitude,
-            'zip_code' => $location->zipCode,
-            'timezone' => $location->timezone,
-        ]);
-        // Associate the profile with the user and save both records
-
-        $this->user->profile()->save($profile);
-        return response()->json([
-            'message' => 'User profile created successfully.',
-            'user' => $this->user
-        ]);
     }
 
     public static function sendVerificationCode(User $user): \Illuminate\Http\JsonResponse
@@ -119,6 +105,25 @@ class AuthService
     {
         $user = new User($this->request->safe()->except(['company_name', 'company_type']));
         $user->save();
+
+        // $ip = $this->request->ip();
+//        $location = Location::get($ip);
+        $user->update([
+//            'ip' => $location->ip,
+            'first_name' => $this->request->first_name,
+            'last_name' => $this->request->last_name,
+//            'iso_code' => $location->isoCode,
+//            'country' => $location->countryName,
+//            'city' => $location->cityName,
+//            'state' => $location->regionName,
+//            'postal_code' => $location->postalCode,
+//            'lat' => $location->latitude,
+//            'lon' => $location->longitude,
+//            'zip_code' => $location->zipCode,
+//            'timezone' => $location->timezone,
+        ]);
+        $user->save();
+
         $this->user = $user;
 
         $employer = new Employer([

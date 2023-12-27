@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('circulars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('employer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('NO ACTION');
+            $table->foreignId('employer_id')->constrained()->onDelete('NO ACTION');
             $table->string('title');
             $table->string('description');
             $table->string('availability');

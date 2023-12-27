@@ -3,29 +3,28 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserPlanService
 {
 
-    public function getUserPlan(): \Illuminate\Database\Eloquent\Relations\BelongsTo|null
-
-
+    public static function getUserPlan(): \Illuminate\Database\Eloquent\Relations\BelongsTo|null
     {
         return auth()->user()->userPlan->first();
     }
 
-    public function isFreePlan(): bool
+    public static function isFreePlan(): bool
     {
         return auth()->user()->userPlan->where('name', 'Free')->exists();
     }
 
-    public function isProPlan(): bool
+    public static function isProPlan(): bool
     {
         return auth()->user()->userPlan->where('name', 'Pro')->exists();
     }
 
-    public function hasReachedCvPlanLimit(): bool
+    public static function hasReachedCvPlanLimit(): bool
     {
-        return auth()->user()->cvs->count() >= 1;
+        return Auth::user()->cvs->count() >= 1;
     }
 }

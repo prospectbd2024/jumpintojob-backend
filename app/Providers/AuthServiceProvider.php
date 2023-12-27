@@ -3,9 +3,7 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
-use App\Models\Profile;
 use App\Models\Upload;
-use App\Policies\ProfilePolicy;
 use App\Policies\UploadPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -18,7 +16,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         //
-        Profile::class => ProfilePolicy::class,
         Upload::class => UploadPolicy::class,
     ];
 

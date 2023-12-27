@@ -3,45 +3,49 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Candidate\CandidateStoreRequest;
+use App\Http\Requests\Candidate\CandidateUpdateRequest;
+use App\Http\Resources\Candidate\CandidateResource;
+use App\Http\Resources\Candidate\CandidateResourceCollection;
 use App\Models\Candidate;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CandidateController extends Controller
 {
+    // Display a listing of the resource.
     public function index()
     {
-        return Candidate::all();
+        return CandidateResourceCollection::make((Candidate::get()));
     }
 
-    public function store(Request $request)
+    // Store a newly created resource in storage.
+    public function store(CandidateStoreRequest $request)
     {
-        $request->validate([
-
-        ]);
-
-        return Candidate::create($request->validated());
+        return CandidateResource::make(Candidate::create($request->validated()));
     }
 
-    public function show(Candidate $candidate)
+    // Display the specified resource.
+    public function show($slug)
     {
-        return $candidate;
+        $candidate = Candidate::where('slug', $slug)->firstOrFail();
+        return CandidateResource::make($candidate);
     }
 
-    public function update(Request $request, Candidate $candidate)
+    // Update the specified resource in storage.
+    public function update(CandidateUpdateRequest $request, Candidate $candidate)
     {
-        $request->validate([
-
-        ]);
-
         $candidate->update($request->validated());
-
-        return $candidate;
+        return CandidateResource::make($candidate);
     }
 
+    // Remove the specified resource from storage.
     public function destroy(Candidate $candidate)
     {
         $candidate->delete();
 
-        return response()->json();
+        return response()->json([
+        'success' => true,
+        'message' => 'Candidate deleted successfully'
+        ], Response::HTTP_NO_CONTENT);
     }
 }

@@ -8,59 +8,52 @@ use App\Http\Requests\CVRequest;
 use App\Http\Requests\CvUpdateFormRequest;
 use App\Http\Resources\CVResource;
 use App\Http\Resources\CvResourceCollection;
-use App\Models\CV;
-use App\Models\User;
+use App\Models\Cv;
 use App\Services\UserPlanService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use function Laravel\Prompts\error;
 
 class CVController extends Controller
 {
-    public function createCV(CVRequest $request)
-    {
-        $user = auth()->user();
-        $userPlanService = app(UserPlanService::class);
+    private UserPlanService $userPlanService;
 
-        if ($userPlanService->isFreePlan() && $userPlanService->hasReachedCvPlanLimit()) {
+    public function __construct(UserPlanService $userPlanService)
+    {
+        $this->userPlanService = $userPlanService;
+    }
+
+    public function create(CVRequest $request)
+    {
+        if ($this->userPlanService->hasReachedCvPlanLimit()) {
             return errorResponse(
                 'plan_limit_reached',
-                'You have reached the CV creation limit for the Free plan.',
+                'You have reached the Cv creation limit for the Free plan.',
                 403);
         }
 
-        $cv = $this->createUserCV($user, $request->validated());
-
-        return new CVResource($cv);
+        $cv = new Cv($request->validated());
+        $cv->save();
+        return CVResource::make($cv);
     }
 
-    private function createUserCV(User $user, array $data)
-    {
-        return $user->cvs()->create($data);
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function getUserCVs()
+    public function getUserCvList()
     {
         $cv = auth()->user()->cvs;
 
         if ($cv->isEmpty()) {
-            throw new AppException('CV collection is empty', Response::HTTP_NO_CONTENT);
+            throw new AppException('Cv collection is empty', Response::HTTP_NO_CONTENT);
         }
         return new CvResourceCollection($cv);
     }
 
-    public function getCVDetails(CV $CV, Exception $e)
+    public function getCvDetails(Cv $CV)
     {
         if ($CV->user_id !== auth()->id()) {
             return errorResponse(
                 'unauthorized',
-                'You are not authorized to view this CV.',
+                'You are not authorized to view this Cv.',
                 Response::HTTP_UNAUTHORIZED
             );
         }
@@ -69,7 +62,7 @@ class CVController extends Controller
 
     public function update(CvUpdateFormRequest $request, $id)
     {
-        $cvModel = CV::where('id', $id)
+        $cvModel = Cv::where('id', $id)
             ->where('user_id', Auth::id())
             ->first();
 
@@ -85,7 +78,7 @@ class CVController extends Controller
         return new CVResource($cvModel);
     }
 
-    public function deleteCV(CV $CV)
+    public function delete(Cv $CV)
     {
         $CV->delete();
 

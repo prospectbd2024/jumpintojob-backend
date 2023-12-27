@@ -1531,7 +1531,7 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/cv/delete/{CV}'
+    uri: 'api/v1/cv/delete/{Cv}'
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -1546,7 +1546,7 @@ endpoints:
       Accept: application/json
     urlParameters:
       CV:
-        name: CV
+        name: Cv
         description: ''
         required: true
         example: 4
@@ -1609,7 +1609,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/v1/cv/get/all-details/{CV}'
+    uri: 'api/v1/cv/get/all-details/{Cv}'
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -1624,7 +1624,7 @@ endpoints:
       Accept: application/json
     urlParameters:
       CV:
-        name: CV
+        name: Cv
         description: ''
         required: true
         example: 11

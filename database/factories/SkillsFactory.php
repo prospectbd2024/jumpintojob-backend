@@ -2,23 +2,22 @@
 
 namespace Database\Factories;
 
-use App\Models\Skills;
+use App\Models\Category;
+use App\Models\Skill;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Carbon;
 
 class SkillsFactory extends Factory
 {
-    protected $model = Skills::class;
+    protected $model = Skill::class;
 
     public function definition(): array
     {
         return [
-            'cv_id' => rand(1, 20000),
-            'category_id' => $this->faker->randomNumber(),
+            'user_id' => User::get()->unique()->random()->id,
             'skill_name' => $this->faker->name(),
-            'proficiency' => $this->faker->word(),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'proficiency' => $this->faker->randomElement(['beginner', 'intermediate', 'expert']),
         ];
     }
 }

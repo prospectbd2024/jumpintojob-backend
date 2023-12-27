@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('contacts_type', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contact_use_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('contact_use_type_id')->constrained('contacts_use_type')->onDelete('cascade');
             $table->string('type');
             $table->string('validationRegex');
             $table->softDeletes();

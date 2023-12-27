@@ -16,9 +16,7 @@ class AddressFactory extends Factory
         $addressTypes = ['primary', 'permanent'];
         return [
             'address' => $this->faker->address(),
-            'address_type' => $addressTypes[rand(0, 1)],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'address_type' => $addressTypes[rand(0, 1)]
         ];
     }
 }

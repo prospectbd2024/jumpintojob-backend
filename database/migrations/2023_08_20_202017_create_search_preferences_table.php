@@ -9,9 +9,9 @@ return new class extends Migration {
     {
         Schema::create('search_preferences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('cv_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+//            $table->foreignId('user_id')->constrained();
+//            $table->foreignId('cv_id')->constrained();
+//            $table->foreignId('category_id')->constrained();
             $table->string('preferred_regions')->nullable();
             $table->string('skills')->nullable();
             $table->string('preferred_timezone')->nullable();

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\Certifications */
+/** @mixin \App\Models\Certification */
 class CertificationsResource extends JsonResource
 {
     public function toArray(Request $request): array

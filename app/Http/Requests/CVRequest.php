@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\CV;
+use App\Models\Cv;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CVRequest extends FormRequest
@@ -11,6 +11,7 @@ class CVRequest extends FormRequest
     {
         return [
             'user_id' => 'integer',
+            'template_id' => 'integer|required',
             'cv_link' => 'nullable',
             'title' => 'required',
             'summary' => 'required',
@@ -28,6 +29,7 @@ class CVRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return true;
+//        return auth()->user()->can('create', Cv::class);
+       return true;
     }
 }

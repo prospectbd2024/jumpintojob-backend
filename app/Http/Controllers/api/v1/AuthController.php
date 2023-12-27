@@ -4,11 +4,11 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 
-//use App\Http\Controllers\OTPVerificationController;
+//use App\Http\Controllers\api\v1\OTPVerificationController;
 //use App\Models\BusinessSetting;
 //use App\Models\Cart;
 //use App\Models\Candidate;
-use App\Http\Controllers\OTPVerificationController;
+use App\Http\Controllers\api\v1\OTPVerificationController;
 use App\Http\Requests\EmployeeSignupRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\LoginResource;
@@ -45,10 +45,8 @@ class AuthController extends Controller
      */
     public function jobSeekerSignup(SignupRequest $request)
     {
-
         $this->authService->setRequest($request);
         $this->authService->createJobSeeker();
-        $this->authService->createProfile();
         $this->authService->createAddress();
         $this->sendVerificationCode('email', $this->authService->getUser());
 
@@ -75,9 +73,8 @@ class AuthController extends Controller
     public function employerSignup(EmployeeSignupRequest $request)
     {
         $this->authService->setRequest($request);
-        $this->authService->createCompany();
+//        $this->authService->createCompany();
         $this->authService->createEmployee();
-        $this->authService->createProfile();
         $this->authService->createAddress();
         $this->sendVerificationCode('email');
 

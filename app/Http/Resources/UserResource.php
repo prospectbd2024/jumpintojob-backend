@@ -18,7 +18,6 @@ class UserResource extends JsonResource
             'device_token' => $this->device_token,
             'referral_code' => $this->referral_code,
             'user_plan_id' => $this->user_plan_id,
-            'profile' => new ProfileResource($this->profile),
             'cv' => new CVResource($this->cv),
             'address' => new AddressResource($this->address)
 

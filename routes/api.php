@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\api\CompanyController;
-use App\Http\Controllers\api\EmployerController;
+use App\Http\Controllers\api\v1\ApplicationController;
 use App\Http\Controllers\api\v1\AuthController;
+use App\Http\Controllers\api\v1\CandidateContactController;
+use App\Http\Controllers\api\v1\CandidateController;
 use App\Http\Controllers\api\v1\CategoryController;
 use App\Http\Controllers\api\v1\CircularController;
+use App\Http\Controllers\api\v1\CompanyController;
 use App\Http\Controllers\api\v1\CVController;
-use App\Http\Controllers\api\v1\EducationController;
+use App\Http\Controllers\api\v1\EmployerController;
+use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\PasswordResetController;
-use App\Http\Controllers\api\v1\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -34,172 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('account-deletion', [AuthController::class, 'accountDeletion']);
 
     Route::middleware('isEmailVerified')->group(function () {
-//profile section
-        Route::group(['prefix' => 'profile'], function () {
-            Route::get('/', [ProfileController::class, 'getUserProfile']);
-            Route::put('update', [ProfileController::class, 'updateProfile']);
-        });
-
 //cv section
         Route::group(['prefix' => 'cv'], function () {
-            Route::post('create', [CVController::class, 'createCV']);
+            Route::post('create', [CVController::class, 'create']);
             Route::put('update/{id}', [CVController::class, 'update']);
-            Route::delete('delete/{CV}', [CVController::class, 'deleteCV']);
-            Route::get('get', [CVController::class, 'getUserCVs']);
-            Route::get('get/all-details/{CV}', [CVController::class, 'getCVDetails']);
+            Route::delete('delete/{Cv}', [CVController::class, 'delete']);
+            Route::get('get', [CVController::class, 'getUserCvList']);
+            Route::get('get/all-details/{Cv}', [CVController::class, 'getCvDetails']);
         });
-
-// Education Routes
-        Route::group(['prefix' => 'education'], function () {
-            Route::post('add/{education}', [EducationController::class, 'addEducation']);
-            Route::post('get/{education}', [EducationController::class, 'getEducation']);
-            Route::put('update/{education}', [EducationController::class, 'updateEducation']);
-            Route::delete('delete/{education}', [EducationController::class, 'deleteEducation']);
-        });
-//
-//// Experience Routes
-// Route::group(['prefix' => 'cv/experience'], function () {
-//        // Add experience to a CV
-//        Route::post('add/{cv}', [ExperienceController::class, 'addExperience']);
-//
-//        // Update experience
-//        Route::put('experience/{experience}', [ExperienceController::class, 'updateExperience']);
-//
-//        // Delete experience
-//        Route::delete('experience/{experience}', [ExperienceController::class, 'deleteExperience']);
-//    });
-//
-//// Skills Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add skill to a CV
-//        Route::post('cv/{cv}/skills', [SkillsController::class, 'addSkill']);
-//
-//        // Update skill
-//        Route::put('skills/{skill}', [SkillsController::class, 'updateSkill']);
-//
-//        // Delete skill
-//        Route::delete('skills/{skill}', [SkillsController::class, 'deleteSkill']);
-//    });
-//
-//// Projects Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add project to a CV
-//        Route::post('cv/{cv}/projects', [ProjectsController::class, 'addProject']);
-//
-//        // Update project
-//        Route::put('projects/{project}', [ProjectsController::class, 'updateProject']);
-//
-//        // Delete project
-//        Route::delete('projects/{project}', [ProjectsController::class, 'deleteProject']);
-//    });
-//
-//// Languages Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add language to a CV
-//        Route::post('cv/{cv}/languages', [LanguagesController::class, 'addLanguage']);
-//
-//        // Update language
-//        Route::put('languages/{language}', [LanguagesController::class, 'updateLanguage']);
-//
-//        // Delete language
-//        Route::delete('languages/{language}', [LanguagesController::class, 'deleteLanguage']);
-//    });
-//
-//// Certifications Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add certification to a CV
-//        Route::post('cv/{cv}/certifications', [CertificationsController::class, 'addCertification']);
-//
-//        // Update certification
-//        Route::put('certifications/{certification}', [CertificationsController::class, 'updateCertification']);
-//
-//        // Delete certification
-//        Route::delete('certifications/{certification}', [CertificationsController::class, 'deleteCertification']);
-//    });
-//
-//// Awards Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add award to a CV
-//        Route::post('cv/{cv}/awards', [AwardsController::class, 'addAward']);
-//
-//        // Update award
-//        Route::put('awards/{award}', [AwardsController::class, 'updateAward']);
-//
-//        // Delete award
-//        Route::delete('awards/{award}', [AwardsController::class, 'deleteAward']);
-//    });
-//
-//// Publications Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add publication to a CV
-//        Route::post('cv/{cv}/publications', [PublicationsController::class, 'addPublication']);
-//
-//        // Update publication
-//        Route::put('publications/{publication}', [PublicationsController::class, 'updatePublication']);
-//
-//        // Delete publication
-//        Route::delete('publications/{publication}', [PublicationsController::class, 'deletePublication']);
-//    });
-//
-//// Interests Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add interest to a CV
-//        Route::post('cv/{cv}/interests', [InterestsController::class, 'addInterest']);
-//
-//        // Update interest
-//        Route::put('interests/{interest}', [InterestsController::class, 'updateInterest']);
-//
-//        // Delete interest
-//        Route::delete('interests/{interest}', [InterestsController::class, 'deleteInterest']);
-//    });
-//
-//// References Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add reference to a CV
-//        Route::post('cv/{cv}/references', [ReferencesController::class, 'addReference']);
-//
-//        // Update reference
-//        Route::put('references/{reference}', [ReferencesController::class, 'updateReference']);
-//
-//        // Delete reference
-//        Route::delete('references/{reference}', [ReferencesController::class, 'deleteReference']);
-//    });
-//
-//// Volunteer Experience Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add volunteer experience to a CV
-//        Route::post('cv/{cv}/volunteer-experience', [VolunteerExperienceController::class, 'addVolunteerExperience']);
-//
-//        // Update volunteer experience
-//        Route::put('volunteer-experience/{volunteer_experience}', [VolunteerExperienceController::class, 'updateVolunteerExperience']);
-//
-//        // Delete volunteer experience
-//        Route::delete('volunteer-experience/{volunteer_experience}', [VolunteerExperienceController::class, 'deleteVolunteerExperience']);
-//    });
-//
-//// Courses Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add course to a CV
-//        Route::post('cv/{cv}/courses', [CoursesController::class, 'addCourse']);
-//
-//        // Update course
-//        Route::put('courses/{course}', [CoursesController::class, 'updateCourse']);
-//
-//        // Delete course
-//        Route::delete('courses/{course}', [CoursesController::class, 'deleteCourse']);
-//    });
-//
-//// Languages Routes
-//    Route::middleware('auth:sanctum')->group(function () {
-//        // Add language to a CV
-//        Route::post('cv/{cv}/languages', [LanguagesController::class, 'addLanguage']);
-//
-//        // Update language
-//        Route::put('languages/{language}', [LanguagesController::class, 'updateLanguage']);
-//
-//        // Delete language
-//        Route::delete('languages/{language}', [LanguagesController::class, 'deleteLanguage']);
-//    });
 
 
         Route::prefix('company')->group(function () {
@@ -253,3 +97,41 @@ Route::get('companies', [CompanyController::class, 'index'])->name('company.list
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.list');
 
 Route::get('employers', [EmployerController::class, 'index'])->name('employer.list');
+
+Route::prefix('notification')->group(function () {
+
+            Route::get('/', [NotificationController::class, 'index'])->name('notification.index');
+
+            Route::get('show/{slug}', [NotificationController::class, 'show'])->name('notification.show');
+
+            Route::post('store/{notification}', [NotificationController::class, 'store'])->name('notification.store');
+
+            Route::put('update/{notification}', [NotificationController::class, 'update'])->name('notification.update');
+
+            Route::delete('destroy/{notification}', [NotificationController::class, 'destroy'])->name('notification.destroy');
+
+        });
+
+Route::prefix('application')->group(function () {
+            Route::get('/', [ApplicationController::class, 'index'])->name('application.index');
+            Route::get('show/{slug}', [ApplicationController::class, 'show'])->name('application.show');
+            Route::post('store', [ApplicationController::class, 'store'])->name('application.store');
+            Route::put('update/{application}', [ApplicationController::class, 'update'])->name('application.update');
+            Route::delete('destroy/{application}', [ApplicationController::class, 'destroy'])->name('application.destroy');
+        });
+
+Route::prefix('candidate')->group(function () {
+            Route::get('/', [CandidateController::class, 'index'])->name('candidate.index');
+            Route::get('show/{slug}', [CandidateController::class, 'show'])->name('candidate.show');
+            Route::post('store', [CandidateController::class, 'store'])->name('candidate.store');
+            Route::put('update/{candidate}', [CandidateController::class, 'update'])->name('candidate.update');
+            Route::delete('destroy/{candidate}', [CandidateController::class, 'destroy'])->name('candidate.destroy');
+        });
+
+Route::prefix('candidate-contact')->group(function () {
+            Route::get('/', [CandidateContactController::class, 'index'])->name('candidate-contact.index');
+            Route::get('show/{slug}', [CandidateContactController::class, 'show'])->name('candidate-contact.show');
+            Route::post('store', [CandidateContactController::class, 'store'])->name('candidate-contact.store');
+            Route::put('update/{candidate-contact}', [CandidateContactController::class, 'update'])->name('candidate-contact.update');
+            Route::delete('destroy/{candidate-contact}', [CandidateContactController::class, 'destroy'])->name('candidate-contact.destroy');
+        });

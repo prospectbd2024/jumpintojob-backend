@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\OTPVerificationController;
+use App\Http\Controllers\api\v1\OTPVerificationController;
 use App\Models\User;
 use App\Notifications\api\v1\AppEmailVerificationNotification;
 use Hash;
 use Illuminate\Http\Request;
 
-//use App\Http\Controllers\OTPVerificationController;
+//use App\Http\Controllers\api\v1\OTPVerificationController;
 
 class PasswordResetController extends Controller
 {

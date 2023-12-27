@@ -14,8 +14,6 @@ class CategoryFactory extends Factory
     {
         return [
             'category_name' => $this->faker->name(),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
         ];
     }
 }

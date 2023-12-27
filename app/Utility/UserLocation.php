@@ -2,7 +2,6 @@
 
 namespace App\Utility;
 
-use App\Models\Profile;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,8 @@ class UserLocation
         $location = geoip($ip);
 
         // Store the location data in your database if needed
-        Profile::create([
+        
+        $user->update([
             'ip' => $ip,
             'user_id' => id,
             'iso_code' => $location->iso_code,

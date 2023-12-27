@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Profile;
 use App\Models\User;
-use App\Observers\ProfileObserver;
 use App\Observers\UserObserver;
 use App\Services\FileUploadService;
 use Illuminate\Support\Facades\Schema;
@@ -33,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         User::observe(UserObserver::class);
-        Profile::observe(ProfileObserver::class);
 
         // password validation rules
         Password::defaults(function () {
