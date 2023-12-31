@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cv extends Model
+class CV extends Model
 {
     use SoftDeletes, HasFactory;
 
@@ -14,24 +14,22 @@ class Cv extends Model
 
     protected $fillable = [
         'user_id',
-        'template_id',
         'cv_link',
         'title',
         'summary',
     ];
 
     protected $with = [
-        'user'
+        'educations', 'user'
     ];
 
+    public function educations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Education::class, 'cv_id');
+    }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function template(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(Template::class);
     }
 }
