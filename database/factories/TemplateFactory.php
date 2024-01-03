@@ -13,7 +13,7 @@ class TemplateFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'description' => $this->faker->text,
+            'description' => $this->faker->word,
             'template' => fake()->randomHtml(2, 3),
             'is_active' => $this->faker->boolean,
         ];
