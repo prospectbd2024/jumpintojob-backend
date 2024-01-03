@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users')->noActionOnDelete();
             $table->foreignId('company_id')->constrained('companies')->noActionOnDelete();
             $table->binary('name')->nullable();
-            $table->string('email', 255)->unique()->nullable(); // Adjust the size (255) as needed
-            $table->string('phone', 20)->unique()->nullable(); // Assuming phone numbers, adjust the size as needed
+            $table->string('email', 255)->unique()->nullable();
+            $table->string('phone', 20)->unique()->nullable();
             $table->binary('position')->nullable();
             $table->binary('avatar')->nullable();
             $table->softDeletes();
