@@ -1,7 +1,7 @@
 #!/bin/bash
 files='-f docker-compose.yml '
 docker compose $files down
-docker compose $files  up -d --buil
+docker compose $files  up -d --build
 
 docker compose exec jumpintojob  ./bin/update_dev.sh
 
