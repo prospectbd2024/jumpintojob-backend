@@ -15,13 +15,14 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users')->noActionOnDelete();
             $table->foreignId('company_id')->constrained('companies')->noActionOnDelete();
             $table->binary('name')->nullable();
-            $table->binary('email')->unique()->nullable();
-            $table->binary('phone')->unique()->nullable();
+            $table->string('email', 255)->unique()->nullable();
+            $table->string('phone', 20)->unique()->nullable();
             $table->binary('position')->nullable();
             $table->binary('avatar')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
+
     }
 
     /**

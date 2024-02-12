@@ -12,13 +12,13 @@ return new class extends Migration {
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->binary('name')->unique();
-            $table->binary('email')->unique();
-            $table->binary('phone')->unique();
-            $table->binary('logo')->nullable();
-            $table->binary('cover_image')->nullable();
-            $table->binary('location')->nullable();
-            $table->binary('company_type');
+            $table->string('name', 255)->unique(); // Adjust the size (255) as needed
+            $table->string('email', 255)->unique(); // Adjust the size (255) as needed
+            $table->string('phone', 20)->unique(); // Assuming phone numbers, adjust the size as needed
+            $table->text('logo')->nullable();
+            $table->text('cover_image')->nullable();
+            $table->text('location')->nullable();
+            $table->text('company_type');
             $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
