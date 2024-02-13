@@ -13,3 +13,4 @@ jobs:
         run: |
           cd C:\Users\prospectbddev\Desktop\jumpintojobsbackend\jumpintojob-backend
           git pull origin
+          ./bin/deploy_dev.sh
