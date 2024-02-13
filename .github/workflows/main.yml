@@ -1,0 +1,15 @@
+name: Windows Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Install dependencies (Optional)
+        run: |
+          cd C:\Users\prospectbddev\Desktop\jumpintojobsbackend\jumpintojob-backend
+          git pull origin
