@@ -1,9 +1,6 @@
 name: Windows Deployment
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   deploy:
@@ -11,5 +8,5 @@ jobs:
     steps:
       - name: Install dependencies (Optional)
         run: |
-          cd C:\Users\prospectbddev\Desktop\jumpintojobsbackend\jumpintojob-backend
+          cd C:\Users\prospectbddev\Desktop\auto-deploy
           git pull origin
