@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "andreaselia/laravel-api-to-postman": "^1.15",
         "caneara/axiom": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
