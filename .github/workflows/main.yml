@@ -13,4 +13,5 @@ jobs:
         run: |
           cd C:\Users\prospectbddev\Desktop\jumpintojob-backend
           git pull origin
-          ./bin/deploy_dev.sh
+          docker compose down
+          docker compose up --build -d
