@@ -7,6 +7,7 @@ services:
       - ./:/var/www/html
     ports:
       - 8090:80
+    restart: unless-stopped
   
   mysql_db:
     image: mysql:8.0
@@ -15,6 +16,7 @@ services:
       MYSQL_DATABASE: jumpinto_db
     ports:
     - 3308:3306
+    restart: unless-stopped
   
   # phpmyadmin:
   #   image: phpmyadmin:latest
