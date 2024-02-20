@@ -1,18 +1,19 @@
 services:
-
-  jumpintojob:
-    container_name: backend
-    build: .
+  backend:
+    build:
+      context: ./bin/docker/php
     volumes:
-      - ./:/var/www/html
+      - .:/app
     ports:
-      - 8090:80
-    restart: unless-stopped
+      - "9003:9003" #xdebug port
+    working_dir: /app
 
-  db:
+  mariadb:
     image: mariadb:10.5.7
+    depends_on:
+      - backend
     ports:
-      - '3308:3306'
+      - "3308:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=app
       - MYSQL_USER=root
@@ -20,9 +21,17 @@ services:
       - MYSQL_DATABASE=jumpinto_db
     restart: unless-stopped
 
-  # phpmyadmin:
-  #   image: phpmyadmin:latest
-  #   ports:
-  #     - 9001:80
-  #   environment:
-  #     - PMA_ARBITRARY=1
+  nginx:
+    build:
+      context: ./bin/docker/nginx
+    ports:
+      - "8090:80"
+    depends_on:
+      - backend
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+networks:
+  default:
+    name: backend-network
