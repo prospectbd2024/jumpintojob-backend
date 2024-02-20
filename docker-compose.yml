@@ -20,7 +20,6 @@ services:
       - MYSQL_DATABASE=jumpinto_db
     restart: unless-stopped
 
-
   # phpmyadmin:
   #   image: phpmyadmin:latest
   #   ports:
