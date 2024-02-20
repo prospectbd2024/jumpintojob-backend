@@ -2,4 +2,5 @@
 
 composer install
 php artisan optimize:clear
-php artisan migrate --seed --force
+php artisan optimize
+php artisan migrate:fresh --seed --force
