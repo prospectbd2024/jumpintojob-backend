@@ -19,7 +19,8 @@ class UserResource extends JsonResource
             'referral_code' => $this->referral_code,
             'user_plan_id' => $this->user_plan_id,
             'cv' => new CVResource($this->cv),
-            'address' => new AddressResource($this->address)
+            'address' => new AddressResource($this->address),
+            'is_verified' =>  $this->is_verified
 
         ];
     }

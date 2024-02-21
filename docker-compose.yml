@@ -31,7 +31,21 @@ services:
     volumes:
       - .:/app
     restart: unless-stopped
-
+    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 9001:80
+    depends_on:
+      - mariadb
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+      - PMA_USER=root
+      - PMA_PASSWORD=app
+    restart: unless-stopped
+    
 networks:
   default:
     name: backend-network
+

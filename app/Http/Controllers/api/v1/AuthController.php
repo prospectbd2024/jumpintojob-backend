@@ -23,6 +23,7 @@ use App\Services\AuthService;
 use Hash;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -56,9 +57,10 @@ class AuthController extends Controller
 
         return response()->json([
             'result' => true,
-            'message' => (get_setting('email_verification') == '1') ?
+            'message' => (get_setting('email_verification') ===null) ?
                 'Registration Successful! Please verify to use all features or log in to your account.' :
                 'Registration Successful! Please log in to your account.',
+            'is_verified' =>  (get_setting('email_verification') ===null) ? false:true,
             'user_id' => $this->authService->getUser()->id,
             'access_token' => $token->plainTextToken,
         ], 200);
@@ -180,11 +182,13 @@ class AuthController extends Controller
      */
     public function confirmCode(Request $request)
     {
-        $user = User::where('id', $request->user_id)->first();
+        $user_id = $request->user()->id;
+        $user = User::where('id',$user_id)->first();
 
         if ($user->verification_code == $request->verification_code) {
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->verification_code = null;
+            $user->is_verified = true;
             $user->save();
             return response()->json([
                 'result' => true,
