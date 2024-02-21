@@ -1,8 +1,8 @@
 #!/bin/bash
-files='-f docker-compose.yml '
+files='-f docker-compose.yml'
 docker compose $files down
-docker compose $files  up -d --build
+docker compose $files up -d --build
 
-docker compose exec jumpintojob  ./bin/update_dev.sh
+docker compose exec backend sh ./bin/update_dev.sh
 
 echo 'http://localhost:8090/'
