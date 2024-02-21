@@ -22,7 +22,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('password/confirm_reset', [PasswordResetController::class, 'confirmReset']);
     Route::post('password/resend_code', [PasswordResetController::class, 'resendCode']);
     Route::post('resend_code', [AuthController::class, 'resendCode']);
-    Route::post('confirm_code', [AuthController::class, 'confirmCode']);
+    Route::post('confirm_code', [AuthController::class, 'confirmCode'])->middleware(['auth:sanctum']);
     Route::get('account/{user_id}/verify/{code}', [AuthController::class, 'accountVerification'])->name('accountVerification');
 });
 
