@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -39,6 +40,10 @@ class NewUserEmailVerificationNotification extends Notification implements Shoul
         $array['email'] = $notifiable->email;
         $array['subject'] = translate('Email Verification');
         $array['code'] = $notifiable->verification_code;
+        // update verification code
+        $user = User::where('email',$array['email'])->firstOrFail();
+        $user->verification_code =$array['code'];
+        $user->save();
         $array['link'] = route('accountVerification', ['user_id' => $notifiable->id, 'code' => $notifiable->verification_code]);
 
         return (new MailMessage)
