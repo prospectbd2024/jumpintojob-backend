@@ -7,8 +7,18 @@ services:
       - ./:/var/www/html:consistent
     ports:
       - 8090:80
+    image: laravel/app
     restart: unless-stopped
   
+  queue:
+    depends_on:
+     - jumpintojob
+     - mysql_db
+    image: laravel/app
+    command: php artisan queue:work
+    volumes:
+      - ./:/var/www/html:consistent
+    restart: unless-stopped
   mysql_db:
     image: mysql:8.0
     environment:
