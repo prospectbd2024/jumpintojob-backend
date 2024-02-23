@@ -14,9 +14,8 @@ jobs:
           cd C:\Users\prospectbddev\Desktop\jumpintojob-backend
           git pull origin main
           docker compose down
-          docker compose up -d
-          # docker compose up --build -d
-          # docker compose exec backend composer install
-          # docker compose exec backend php artisan optimize:clear
-          # docker compose exec backend php artisan migrate:fresh --seed --force
+          docker compose up --build -d
+          docker compose exec backend composer install
+          docker compose exec backend php artisan optimize:clear
+          docker compose exec backend php artisan migrate:fresh --seed --force
 
