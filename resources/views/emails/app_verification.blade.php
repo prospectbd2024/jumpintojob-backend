@@ -73,7 +73,7 @@
                                                                 <tr>
                                                                     <td align="left"
                                                                         style="padding-top:30px;font-size:30px;letter-spacing:-1px;font-weight:normal;font-family:'Segoe UI Semibold','Segoe UI',SUWSB,Arial,sans-serif;color:#000000">
-                                                                        CareerHubGlobal email verification code
+                                                                        Jump Into Job email verification code
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>
@@ -100,7 +100,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Please, use the following
-                                                                                    verification code for the CareerHubGlobal
+                                                                                    verification code for the Jump Into Job
                                                                                     account <span
                                                                                         style="color:rgb(0,120,202)">{{ $array['email'] }}</span>
                                                                                 </td>
@@ -130,13 +130,13 @@
                                                                                             <td><br>Thanks,</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td>The CareerHubGlobal team</td>
+                                                                                            <td>The Jump Into Job team</td>
                                                                                         </tr>
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr>
+                                                                            {{-- <tr>
                                                                                 <td><br>If you have any issue, please,
                                                                                     contact <a
                                                                                         href="https://go.CareerHubGlobal.com/emailverification.support?utm_source=ccb5e686"
@@ -146,7 +146,7 @@
                                                                                         Customer Support Team</a> and
                                                                                     provide the following detail:
                                                                                 </td>
-                                                                            </tr>
+                                                                            </tr> --}}
                                                                             <tr>
 {{--                                                                                <td><br>Request: ccb5e686</td>--}}
                                                                             </tr>
@@ -158,7 +158,7 @@
                                                             </table>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td bgcolor="#f0f0f0" style="padding:17px 20px 30px">
                                                             <table width="100%" cellspacing="0" cellpadding="0"
                                                                    border="0" style="width:100%;min-width:100%">
@@ -166,13 +166,13 @@
                                                                 <tr>
                                                                     <td align="left"
                                                                         style="padding:0;font-size:10px;line-height:14px;font-weight:normal;font-family:'Segoe UI','Segoe UI Regular',SUWR,Arial,sans-serif;color:#6b6b6b">
-                                                                        Limited emergency calling. CareerHubGlobal is not a
+                                                                        Limited emergency calling. Jump Into Job is not a
                                                                         replacement for your telephone and has limited
                                                                         emergency calling capabilities depending on your
-                                                                        country.<br><br>2022-2023 CareerHubGlobal and/or
-                                                                        CareerHubGlobal. The CareerHubGlobal name, associated trademarks
+                                                                        country.<br><br>2023-2024 Jump Into Job and/or
+                                                                        Jump Into Job. The Jump Into Job name, associated trademarks
                                                                         and logos and the "C" logo are trademarks of
-                                                                        CareerHubGlobal or related entities. <a
+                                                                        Jump Into Job or related entities. <a
                                                                             href="https://go.CareerHubGlobal.com/emailverification.privacystatement?utm_source=ccb5e686"
                                                                             style="color:#6b6b6b;text-decoration:underline;font-weight:normal"
                                                                             target="_blank"
@@ -183,7 +183,7 @@
                                                                 <tr>
                                                                     <td align="left"
                                                                         style="padding:14px 0 0;font-size:10px;line-height:14px;font-weight:normal;font-family:'Segoe UI','Segoe UI Regular',SUWR,Arial,sans-serif;color:#6b6b6b">
-                                                                        CareerHubGlobal Corporation, CareerHubGlobal Way,
+                                                                        Jump Into Job Corporation, Jump Into Job Way,
                                                                         Santinagar, PO 1217 Bangladesh
                                                                     </td>
                                                                 </tr>
@@ -211,7 +211,7 @@
                                                                 </tbody>
                                                             </table>
                                                         </td>
-                                                    </tr>
+                                                    </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </td>
