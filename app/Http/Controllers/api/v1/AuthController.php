@@ -161,7 +161,8 @@ class AuthController extends Controller
     {
         if ($method == 'email') {
             // Send the verification code via email
-            $this->authService->getUser()->notify(new NewUserEmailVerificationNotification());
+            // $this->authService->getUser()->notify(new NewUserEmailVerificationNotification());
+            // the email was sent on another process
         } else {
             $otpController = new OTPVerificationController();
             $otpController->send_code($this->authService->getUser());
@@ -217,7 +218,8 @@ class AuthController extends Controller
             ]);
 
             AuthService::sendWelcomeEmailToUser($user);
-            return response()->json(['message' => 'Account verified successfully']);
+            // return response()->json(['message' => 'Account verified successfully']);
+            return redirect(config('app.APP_FRONTEND'));
         }
 
         return response()->json(['message' => 'Account already verified']);
