@@ -15,7 +15,7 @@ services:
      - mariadb
      - nginx
     image: laravel/app
-    command: php artisan queue:work
+    command: php artisan queue:work --sleep=3 --tries=3   --timeout=120
     working_dir: /app
     volumes:
       - .:/app
