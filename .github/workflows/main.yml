@@ -11,8 +11,9 @@ jobs:
     steps:
       - name: Install dependencies (Optional)
         run: |
-          whoami
+          echo %cd%
           cd C:\Users\prospectbddev\Desktop\jumpintojob-backend
+          echo %cd%
           git pull origin main
           docker compose down
           docker compose up --build -d
