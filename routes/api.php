@@ -17,7 +17,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('user/login', [AuthController::class, 'login']);
     Route::post('job-seeker/signup', [AuthController::class, 'jobSeekerSignup']);
     Route::post('employer/signup', [AuthController::class, 'employerSignup']);
-    Route::post('social-login', [AuthController::class, 'socialLogin']);
+    // Route::post('social-login', [AuthController::class, 'socialLogin']);
+    Route::post('social-signin', [AuthController::class, 'socialSignIn']);
     Route::post('password/forget_request', [PasswordResetController::class, 'forgetRequest']);
     Route::post('password/confirm_reset', [PasswordResetController::class, 'confirmReset']);
     Route::post('password/resend_code', [PasswordResetController::class, 'resendCode']);

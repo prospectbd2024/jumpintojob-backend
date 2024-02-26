@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str;
 //use App\Http\Controllers\api\v1\OTPVerificationController;
 //use App\Models\BusinessSetting;
 //use App\Models\Cart;
@@ -430,5 +430,32 @@ class AuthController extends Controller
             "result" => true,
             "message" => 'Your account deletion successfully done'
         ]);
+    }
+    public function socialSignIn(Request $request) {
+        if(!$request->profile){
+            return response()->json(['result' => false, 'message' => 'User Not Found', 'user' => null]);
+        }
+        $user_profile = (object) $request->profile;
+        $user = User::where('email',$user_profile->email)->first();
+        if($user){
+            $login_resource =  new LoginResource($user);
+            return   $login_resource;
+        }
+        $user = new User;
+        $user->user_plan_id =1;
+        $user->first_name = $user_profile->name;
+        $user->last_name ="";
+        $user->email = $user_profile->email;
+        $user->avatar = $user_profile->image;
+        $user->is_verified = 1;
+        $user->password = Str::random(10);
+        $user->user_type= $user_profile->user_type;
+        $user->save();
+        $user->createToken('tokens');
+        $login_resource =  new LoginResource($user);
+        return $login_resource;
+
+        
+        
     }
 }
