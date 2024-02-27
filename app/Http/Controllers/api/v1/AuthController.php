@@ -49,7 +49,7 @@ class AuthController extends Controller
         $this->authService->setRequest($request);
         $this->authService->createJobSeeker();
         $this->authService->createAddress();
-        $this->sendVerificationCode('email', $this->authService->getUser());
+        // $this->sendVerificationCode('email', $this->authService->getUser());
 
 
         // Create token
@@ -78,7 +78,7 @@ class AuthController extends Controller
 //        $this->authService->createCompany();
         $this->authService->createEmployee();
         $this->authService->createAddress();
-        $this->sendVerificationCode('email');
+        // $this->sendVerificationCode('email');
 
 
         // Create token
@@ -107,6 +107,7 @@ class AuthController extends Controller
                 'email_or_phone' => 'nullable',
             ]);
 
+
             $user = $this->getUserForVerification($request);
 
             if ($this->needsVerification($user)) {
@@ -116,7 +117,7 @@ class AuthController extends Controller
             $user->generateVerificationCode();
 
             $this->sendVerificationCode($request->verify_by, $user);
-
+            
             return $this->verificationCodeSentResponse();
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
@@ -157,11 +158,11 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function sendVerificationCode($method): void
+    public function sendVerificationCode($method, User $user): void
     {
         if ($method == 'email') {
             // Send the verification code via email
-            // $this->authService->getUser()->notify(new NewUserEmailVerificationNotification());
+            $user->notify(new NewUserEmailVerificationNotification());
             // the email was sent on another process
         } else {
             $otpController = new OTPVerificationController();
