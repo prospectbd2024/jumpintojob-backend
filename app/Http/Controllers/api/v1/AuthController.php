@@ -433,10 +433,14 @@ class AuthController extends Controller
         ]);
     }
     public function socialSignIn(Request $request) {
-        if(!$request->profile){
+        $userInfo = $request->userInfo['user'];
+        $profile = $request->userInfo['profile'];
+        $account = $request->userInfo['account'];
+        $user_type= $request->userInfo['user_type'];
+        if(!$userInfo){
             return response()->json(['result' => false, 'message' => 'User Not Found', 'user' => null]);
         }
-        $user_profile = (object) $request->profile;
+        $user_profile = (object)  $userInfo;
         $user = User::where('email',$user_profile->email)->first();
         if($user){
             $login_resource =  new LoginResource($user);
@@ -450,7 +454,9 @@ class AuthController extends Controller
         $user->avatar = $user_profile->image;
         $user->is_verified = 1;
         $user->password = Str::random(10);
-        $user->user_type= $user_profile->user_type;
+        $user->user_type=  $user_type;
+        $user->social_profile =json_encode($profile);
+        $user->social_account =json_encode($account);
         $user->save();
         $user->createToken('tokens');
         $login_resource =  new LoginResource($user);
