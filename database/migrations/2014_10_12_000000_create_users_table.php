@@ -43,6 +43,8 @@ return new class extends Migration {
             $table->string('new_email_verification_code')->nullable();
             $table->string('device_token')->nullable();
             $table->string('referral_code')->nullable();
+            $table->json('social_profile')->nullable();
+            $table->json('social_account')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
