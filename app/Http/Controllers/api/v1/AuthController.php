@@ -75,8 +75,8 @@ class AuthController extends Controller
     public function employerSignup(EmployeeSignupRequest $request)
     {
         $this->authService->setRequest($request);
-//        $this->authService->createCompany();
-        $this->authService->createEmployee();
+       $this->authService->createCompany();
+        $this->authService->createEmployer();
         $this->authService->createAddress();
         // $this->sendVerificationCode('email');
 

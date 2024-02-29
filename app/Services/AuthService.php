@@ -25,6 +25,7 @@ class AuthService
 
     public function createJobSeeker(): void
     {
+            
         $user = new User($this->request->validated());
         $user->save();
         // $ip = $this->request->ip();
@@ -101,8 +102,8 @@ class AuthService
         return $this->user;
     }
 
-    public function createEmployee(): void
-    {
+    public function createEmployer(): void
+    {   
         $user = new User($this->request->safe()->except(['company_name', 'company_type']));
         $user->save();
 
@@ -136,8 +137,15 @@ class AuthService
 
     public function createCompany(): void
     {
-        $this->company = new Company($this->request->safe()->only(['name', 'email', 'company_type', 'slug']));
-        $this->company->save();
+        // dd($this->request->safe()->only(['name', 'email', 'company_type', 'slug']));
+        // $this->company = new Company($this->request->safe()->only(['name', 'email', 'company_type', 'slug']));
+        $company = new Company;
+        $company->name = $this->request->name;
+        $company->email =  $this->request->email;
+        $company->company_type =  $this->request->company_type;
+        $company->slug =  $this->request->slug;
+        $company->save();
+        $this->company  = $company;
     }
 
 }

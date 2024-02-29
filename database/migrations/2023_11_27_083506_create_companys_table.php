@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 255)->unique(); // Adjust the size (255) as needed
             $table->string('email', 255)->unique(); // Adjust the size (255) as needed
-            $table->string('phone', 20)->unique(); // Assuming phone numbers, adjust the size as needed
+            $table->string('phone', 20)->unique()->nullable(); // Assuming phone numbers, adjust the size as needed
             $table->text('logo')->nullable();
             $table->text('cover_image')->nullable();
             $table->text('location')->nullable();
