@@ -17,11 +17,12 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('user/login', [AuthController::class, 'login']);
     Route::post('job-seeker/signup', [AuthController::class, 'jobSeekerSignup']);
     Route::post('employer/signup', [AuthController::class, 'employerSignup']);
-    Route::post('social-login', [AuthController::class, 'socialLogin']);
+    // Route::post('social-login', [AuthController::class, 'socialLogin']);
+    Route::post('social-signin', [AuthController::class, 'socialSignIn']);
     Route::post('password/forget_request', [PasswordResetController::class, 'forgetRequest']);
     Route::post('password/confirm_reset', [PasswordResetController::class, 'confirmReset']);
     Route::post('password/resend_code', [PasswordResetController::class, 'resendCode']);
-    Route::post('resend_code', [AuthController::class, 'resendCode']);
+    Route::post('verification_code/resend_code', [AuthController::class, 'resendCode']);
     Route::post('confirm_code', [AuthController::class, 'confirmCode'])->middleware(['auth:sanctum']);
     Route::get('account/{user_id}/verify/{code}', [AuthController::class, 'accountVerification'])->name('accountVerification');
 });

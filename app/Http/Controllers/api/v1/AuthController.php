@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str;
 //use App\Http\Controllers\api\v1\OTPVerificationController;
 //use App\Models\BusinessSetting;
 //use App\Models\Cart;
@@ -49,7 +49,7 @@ class AuthController extends Controller
         $this->authService->setRequest($request);
         $this->authService->createJobSeeker();
         $this->authService->createAddress();
-        $this->sendVerificationCode('email', $this->authService->getUser());
+        // $this->sendVerificationCode('email', $this->authService->getUser());
 
 
         // Create token
@@ -75,10 +75,10 @@ class AuthController extends Controller
     public function employerSignup(EmployeeSignupRequest $request)
     {
         $this->authService->setRequest($request);
-//        $this->authService->createCompany();
-        $this->authService->createEmployee();
+       $this->authService->createCompany();
+        $this->authService->createEmployer();
         $this->authService->createAddress();
-        $this->sendVerificationCode('email');
+        // $this->sendVerificationCode('email');
 
 
         // Create token
@@ -107,6 +107,7 @@ class AuthController extends Controller
                 'email_or_phone' => 'nullable',
             ]);
 
+
             $user = $this->getUserForVerification($request);
 
             if ($this->needsVerification($user)) {
@@ -116,7 +117,7 @@ class AuthController extends Controller
             $user->generateVerificationCode();
 
             $this->sendVerificationCode($request->verify_by, $user);
-
+            
             return $this->verificationCodeSentResponse();
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
@@ -157,11 +158,11 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function sendVerificationCode($method): void
+    public function sendVerificationCode($method, User $user): void
     {
         if ($method == 'email') {
             // Send the verification code via email
-            // $this->authService->getUser()->notify(new NewUserEmailVerificationNotification());
+            $user->notify(new NewUserEmailVerificationNotification());
             // the email was sent on another process
         } else {
             $otpController = new OTPVerificationController();
@@ -430,5 +431,38 @@ class AuthController extends Controller
             "result" => true,
             "message" => 'Your account deletion successfully done'
         ]);
+    }
+    public function socialSignIn(Request $request) {
+        $userInfo = $request->userInfo['user'];
+        $profile = $request->userInfo['profile'];
+        $account = $request->userInfo['account'];
+        $user_type= $request->userInfo['user_type'];
+        if(!$userInfo){
+            return response()->json(['result' => false, 'message' => 'User Not Found', 'user' => null]);
+        }
+        $user_profile = (object)  $userInfo;
+        $user = User::where('email',$user_profile->email)->first();
+        if($user){
+            $login_resource =  new LoginResource($user);
+            return   $login_resource;
+        }
+        $user = new User;
+        $user->user_plan_id =1;
+        $user->first_name = $user_profile->name;
+        $user->last_name ="";
+        $user->email = $user_profile->email;
+        $user->avatar = $user_profile->image;
+        $user->is_verified = 1;
+        $user->password = Str::random(10);
+        $user->user_type=  $user_type;
+        $user->social_profile =json_encode($profile);
+        $user->social_account =json_encode($account);
+        $user->save();
+        $user->createToken('tokens');
+        $login_resource =  new LoginResource($user);
+        return $login_resource;
+
+        
+        
     }
 }
