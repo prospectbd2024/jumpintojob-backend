@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('title');
             $table->string('description');
             $table->string('availability');
-            $table->string('email');
             $table->string('phone');
             $table->string('slug')->unique();
             $table->string('current_company_name');
