@@ -7,17 +7,21 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
-    - name: Use PHP 8.2
+    - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-        extensions: mbstring, intl # Add any required extensions here
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+        coverage: none
+
+    - name: Run composer install
+      run: composer install -n --prefer-dist
+
+    - name: Prepare Laravel Application
+      run: |
+        php artisan key:generate
 
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -26,6 +30,3 @@ jobs:
         username: jumpinto
         password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
         server-dir: /api.jumpintojob.com/
-
-    - name: 📦 Install Composer dependencies
-      run: composer install --no-interaction --no-progress --no-suggest
