@@ -1,4 +1,4 @@
-name: Windows Deployment
+name: Server Deployment
 
 on:
   push:
@@ -6,15 +6,24 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies (Optional)
-        run: |
-          git pull origin main
-          docker compose down
-          docker compose up --build -d
-          docker compose exec backend composer install
-          docker compose exec backend php artisan optimize:clear
-          docker compose exec backend php artisan migrate:fresh --seed --force
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: Use PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, intl # Add any required extensions here
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: www.jumpintojob.com
+        username: jumpinto
+        password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
+        server-dir: /api.jumpintojob.com/
 
