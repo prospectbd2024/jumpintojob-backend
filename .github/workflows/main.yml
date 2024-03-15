@@ -27,3 +27,5 @@ jobs:
         password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
         server-dir: /api.jumpintojob.com/
 
+    - name: 📦 Install Composer dependencies
+      run: composer install --no-interaction --no-progress --no-suggest
