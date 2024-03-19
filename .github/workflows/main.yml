@@ -28,7 +28,7 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: api.jumpintojob.com
-        username: api.jumpintojob.com
+        server: ftp.jumpintojob.com
+        username: api.jumpintojob.com@jumpintojob.com
         password: WSVC^PDbINi?         # ${{ secrets.ftp_password }}
         server-dir: /api.jumpintojob.com/
