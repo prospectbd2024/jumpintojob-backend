@@ -10,15 +10,17 @@ class CompanyResource extends JsonResource
     {
         $id = $this->id;
         return [
-            'title' => $this->title,
-            'description' => $this->description,
+            'name' => $this->name,
+            'logo' => $this->logo,
+            'cover_image' => $this->cover_image,
+            'location' => $this->location,
+            'company_type' => $this->company_type,
             'created_at' => $this->created_at->format('d-m-Y'),
             'links' => [
                 'show' => route('company.show', $this->slug),
-                'update' => route('company.update', $id),
-                'delete' => route('company.destroy', $id),
+//                'update' => route('company.update', $id),
+//                'delete' => route('company.destroy', $id),
             ]
         ];
     }
 }
-        
