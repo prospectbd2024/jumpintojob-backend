@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\CandidateContact;
-
 use App\Models\Candidate;
 
 use App\Models\Application;
@@ -22,8 +20,6 @@ use App\Models\ContactUseType;
 use App\Models\Course;
 use App\Models\Cv;
 use App\Models\Experience;
-use App\Models\Language;
-use App\Models\Project;
 use App\Models\Skill;
 use App\Models\Template;
 use App\Models\User;
