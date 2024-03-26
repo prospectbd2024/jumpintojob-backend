@@ -21,13 +21,6 @@ class Company extends Model
         'slug',
     ];
 
-    protected $guarded = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
     protected array $dates = [
         'created_at',
         'updated_at',
