@@ -29,6 +29,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftp.jumpintojob.com
-        username: api@api.jumpintojob.com
-        password: WSVC^PDbINi?         # ${{ secrets.ftp_password }}
+        username: jumpinto
+        password: i;p93:fNnIMT14         # ${{ secrets.ftp_password }}
         server-dir: /api.jumpintojob.com/
