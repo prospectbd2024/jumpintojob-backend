@@ -15,6 +15,7 @@ class CompanyResource extends JsonResource
             'cover_image' => $this->cover_image,
             'location' => $this->location,
             'company_type' => $this->company_type,
+            'description' => $this->description,
             'created_at' => $this->created_at->format('d-m-Y'),
             'links' => [
                 'show' => route('company.show', $this->slug),

@@ -18,6 +18,7 @@ class CompanyFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->unique()->phoneNumber(),
             'cover_image' => $this->faker->imageUrl(),
+            'description' => $this->faker->realText(200),
             'location' => $this->faker->city(),
             'company_type' => $this->faker->randomElement(['private', 'public']),
             'slug' => $this->faker->slug(),

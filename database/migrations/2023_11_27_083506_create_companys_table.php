@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->text('logo')->nullable();
             $table->text('cover_image')->nullable();
             $table->text('location')->nullable();
+            $table->text('description')->nullable();
             $table->text('company_type');
             $table->string('slug')->unique();
             $table->softDeletes();
