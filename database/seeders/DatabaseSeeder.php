@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
     {
         Template::factory(10)->create();
         Category::factory(10)->create();
-        Company::factory(200)->create();
+        Company::factory(3)->create();
         $this->call(UserPlansTableSeeder::class);
     }
 }

@@ -18,7 +18,7 @@ class CompanyController extends Controller
     {   
         $category_id =$request->category_id;
         $is_category_id = ($category_id!='all' && $category_id != null ) ;
-        
+        $category_id = $is_category_id && $category_id =='others'? null : $category_id;
         $companies = $is_category_id?  Company::where('category_id',$category_id)->get() : Company::get();
         return CompanyResourceCollection::make(($companies));
     }
