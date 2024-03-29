@@ -13,12 +13,13 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->company(),
+            'name' => $this->faker->name,
             'logo' => $this->faker->imageUrl(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->unique()->phoneNumber(),
             'cover_image' => $this->faker->imageUrl(),
             'description' => $this->faker->realText(200),
+            'category_id' => random_int(1,10),
             'location' => $this->faker->city(),
             'company_type' => $this->faker->randomElement(['private', 'public']),
             'slug' => $this->faker->slug(),
