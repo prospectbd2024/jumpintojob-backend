@@ -52,4 +52,11 @@ class CompanyController extends Controller
         'message' => 'Company deleted successfully'
         ], Response::HTTP_NO_CONTENT);
     }
+    public function show_slug(Request $request)
+
+    {   
+        $slug = $request->slug;
+        $company = Company::where('slug',$slug)->first();
+        return CompanyResource::make($company);
+    }
 }

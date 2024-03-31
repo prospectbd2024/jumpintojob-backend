@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
             Route::get('/', [CompanyController::class, 'index'])->name('company.index');
 
-            Route::get('show/{slug}', [CompanyController::class, 'show'])->name('company.show');
+            Route::get('show/{slug}', [CompanyController::class, 'show_slug'])->name('company.show');
 
             Route::post('store', [CompanyController::class, 'store'])->name('company.store');
 

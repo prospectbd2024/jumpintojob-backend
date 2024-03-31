@@ -19,7 +19,7 @@ class CompanyResource extends JsonResource
             'size' => $this->size,
             'created_at' => $this->created_at->format('d-m-Y'),
             'links' => [
-                'show' => route('company.show', $this->slug),
+                'show' =>  $this->slug,
 //                'update' => route('company.update', $id),
 //                'delete' => route('company.destroy', $id),
             ]
