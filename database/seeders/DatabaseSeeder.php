@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         Company::factory(3)->create();
         User::factory(10)->create();
         Employer::factory(3)->create();
-        Circular::factory(3)->create();
+        Circular::factory(10)->create();
         $this->call(UserPlansTableSeeder::class);
     }
 }
