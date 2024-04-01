@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_plan_id')->constrained('user_plans')->onDelete('NO ACTION');
+            $table->foreignId('user_plan_id')->nullable()->constrained('user_plans')->onDelete('NO ACTION');
             $table->string('user_type')->default('job_seeker');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
