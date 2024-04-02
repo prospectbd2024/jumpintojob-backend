@@ -8,6 +8,7 @@ use App\Http\Requests\Circular\CircularUpdateRequest;
 use App\Http\Resources\Circular\CircularResource;
 use App\Http\Resources\Circular\CircularResourceCollection;
 use App\Models\Circular;
+use App\Models\Company;
 use Symfony\Component\HttpFoundation\Response;
 
 class CircularController extends Controller
@@ -90,6 +91,25 @@ class CircularController extends Controller
             // Validate company
 
             return CircularResource::make($circular);
+
+        } catch (\Exception $e) {
+            // Handle exceptions
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    public function getCompanyCirculars($slug)
+    {
+        try {
+            // Fetch circular
+            $company = Company::where('slug',$slug)->firstOrFail();
+            $circular = Circular::with('category', 'employer')
+                ->where('company_id', $company->id);
+
+            return CircularResourceCollection::make($circular->paginate());
+
 
         } catch (\Exception $e) {
             // Handle exceptions
