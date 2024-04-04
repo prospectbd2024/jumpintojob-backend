@@ -14,10 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->onDelete('NO ACTION');
             $table->foreignId('employer_id')->constrained()->onDelete('NO ACTION');
+            $table->foreignId('company_id')->constrained()->onDelete('NO ACTION');
             $table->string('title');
-            $table->string('description');
-            $table->string('availability');
-            $table->string('phone');
+            $table->text('description');
+            $table->string('availability')->nullable();
+            // $table->string('phone');
             $table->string('slug')->unique();
             $table->string('current_company_name');
             $table->string('location');

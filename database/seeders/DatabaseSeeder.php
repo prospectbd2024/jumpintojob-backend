@@ -39,10 +39,13 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
+    {   
         Template::factory(10)->create();
         Category::factory(10)->create();
-        Company::factory(10)->create();
+        Company::factory(3)->create();
+        User::factory(10)->create();
+        Employer::factory(3)->create();
+        Circular::factory(10)->create();
         $this->call(UserPlansTableSeeder::class);
     }
 }

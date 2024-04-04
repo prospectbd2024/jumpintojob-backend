@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
             Route::get('/', [CompanyController::class, 'index'])->name('company.index');
 
-            Route::get('show/{slug}', [CompanyController::class, 'show'])->name('company.show');
+            Route::get('show/{slug}', [CompanyController::class, 'show_slug'])->name('company.show');
 
             Route::post('store', [CompanyController::class, 'store'])->name('company.store');
 
@@ -90,7 +90,8 @@ Route::middleware('auth:sanctum')->group(function () {
 // public section
 Route::prefix('circular')->group(function () {
     Route::get('/', [CircularController::class, 'index'])->name('circular.index');
-    Route::get('{company}/{slug}', [CircularController::class, 'show'])->name('circular.show');
+    Route::get('show/{id}', [CircularController::class, 'show'])->name('circular.getCircular');
+    Route::get('{company}/{slug}', [CircularController::class, 'getCircular'])->name('circular.show');
 });
 
 Route::get('companies', [CompanyController::class, 'index'])->name('company.list');

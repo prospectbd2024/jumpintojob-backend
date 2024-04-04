@@ -36,7 +36,7 @@ class CircularController extends Controller
     }
 
     // Display the specified resource.
-    public function show($company, $slug)
+    public function getCircular($company, $slug)
     {
         try {
             // Fetch circular
@@ -78,5 +78,25 @@ class CircularController extends Controller
             'success' => true,
             'message' => 'Circular deleted successfully'
         ], Response::HTTP_NO_CONTENT);
+    }
+    public function show($id)
+    {
+        try {
+            // Fetch circular
+            $circular = Circular::with('category', 'employer')
+                ->where('id', $id)
+                ->firstOrFail();
+
+            // Validate company
+
+            return CircularResource::make($circular);
+
+        } catch (\Exception $e) {
+            // Handle exceptions
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
