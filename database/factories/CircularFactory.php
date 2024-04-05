@@ -24,7 +24,7 @@ class CircularFactory extends Factory
             'company_id' => $company->id,
             'title' => $this->faker->realText(20),
             'description' => $this->faker->text(),
-            'current_company_name' => $employer->company->name,
+            'current_company_name' =>'demo company',// $employer->company->name,
             'location' => $this->faker->city(),
             'location_type' => $this->faker->randomElement(['remote', 'office']),
             'vacancies' => $this->faker->numberBetween(1, 10),
