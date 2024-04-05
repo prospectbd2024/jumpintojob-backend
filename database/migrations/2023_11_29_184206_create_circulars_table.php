@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('category_id')->constrained('categories')->onDelete('NO ACTION');
             $table->foreignId('employer_id')->constrained()->onDelete('NO ACTION');
             $table->foreignId('company_id')->constrained()->onDelete('NO ACTION');
-            $table->string('title');
+            $table->text('title');
             $table->text('description');
             $table->string('availability')->nullable();
             // $table->string('phone');
