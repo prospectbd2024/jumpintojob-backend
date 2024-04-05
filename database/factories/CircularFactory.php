@@ -22,7 +22,7 @@ class CircularFactory extends Factory
             'employer_id' => $employer->id,
             'category_id' => $category->id,
             'company_id' => $company->id,
-            'title' => $this->faker->title(),
+            'title' => $this->faker->realText(20),
             'description' => $this->faker->text(),
             'current_company_name' => $employer->company->name,
             'location' => $this->faker->city(),
