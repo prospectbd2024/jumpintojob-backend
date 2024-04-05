@@ -13,7 +13,7 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name($maxNbChars = 50), 
+            'name' => $this->faker->name($maxNbChars = 20), 
             'logo' => $this->faker->imageUrl(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->unique()->phoneNumber(),
