@@ -25,24 +25,24 @@ class AuthService
 
     public function createJobSeeker(): void
     {
-            
+
         $user = new User($this->request->validated());
         $user->save();
         // $ip = $this->request->ip();
-//        $location = Location::get($ip);
+        //        $location = Location::get($ip);
         $user->update([
-//            'ip' => $location->ip,
+            //            'ip' => $location->ip,
             'first_name' => $this->request->first_name,
             'last_name' => $this->request->last_name,
-//            'iso_code' => $location->isoCode,
-//            'country' => $location->countryName,
-//            'city' => $location->cityName,
-//            'state' => $location->regionName,
-//            'postal_code' => $location->postalCode,
-//            'lat' => $location->latitude,
-//            'lon' => $location->longitude,
-//            'zip_code' => $location->zipCode,
-//            'timezone' => $location->timezone,
+            //            'iso_code' => $location->isoCode,
+            //            'country' => $location->countryName,
+            //            'city' => $location->cityName,
+            //            'state' => $location->regionName,
+            //            'postal_code' => $location->postalCode,
+            //            'lat' => $location->latitude,
+            //            'lon' => $location->longitude,
+            //            'zip_code' => $location->zipCode,
+            //            'timezone' => $location->timezone,
         ]);
         $user->save();
         $this->user = $user;
@@ -72,17 +72,17 @@ class AuthService
     {
         if ($user->email_verified_at == null) {
             try {
-//                EmailVerificationJob::dispatch($user);
-//                Artisan::call('queue:work');
-//                $user->notify(new NewUserEmailVerificationNotification($user));
+                //                EmailVerificationJob::dispatch($user);
+                //                Artisan::call('queue:work');
+                //                $user->notify(new NewUserEmailVerificationNotification($user));
                 Notification::send($user, new NewUserEmailVerificationNotification($user));
             } catch (\Exception $e) {
                 return errorResponse($e, 'Something went wrong sending verification email. Please try again later.', ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
             }
-//            else {
-//                $otpController = new OTPVerificationController();
-//                $otpController->send_code($user);
-//            }
+            //            else {
+            //                $otpController = new OTPVerificationController();
+            //                $otpController->send_code($user);
+            //            }
 
             return response()->json([
                 'message' => 'Verification code sent successfully.'
@@ -103,25 +103,25 @@ class AuthService
     }
 
     public function createEmployer(): void
-    {   
+    {
         $user = new User($this->request->safe()->except(['company_name', 'company_type']));
         $user->save();
 
         // $ip = $this->request->ip();
-//        $location = Location::get($ip);
+        //        $location = Location::get($ip);
         $user->update([
-//            'ip' => $location->ip,
+            //            'ip' => $location->ip,
             'first_name' => $this->request->first_name,
             'last_name' => $this->request->last_name,
-//            'iso_code' => $location->isoCode,
-//            'country' => $location->countryName,
-//            'city' => $location->cityName,
-//            'state' => $location->regionName,
-//            'postal_code' => $location->postalCode,
-//            'lat' => $location->latitude,
-//            'lon' => $location->longitude,
-//            'zip_code' => $location->zipCode,
-//            'timezone' => $location->timezone,
+            //            'iso_code' => $location->isoCode,
+            //            'country' => $location->countryName,
+            //            'city' => $location->cityName,
+            //            'state' => $location->regionName,
+            //            'postal_code' => $location->postalCode,
+            //            'lat' => $location->latitude,
+            //            'lon' => $location->longitude,
+            //            'zip_code' => $location->zipCode,
+            //            'timezone' => $location->timezone,
         ]);
         $user->save();
 
@@ -147,5 +147,4 @@ class AuthService
         $company->save();
         $this->company  = $company;
     }
-
 }

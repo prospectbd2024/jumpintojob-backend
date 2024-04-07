@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
 use App\Models\Company;
 use App\Models\Employer;
 use App\Models\User;
@@ -12,31 +13,32 @@ class EmployerSeeder extends Seeder
 {
     public function run(): void
     {
-        $companies = Company::get();
+        $user = User::create([
+            'first_name' => 'employer',
+            'last_name' => 'test',
+            'email' => 'employer@test.com',
+            'email_verified_at' => now(),
+            'is_verified' => 1,
+            'password' => bcrypt('123456'), // password
+            'remember_token' => Str::random(10),
+            'user_plan_id' => 2,
+            'user_type' => 'employer',
+        ]);
 
-        foreach ($companies as $company) {
-            $user = User::create([
-                'first_name' => fake()->firstName(),
-                'last_name' => fake()->lastName(),
-                'email' => fake()->unique()->safeEmail(),
-                'email_verified_at' => now(),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-                'remember_token' => Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        Employer::create([
+            'company_id' => Company::get()->random()->first()->id,
+            'user_id' => $user->id,
+            'name' => 'employer',
+            'email' => 'employer@test.com',
+            'phone' => '01700000000',
+            'position' => fake()->jobTitle(),
+            'avatar' => fake()->imageUrl(),
+        ]);
 
-            $employer = Employer::factory(1)->create([
-                'company_id' => $company->id,
-                'user_id' => $user->id,
-                'name' => fake()->name(),
-                'email' => fake()->email(),
-                'phone' => fake()->phoneNumber(),
-                'position' => fake()->jobTitle(),
-                'avatar' => fake()->imageUrl(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        new Address([
+            'user_id' => $user->id,
+            'address' => 'Dhaka',
+            'address_type' => 'present',
+        ]);
     }
 }
