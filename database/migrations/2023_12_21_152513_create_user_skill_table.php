@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_skill', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->noActionOnDelete();
-        $table->foreignId('skill_id')->constrained()->noActionOnDelete();
-        $table->string('skill_level');
-        $table->string('is_verified')->default('0');
-        $table->timestamps();
+            $table->id();
+            $table->foreignId('user_id')->constrained()->noActionOnDelete();
+            $table->foreignId('skill_id')->constrained()->noActionOnDelete();
+            $table->string('level');
+            $table->string('is_verified')->default('0');
+            $table->timestamps();
         });
     }
 
