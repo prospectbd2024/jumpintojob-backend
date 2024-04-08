@@ -483,8 +483,8 @@ class CircularSeeder extends Seeder
 
             // Add more job entries as needed
         ];
-        $employer = Employer::get()->random()->first();
         foreach ($jobs as $item) {
+            $employer = Employer::inRandomOrder()->first();
             $item['company_id'] = $employer->company_id;
             $item['employer_id'] = $employer->id;
             Circular::create($item);
