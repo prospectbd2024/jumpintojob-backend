@@ -10,17 +10,12 @@ class Skill extends Model
 {
     use SoftDeletes, hasFactory;
 
-    protected $fillable = [
-        'cv_id',
-        'skill_name',
-        'category_id',
-        'proficiency',
-    ];
+    protected $fillable = ['name'];
 
-//    public function cvs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-//    {
-//        return $this->belongsToMany(Cv::class)
-//            ->using(Skill::class)
-//            ->withPivot('skill_level');
-//    }
+    //    public function cvs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    //    {
+    //        return $this->belongsToMany(Cv::class)
+    //            ->using(Skill::class)
+    //            ->withPivot('skill_level');
+    //    }
 }

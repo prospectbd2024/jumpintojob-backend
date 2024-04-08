@@ -11,7 +11,7 @@ class LanguagesController extends Controller
 {
     public function index()
     {
-        return LanguagesResource::collection(Languages::all());
+        return LanguagesResource::collection(Languages::get());
     }
 
     public function store(LanguagesRequest $request)
