@@ -11,8 +11,6 @@ class Languages extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'cv_id',
-        'language_name',
-        'proficiency',
+        'language',
     ];
 }

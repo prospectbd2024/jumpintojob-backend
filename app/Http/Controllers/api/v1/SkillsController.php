@@ -11,7 +11,7 @@ class SkillsController extends Controller
 {
     public function index()
     {
-        return SkillsResource::collection(Skill::all());
+        return SkillsResource::collection(Skill::get());
     }
 
     public function store(SkillsRequest $request)
