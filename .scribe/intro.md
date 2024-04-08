@@ -3,7 +3,7 @@
 
 
 <aside>
-    <strong>Base URL</strong>: <code>https://api.dev.jumpintojob.com</code>
+    <strong>Base URL</strong>: <code>https://api.jumpintojob.com</code>
 </aside>
 
 This documentation aims to provide all the information you need to work with our API.

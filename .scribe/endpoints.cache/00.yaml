@@ -28,7 +28,7 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: davis.leone@example.com
+        example: roberts.mckenzie@example.org
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -37,7 +37,7 @@ endpoints:
         name: password
         description: 'Must be at least 6 characters.'
         required: true
-        example: 'V<{$k,'
+        example: 'tsXQwNo,FIZ&EIqzd&g{'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -46,15 +46,15 @@ endpoints:
         name: remember_me
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      email: davis.leone@example.com
-      password: 'V<{$k,'
-      remember_me: true
+      email: roberts.mckenzie@example.org
+      password: 'tsXQwNo,FIZ&EIqzd&g{'
+      remember_me: false
     fileParameters: []
     responses:
       -
@@ -101,7 +101,7 @@ endpoints:
         name: first_name
         description: ''
         required: true
-        example: suscipit
+        example: magni
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -110,7 +110,7 @@ endpoints:
         name: last_name
         description: ''
         required: true
-        example: eos
+        example: itaque
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -119,7 +119,7 @@ endpoints:
         name: password
         description: ''
         required: true
-        example: voluptatem
+        example: odit
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -189,15 +189,15 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      first_name: suscipit
-      last_name: eos
-      password: voluptatem
+      first_name: magni
+      last_name: itaque
+      password: odit
       user_type: job_seeker
     fileParameters: []
     responses:
       -
         status: 422
-        content: '{"message":"Password confirmation does not match","errors":{"password":["Password confirmation does not match"]}}'
+        content: '{"message":"Minimum 6 digits required for password (and 1 more error)","errors":{"password":["Minimum 6 digits required for password","Password confirmation does not match"]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -257,7 +257,7 @@ endpoints:
         name: name
         description: ''
         required: true
-        example: odio
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -266,7 +266,7 @@ endpoints:
         name: slug
         description: ''
         required: true
-        example: iusto
+        example: nisi
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -275,7 +275,7 @@ endpoints:
         name: company_type
         description: ''
         required: true
-        example: deleniti
+        example: qui
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -284,7 +284,7 @@ endpoints:
         name: password
         description: ''
         required: true
-        example: quasi
+        example: accusamus
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -303,7 +303,7 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: brianne.ledner@example.org
+        example: mike05@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -354,17 +354,17 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      name: odio
-      slug: iusto
-      company_type: deleniti
-      password: quasi
+      name: consequatur
+      slug: nisi
+      company_type: qui
+      password: accusamus
       user_type: employer
-      email: brianne.ledner@example.org
+      email: mike05@example.com
     fileParameters: []
     responses:
       -
         status: 422
-        content: '{"message":"Minimum 6 digits required for password (and 1 more error)","errors":{"password":["Minimum 6 digits required for password","Password confirmation does not match"]}}'
+        content: '{"message":"Password confirmation does not match","errors":{"password":["Password confirmation does not match"]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -382,7 +382,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/auth/social-login
+    uri: api/v1/auth/social-signin
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -404,8 +404,471 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"result":false,"message":"User not found","user":null}'
+        status: 500
+        content: |-
+          {
+              "message": "Trying to access array offset on value of type null",
+              "exception": "ErrorException",
+              "file": "C:\\laragon\\www\\jumpintojob-backend\\app\\Http\\Controllers\\api\\v1\\AuthController.php",
+              "line": 437,
+              "trace": [
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php",
+                      "line": 255,
+                      "function": "handleError",
+                      "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\app\\Http\\Controllers\\api\\v1\\AuthController.php",
+                      "line": 437,
+                      "function": "Illuminate\\Foundation\\Bootstrap\\{closure}",
+                      "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
+                      "line": 54,
+                      "function": "socialSignIn",
+                      "class": "App\\Http\\Controllers\\api\\v1\\AuthController",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
+                      "line": 43,
+                      "function": "callAction",
+                      "class": "Illuminate\\Routing\\Controller",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "line": 259,
+                      "function": "dispatch",
+                      "class": "Illuminate\\Routing\\ControllerDispatcher",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "line": 205,
+                      "function": "runController",
+                      "class": "Illuminate\\Routing\\Route",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 806,
+                      "function": "run",
+                      "class": "Illuminate\\Routing\\Route",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 144,
+                      "function": "Illuminate\\Routing\\{closure}",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
+                      "line": 50,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "line": 159,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "line": 125,
+                      "function": "handleRequest",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "line": 87,
+                      "function": "handleRequestUsingNamedLimiter",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 119,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 805,
+                      "function": "then",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 784,
+                      "function": "runRouteWithinStack",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 748,
+                      "function": "runRoute",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 737,
+                      "function": "dispatchToRoute",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "line": 200,
+                      "function": "dispatch",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 144,
+                      "function": "Illuminate\\Foundation\\Http\\{closure}",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\barryvdh\\laravel-debugbar\\src\\Middleware\\InjectDebugbar.php",
+                      "line": 59,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Barryvdh\\Debugbar\\Middleware\\InjectDebugbar",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "line": 21,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
+                      "line": 31,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "line": 21,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
+                      "line": 40,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+                      "line": 27,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
+                      "line": 99,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php",
+                      "line": 62,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Http\\Middleware\\HandleCors",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php",
+                      "line": 39,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 183,
+                      "function": "handle",
+                      "class": "Illuminate\\Http\\Middleware\\TrustProxies",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 119,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "line": 175,
+                      "function": "then",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "line": 144,
+                      "function": "sendRequestThroughRouter",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 300,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 288,
+                      "function": "callLaravelOrLumenRoute",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 91,
+                      "function": "makeApiCall",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 44,
+                      "function": "makeResponseCall",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 35,
+                      "function": "makeResponseCallIfConditionsPass",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "line": 236,
+                      "function": "__invoke",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "line": 163,
+                      "function": "iterateThroughStrategies",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "line": 95,
+                      "function": "fetchResponses",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "line": 125,
+                      "function": "processRoute",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "line": 72,
+                      "function": "extractEndpointsInfoFromLaravelApp",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "line": 50,
+                      "function": "extractEndpointsInfoAndWriteToDisk",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
+                      "line": 53,
+                      "function": "get",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "line": 36,
+                      "function": "handle",
+                      "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
+                      "line": 41,
+                      "function": "Illuminate\\Container\\{closure}",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "line": 93,
+                      "function": "unwrapIfClosure",
+                      "class": "Illuminate\\Container\\Util",
+                      "type": "::"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "line": 35,
+                      "function": "callBoundMethod",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+                      "line": 662,
+                      "function": "call",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "line": 211,
+                      "function": "call",
+                      "class": "Illuminate\\Container\\Container",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Command\\Command.php",
+                      "line": 326,
+                      "function": "execute",
+                      "class": "Illuminate\\Console\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "line": 180,
+                      "function": "run",
+                      "class": "Symfony\\Component\\Console\\Command\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Application.php",
+                      "line": 1096,
+                      "function": "run",
+                      "class": "Illuminate\\Console\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Application.php",
+                      "line": 324,
+                      "function": "doRunCommand",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Application.php",
+                      "line": 175,
+                      "function": "doRun",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+                      "line": 201,
+                      "function": "run",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "C:\\laragon\\www\\jumpintojob-backend\\artisan",
+                      "line": 35,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Console\\Kernel",
+                      "type": "->"
+                  }
+              ]
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -950,7 +1413,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"result":false,"message":"No user is found"}'
+        content: '{"result":true,"message":"Your password is reset.Please login"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -1458,7 +1921,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/auth/resend_code
+    uri: api/v1/auth/verification_code/resend_code
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -1523,476 +1986,11 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 500
-        content: |-
-          {
-              "message": "Attempt to read property \"verification_code\" on null",
-              "exception": "ErrorException",
-              "file": "C:\\laragon\\www\\jumpintojob-backend\\app\\Http\\Controllers\\api\\v1\\AuthController.php",
-              "line": 185,
-              "trace": [
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php",
-                      "line": 255,
-                      "function": "handleError",
-                      "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\app\\Http\\Controllers\\api\\v1\\AuthController.php",
-                      "line": 185,
-                      "function": "Illuminate\\Foundation\\Bootstrap\\{closure}",
-                      "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
-                      "line": 54,
-                      "function": "confirmCode",
-                      "class": "App\\Http\\Controllers\\api\\v1\\AuthController",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
-                      "line": 43,
-                      "function": "callAction",
-                      "class": "Illuminate\\Routing\\Controller",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-                      "line": 259,
-                      "function": "dispatch",
-                      "class": "Illuminate\\Routing\\ControllerDispatcher",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-                      "line": 205,
-                      "function": "runController",
-                      "class": "Illuminate\\Routing\\Route",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-                      "line": 806,
-                      "function": "run",
-                      "class": "Illuminate\\Routing\\Route",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 144,
-                      "function": "Illuminate\\Routing\\{closure}",
-                      "class": "Illuminate\\Routing\\Router",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
-                      "line": 50,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
-                      "line": 159,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
-                      "line": 125,
-                      "function": "handleRequest",
-                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
-                      "line": 87,
-                      "function": "handleRequestUsingNamedLimiter",
-                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 119,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-                      "line": 805,
-                      "function": "then",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-                      "line": 784,
-                      "function": "runRouteWithinStack",
-                      "class": "Illuminate\\Routing\\Router",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-                      "line": 748,
-                      "function": "runRoute",
-                      "class": "Illuminate\\Routing\\Router",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-                      "line": 737,
-                      "function": "dispatchToRoute",
-                      "class": "Illuminate\\Routing\\Router",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-                      "line": 200,
-                      "function": "dispatch",
-                      "class": "Illuminate\\Routing\\Router",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 144,
-                      "function": "Illuminate\\Foundation\\Http\\{closure}",
-                      "class": "Illuminate\\Foundation\\Http\\Kernel",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\barryvdh\\laravel-debugbar\\src\\Middleware\\InjectDebugbar.php",
-                      "line": 59,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Barryvdh\\Debugbar\\Middleware\\InjectDebugbar",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
-                      "line": 21,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
-                      "line": 31,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
-                      "line": 21,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
-                      "line": 40,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
-                      "line": 27,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
-                      "line": 99,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php",
-                      "line": 62,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Http\\Middleware\\HandleCors",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php",
-                      "line": 39,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 183,
-                      "function": "handle",
-                      "class": "Illuminate\\Http\\Middleware\\TrustProxies",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-                      "line": 119,
-                      "function": "Illuminate\\Pipeline\\{closure}",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-                      "line": 175,
-                      "function": "then",
-                      "class": "Illuminate\\Pipeline\\Pipeline",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-                      "line": 144,
-                      "function": "sendRequestThroughRouter",
-                      "class": "Illuminate\\Foundation\\Http\\Kernel",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-                      "line": 300,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Http\\Kernel",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-                      "line": 288,
-                      "function": "callLaravelOrLumenRoute",
-                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-                      "line": 91,
-                      "function": "makeApiCall",
-                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-                      "line": 44,
-                      "function": "makeResponseCall",
-                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-                      "line": 35,
-                      "function": "makeResponseCallIfConditionsPass",
-                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
-                      "line": 236,
-                      "function": "__invoke",
-                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
-                      "line": 163,
-                      "function": "iterateThroughStrategies",
-                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
-                      "line": 95,
-                      "function": "fetchResponses",
-                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
-                      "line": 125,
-                      "function": "processRoute",
-                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
-                      "line": 72,
-                      "function": "extractEndpointsInfoFromLaravelApp",
-                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
-                      "line": 50,
-                      "function": "extractEndpointsInfoAndWriteToDisk",
-                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
-                      "line": 53,
-                      "function": "get",
-                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-                      "line": 36,
-                      "function": "handle",
-                      "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
-                      "line": 41,
-                      "function": "Illuminate\\Container\\{closure}",
-                      "class": "Illuminate\\Container\\BoundMethod",
-                      "type": "::"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-                      "line": 93,
-                      "function": "unwrapIfClosure",
-                      "class": "Illuminate\\Container\\Util",
-                      "type": "::"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-                      "line": 35,
-                      "function": "callBoundMethod",
-                      "class": "Illuminate\\Container\\BoundMethod",
-                      "type": "::"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-                      "line": 662,
-                      "function": "call",
-                      "class": "Illuminate\\Container\\BoundMethod",
-                      "type": "::"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
-                      "line": 211,
-                      "function": "call",
-                      "class": "Illuminate\\Container\\Container",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Command\\Command.php",
-                      "line": 326,
-                      "function": "execute",
-                      "class": "Illuminate\\Console\\Command",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
-                      "line": 180,
-                      "function": "run",
-                      "class": "Symfony\\Component\\Console\\Command\\Command",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Application.php",
-                      "line": 1096,
-                      "function": "run",
-                      "class": "Illuminate\\Console\\Command",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Application.php",
-                      "line": 324,
-                      "function": "doRunCommand",
-                      "class": "Symfony\\Component\\Console\\Application",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\symfony\\console\\Application.php",
-                      "line": 175,
-                      "function": "doRun",
-                      "class": "Symfony\\Component\\Console\\Application",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
-                      "line": 201,
-                      "function": "run",
-                      "class": "Symfony\\Component\\Console\\Application",
-                      "type": "->"
-                  },
-                  {
-                      "file": "C:\\laragon\\www\\jumpintojob-backend\\artisan",
-                      "line": 35,
-                      "function": "handle",
-                      "class": "Illuminate\\Foundation\\Console\\Kernel",
-                      "type": "->"
-                  }
-              ]
-          }
+        status: 401
+        content: '{"message":"Unauthenticated."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '51'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -2023,7 +2021,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: corrupti
+        example: tempore
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2032,14 +2030,14 @@ endpoints:
         name: code
         description: ''
         required: true
-        example: itaque
+        example: provident
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      user_id: corrupti
-      code: itaque
+      user_id: tempore
+      code: provident
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -2488,7 +2486,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '50'
+          x-ratelimit-remaining: '51'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -2679,7 +2677,7 @@ endpoints:
         name: user_id
         description: ''
         required: false
-        example: 7
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -2688,7 +2686,7 @@ endpoints:
         name: template_id
         description: ''
         required: true
-        example: 11
+        example: 18
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -2706,7 +2704,7 @@ endpoints:
         name: title
         description: ''
         required: true
-        example: qui
+        example: eveniet
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2715,16 +2713,16 @@ endpoints:
         name: summary
         description: ''
         required: true
-        example: doloribus
+        example: voluptatem
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      user_id: 7
-      template_id: 11
-      title: qui
-      summary: doloribus
+      user_id: 1
+      template_id: 18
+      title: eveniet
+      summary: voluptatem
     fileParameters: []
     responses:
       -
@@ -2763,13 +2761,13 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: tempore
+        example: vitae
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      id: tempore
+      id: vitae
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -2777,7 +2775,7 @@ endpoints:
         name: user_id
         description: ''
         required: false
-        example: 15
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -2795,7 +2793,7 @@ endpoints:
         name: title
         description: ''
         required: true
-        example: temporibus
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2804,15 +2802,15 @@ endpoints:
         name: summary
         description: ''
         required: true
-        example: nemo
+        example: quis
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      user_id: 15
-      title: temporibus
-      summary: nemo
+      user_id: 17
+      title: et
+      summary: quis
     fileParameters: []
     responses:
       -
@@ -2851,13 +2849,13 @@ endpoints:
         name: Cv
         description: ''
         required: true
-        example: voluptate
+        example: vel
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      Cv: voluptate
+      Cv: vel
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -2939,13 +2937,13 @@ endpoints:
         name: Cv
         description: ''
         required: true
-        example: magnam
+        example: saepe
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      Cv: magnam
+      Cv: saepe
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3027,13 +3025,13 @@ endpoints:
         name: slug
         description: 'The slug of the show.'
         required: true
-        example: ipsum
+        example: velit
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      slug: ipsum
+      slug: velit
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3080,7 +3078,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: bfe
+        example: pduodvjvhjwhwljiup
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3089,7 +3087,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: true
-        example: 'Libero omnis ipsa veritatis non.'
+        example: 'Et incidunt accusantium facere ut aut.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3104,8 +3102,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: bfe
-      description: 'Libero omnis ipsa veritatis non.'
+      title: pduodvjvhjwhwljiup
+      description: 'Et incidunt accusantium facere ut aut.'
     fileParameters: []
     responses:
       -
@@ -3144,13 +3142,13 @@ endpoints:
         name: company_id
         description: 'The ID of the company.'
         required: true
-        example: 5
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      company_id: 5
+      company_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -3158,7 +3156,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: qgwgbcawnjxpiyyzbt
+        example: vtifsaoiqesbpkwnjkqwqvvlf
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3167,7 +3165,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: false
-        example: 'Possimus esse illo aut.'
+        example: 'Fuga molestias omnis iste quis incidunt vel.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3182,8 +3180,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: qgwgbcawnjxpiyyzbt
-      description: 'Possimus esse illo aut.'
+      title: vtifsaoiqesbpkwnjkqwqvvlf
+      description: 'Fuga molestias omnis iste quis incidunt vel.'
     fileParameters: []
     responses:
       -
@@ -3222,13 +3220,13 @@ endpoints:
         name: company_id
         description: 'The ID of the company.'
         required: true
-        example: 9
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      company_id: 9
+      company_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3310,13 +3308,13 @@ endpoints:
         name: slug
         description: 'The slug of the show.'
         required: true
-        example: ut
+        example: sapiente
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      slug: ut
+      slug: sapiente
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3363,7 +3361,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: sqdlzmuxmjbthnajryk
+        example: vilwqirrd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3372,7 +3370,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: true
-        example: 'Eos ad veniam fugit inventore.'
+        example: 'Necessitatibus beatae harum sed dignissimos amet soluta.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3387,8 +3385,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: sqdlzmuxmjbthnajryk
-      description: 'Eos ad veniam fugit inventore.'
+      title: vilwqirrd
+      description: 'Necessitatibus beatae harum sed dignissimos amet soluta.'
     fileParameters: []
     responses:
       -
@@ -3427,13 +3425,13 @@ endpoints:
         name: employer_id
         description: 'The ID of the employer.'
         required: true
-        example: 13
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      employer_id: 13
+      employer_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -3441,7 +3439,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: zgplviytwyadutxcbk
+        example: oxcjotkbzwcbswlqsbjxc
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3450,7 +3448,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: false
-        example: 'Quos veritatis ipsa quae voluptas mollitia.'
+        example: 'Adipisci recusandae sit totam accusantium accusamus eaque.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3465,8 +3463,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: zgplviytwyadutxcbk
-      description: 'Quos veritatis ipsa quae voluptas mollitia.'
+      title: oxcjotkbzwcbswlqsbjxc
+      description: 'Adipisci recusandae sit totam accusantium accusamus eaque.'
     fileParameters: []
     responses:
       -
@@ -3505,13 +3503,13 @@ endpoints:
         name: employer_id
         description: 'The ID of the employer.'
         required: true
-        example: 12
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      employer_id: 12
+      employer_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3558,7 +3556,7 @@ endpoints:
         name: employer_id
         description: ''
         required: false
-        example: 3
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -3567,7 +3565,7 @@ endpoints:
         name: category_id
         description: ''
         required: false
-        example: 7
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -3576,7 +3574,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: bn
+        example: etzrn
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3585,7 +3583,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: true
-        example: 'Vero voluptate et ut voluptatem voluptate non eligendi tempora.'
+        example: 'Tempore sit ut voluptas nisi dolores fuga.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3594,7 +3592,7 @@ endpoints:
         name: availability
         description: ''
         required: true
-        example: aut
+        example: autem
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3621,7 +3619,7 @@ endpoints:
         name: location
         description: ''
         required: true
-        example: quia
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3630,7 +3628,7 @@ endpoints:
         name: location_type
         description: ''
         required: true
-        example: dicta
+        example: praesentium
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3639,7 +3637,7 @@ endpoints:
         name: vacancies
         description: ''
         required: true
-        example: enim
+        example: illo
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3648,7 +3646,7 @@ endpoints:
         name: employment_type
         description: ''
         required: true
-        example: saepe
+        example: ratione
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3657,7 +3655,7 @@ endpoints:
         name: salary
         description: ''
         required: true
-        example: repellat
+        example: sapiente
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3666,7 +3664,7 @@ endpoints:
         name: deadline
         description: ''
         required: true
-        example: dolorem
+        example: explicabo
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3681,17 +3679,17 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      employer_id: 3
-      category_id: 7
-      title: bn
-      description: 'Vero voluptate et ut voluptatem voluptate non eligendi tempora.'
-      availability: aut
-      location: quia
-      location_type: dicta
-      vacancies: enim
-      employment_type: saepe
-      salary: repellat
-      deadline: dolorem
+      employer_id: 14
+      category_id: 16
+      title: etzrn
+      description: 'Tempore sit ut voluptas nisi dolores fuga.'
+      availability: autem
+      location: et
+      location_type: praesentium
+      vacancies: illo
+      employment_type: ratione
+      salary: sapiente
+      deadline: explicabo
     fileParameters: []
     responses:
       -
@@ -3730,13 +3728,13 @@ endpoints:
         name: circular_id
         description: 'The ID of the circular.'
         required: true
-        example: 9
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      circular_id: 9
+      circular_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -3744,7 +3742,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: bxgrywtikkwr
+        example: fankz
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3753,7 +3751,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: true
-        example: 'Quis quaerat perferendis incidunt sint et.'
+        example: 'Fuga nam eum qui nihil mollitia cumque.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3762,7 +3760,7 @@ endpoints:
         name: availability
         description: ''
         required: true
-        example: a
+        example: dolore
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3789,7 +3787,7 @@ endpoints:
         name: location
         description: ''
         required: true
-        example: dolor
+        example: id
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3798,7 +3796,7 @@ endpoints:
         name: location_type
         description: ''
         required: true
-        example: autem
+        example: sint
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3807,7 +3805,7 @@ endpoints:
         name: vacancies
         description: ''
         required: true
-        example: natus
+        example: suscipit
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3816,7 +3814,7 @@ endpoints:
         name: employment_type
         description: ''
         required: true
-        example: qui
+        example: voluptatum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3825,7 +3823,7 @@ endpoints:
         name: salary
         description: ''
         required: true
-        example: tenetur
+        example: placeat
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3834,7 +3832,7 @@ endpoints:
         name: deadline
         description: ''
         required: true
-        example: earum
+        example: illum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3849,15 +3847,15 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: bxgrywtikkwr
-      description: 'Quis quaerat perferendis incidunt sint et.'
-      availability: a
-      location: dolor
-      location_type: autem
-      vacancies: natus
-      employment_type: qui
-      salary: tenetur
-      deadline: earum
+      title: fankz
+      description: 'Fuga nam eum qui nihil mollitia cumque.'
+      availability: dolore
+      location: id
+      location_type: sint
+      vacancies: suscipit
+      employment_type: voluptatum
+      salary: placeat
+      deadline: illum
     fileParameters: []
     responses:
       -
@@ -3896,13 +3894,13 @@ endpoints:
         name: circular_id
         description: 'The ID of the circular.'
         required: true
-        example: 19
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      circular_id: 19
+      circular_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3950,7 +3948,58 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[],"links":{"first":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/circular?page=1","last":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/circular?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/circular?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/circular","per_page":15,"to":null,"total":0}}'
+        content: '{"data":[{"id":1,"job_title":"Senior Software Engineer","job_category":"Software Development","company_name":"Traveloka","phone":"+62 21 39730488","email":"info@traveloka.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c8\/Traveloka_logo_2019.svg\/1200px-Traveloka_logo_2019.svg.png","job_description":"We are looking for a highly skilled Senior Software Engineer to join our team.","address":"San Francisco","location_type":"office","job_vacancy":"3","job_type":"full-time","salary":"120000","deadline":"2024-06-30","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Traveloka\/senior-software-engineer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/1","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/1"}},{"id":2,"job_title":"Web Developer","job_category":"Web Development","company_name":"BRAC Bank Limited","phone":"+880 2 883 3003","email":"info@bracbank.com","availability":null,"image":"https:\/\/www.bracbank.com\/media\/2769\/logo.png","job_description":"We are seeking a talented Web Developer to join our dynamic team.","address":"New York","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"90000","deadline":"2024-07-15","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/BRAC%20Bank%20Limited\/web-developer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/2","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/2"}},{"id":3,"job_title":"Data Scientist","job_category":"Mobile App Development","company_name":"Microsoft Corporation","phone":"+1 (425) 882-8080","email":"contact@microsoft.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/4\/44\/Microsoft_logo.svg\/1200px-Microsoft_logo.svg.png","job_description":"We are looking for a talented Data Scientist to join our analytics team.","address":"Seattle","location_type":"office","job_vacancy":"1","job_type":"full-time","salary":"140000","deadline":"2024-07-30","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Microsoft%20Corporation\/data-scientist","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/3","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/3"}},{"id":4,"job_title":"UX\/UI Designer","job_category":"UI\/UX Design","company_name":"Grameenphone Ltd.","phone":"+880 17 11 300 300","email":"info@grameenphone.com","availability":null,"image":"https:\/\/www.grameenphone.com\/sites\/all\/themes\/gp_corporate\/logo.png","job_description":"We are seeking a creative and talented UX\/UI Designer to join our design team.","address":"Los Angeles","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"100000","deadline":"2024-08-15","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Grameenphone%20Ltd.\/ux-ui-designer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/4","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/4"}},{"id":5,"job_title":"Marketing Manager","job_category":"Data Science","company_name":"Bukalapak","phone":"+62 21 12345678","email":"info@bukalapak.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/a\/a4\/Bukalapak_logo.svg\/1200px-Bukalapak_logo.svg.png","job_description":"We are looking for an experienced Marketing Manager to lead our marketing initiatives.","address":"London","location_type":"office","job_vacancy":"1","job_type":"full-time","salary":"110000","deadline":"2024-09-01","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Bukalapak\/marketing-manager","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/5","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/5"}},{"id":6,"job_title":"Financial Analyst","job_category":"Machine Learning","company_name":"Traveloka","phone":"+62 21 39730488","email":"info@traveloka.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c8\/Traveloka_logo_2019.svg\/1200px-Traveloka_logo_2019.svg.png","job_description":"We are seeking a skilled Financial Analyst to join our finance team.","address":"Toronto","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"95000","deadline":"2024-08-30","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Traveloka\/financial-analyst","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/6","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/6"}},{"id":7,"job_title":"Software Developer","job_category":"Artificial Intelligence","company_name":"SAP SE","phone":"+1 (800) 872-1727","email":"contact@sap.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/5\/59\/SAP_2011_logo.svg\/1280px-SAP_2011_logo.svg.png","job_description":"We are looking for a Software Developer to join our development team.","address":"Dhaka","location_type":"office","job_vacancy":"3","job_type":"full-time","salary":"80000","deadline":"2024-09-15","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/SAP%20SE\/software-developer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/7","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/7"}},{"id":8,"job_title":"Graphic Designer","job_category":"Cybersecurity","company_name":"Traveloka","phone":"+62 21 39730488","email":"info@traveloka.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c8\/Traveloka_logo_2019.svg\/1200px-Traveloka_logo_2019.svg.png","job_description":"We are seeking a talented Graphic Designer to join our creative team.","address":"Chittagong","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"70000","deadline":"2024-09-10","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Traveloka\/graphic-designer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/8","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/8"}},{"id":9,"job_title":"HR Manager","job_category":"Cloud Computing","company_name":"Traveloka","phone":"+62 21 39730488","email":"info@traveloka.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c8\/Traveloka_logo_2019.svg\/1200px-Traveloka_logo_2019.svg.png","job_description":"We are looking for an experienced HR Manager to oversee our human resources department.","address":"Sylhet","location_type":"office","job_vacancy":"1","job_type":"full-time","salary":"100000","deadline":"2024-09-20","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Traveloka\/hr-manager","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/9","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/9"}},{"id":10,"job_title":"Sales Executive","job_category":"DevOps","company_name":"Salesforce.com, Inc.","phone":"+1 (415) 901-7000","email":"contact@salesforce.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/e\/e3\/Salesforce_logo.svg\/1200px-Salesforce_logo.svg.png","job_description":"We are seeking a Sales Executive to join our sales team.","address":"Khulna","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"90000","deadline":"2024-09-25","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Salesforce.com,%20Inc.\/sales-executive","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/10","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/10"}},{"id":11,"job_title":"Accountant","job_category":"Project Management","company_name":"SAP SE","phone":"+1 (800) 872-1727","email":"contact@sap.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/5\/59\/SAP_2011_logo.svg\/1280px-SAP_2011_logo.svg.png","job_description":"We are looking for a skilled Accountant to manage our financial records.","address":"Rajshahi","location_type":"office","job_vacancy":"1","job_type":"full-time","salary":"85000","deadline":"2024-10-01","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/SAP%20SE\/accountant","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/11","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/11"}},{"id":12,"job_title":"Content Writer","job_category":"Quality Assurance","company_name":"Traveloka","phone":"+62 21 39730488","email":"info@traveloka.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c8\/Traveloka_logo_2019.svg\/1200px-Traveloka_logo_2019.svg.png","job_description":"We are seeking a talented Content Writer to create engaging content for our digital platforms.","address":"Barisal","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"75000","deadline":"2024-10-05","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Traveloka\/content-writer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/12","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/12"}},{"id":13,"job_title":"Customer Service Representative","job_category":"Database Administration","company_name":"Salesforce.com, Inc.","phone":"+1 (415) 901-7000","email":"contact@salesforce.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/e\/e3\/Salesforce_logo.svg\/1200px-Salesforce_logo.svg.png","job_description":"We are looking for a Customer Service Representative to assist our clients with their inquiries.","address":"Dinajpur","location_type":"office","job_vacancy":"1","job_type":"full-time","salary":"70000","deadline":"2024-10-10","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Salesforce.com,%20Inc.\/customer-service-representative","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/13","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/13"}},{"id":14,"job_title":"Project Manager","job_category":"Network Engineering","company_name":"Grameenphone Ltd.","phone":"+880 17 11 300 300","email":"info@grameenphone.com","availability":null,"image":"https:\/\/www.grameenphone.com\/sites\/all\/themes\/gp_corporate\/logo.png","job_description":"We are seeking an experienced Project Manager to oversee our project initiatives.","address":"Comilla","location_type":"office","job_vacancy":"1","job_type":"full-time","salary":"110000","deadline":"2024-10-15","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/Grameenphone%20Ltd.\/project-manager","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/14","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/14"}},{"id":15,"job_title":"Software Engineer","job_category":"Frontend Development","company_name":"SAP SE","phone":"+1 (800) 872-1727","email":"contact@sap.com","availability":null,"image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/5\/59\/SAP_2011_logo.svg\/1280px-SAP_2011_logo.svg.png","job_description":"We are looking for a skilled Software Engineer to develop and maintain our software systems.","address":"Jessore","location_type":"office","job_vacancy":"2","job_type":"full-time","salary":"90000","deadline":"2024-10-20","created_at":"08\/04\/2024","links":{"show":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/SAP%20SE\/software-engineer","update":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/update\/15","delete":"https:\/\/api.jumpintojob.com\/api\/v1\/circular\/destroy\/15"}}],"links":{"first":"https:\/\/api.jumpintojob.com\/api\/v1\/circular?page=1","last":"https:\/\/api.jumpintojob.com\/api\/v1\/circular?page=2","prev":null,"next":"https:\/\/api.jumpintojob.com\/api\/v1\/circular?page=2"},"meta":{"current_page":1,"from":1,"last_page":2,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https:\/\/api.jumpintojob.com\/api\/v1\/circular?page=1","label":"1","active":true},{"url":"https:\/\/api.jumpintojob.com\/api\/v1\/circular?page=2","label":"2","active":false},{"url":"https:\/\/api.jumpintojob.com\/api\/v1\/circular?page=2","label":"Next &raquo;","active":false}],"path":"https:\/\/api.jumpintojob.com\/api\/v1\/circular","per_page":15,"to":15,"total":29}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '50'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/circular/show/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the show.'
+        required: true
+        example: quas
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: quas
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"success":false,"message":"Error: No query results for model [App\\Models\\Circular]."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -3986,7 +4035,7 @@ endpoints:
         name: company
         description: ''
         required: true
-        example: 17
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -3995,14 +4044,14 @@ endpoints:
         name: slug
         description: 'The slug of the {company}.'
         required: true
-        example: explicabo
+        example: voluptatibus
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      company: 17
-      slug: explicabo
+      company: 1
+      slug: voluptatibus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -4017,6 +4066,57 @@ endpoints:
           content-type: application/json
           x-ratelimit-limit: '60'
           x-ratelimit-remaining: '48'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/circular/{slug}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the circular.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      slug: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"success":false,"message":"Error: No query results for model [App\\Models\\Company]."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '47'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -4052,12 +4152,53 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[]}'
+        content: '{"data":[{"name":"Microsoft Corporation","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/4\/44\/Microsoft_logo.svg\/1200px-Microsoft_logo.svg.png","cover_image":"https:\/\/www.microsoft.com\/en-us\/BrandStore\/Content\/images\/hero\/hero_brand_microsoft_1x.jpg","location":"Redmond, Washington, United States","company_type":"public","description":"Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.","size":0,"created_at":"08-04-2024","links":{"show":"microsoft-corporation"}},{"name":"Oracle Corporation","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/5\/50\/Oracle_Corporation_logo.svg\/1280px-Oracle_Corporation_logo.svg.png","cover_image":"https:\/\/images.idgesg.net\/images\/article\/2020\/09\/oracle-cloud-platform-nocloud-100857485-large.jpg","location":"Redwood Shores, California, United States","company_type":"public","description":"Oracle Corporation is an American multinational computer technology corporation headquartered in Redwood Shores, California. The company sells database software and technology, cloud engineered systems, and enterprise software products\u2014particularly its own brands of database management systems.","size":0,"created_at":"08-04-2024","links":{"show":"oracle-corporation"}},{"name":"Adobe Inc.","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/7\/7c\/Adobe_Systems_logo_and_wordmark.svg\/1200px-Adobe_Systems_logo_and_wordmark.svg.png","cover_image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/f\/f4\/Adobe_HQ_building.jpg\/1200px-Adobe_HQ_building.jpg","location":"San Jose, California, United States","company_type":"public","description":"Adobe Inc. is an American multinational computer software company headquartered in San Jose, California. It has historically focused upon the creation of multimedia and creativity software products, with a more recent foray towards digital marketing software.","size":0,"created_at":"08-04-2024","links":{"show":"adobe-inc"}},{"name":"Salesforce.com, Inc.","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/e\/e3\/Salesforce_logo.svg\/1200px-Salesforce_logo.svg.png","cover_image":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/a\/a3\/Salesforce_Tower%2C_San_Francisco.jpg\/1200px-Salesforce_Tower%2C_San_Francisco.jpg","location":"San Francisco, California, United States","company_type":"public","description":"Salesforce.com, Inc. is an American cloud-based software company headquartered in San Francisco, California. It provides customer relationship management (CRM) service and also sells a complementary suite of enterprise applications focused on customer service, marketing automation, analytics, and application development.","size":0,"created_at":"08-04-2024","links":{"show":"salesforce-com-inc"}},{"name":"SAP SE","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/5\/59\/SAP_2011_logo.svg\/1280px-SAP_2011_logo.svg.png","cover_image":"https:\/\/images.idgesg.net\/images\/article\/2019\/01\/04_SAP_HQ_Plastic.jpg","location":"Walldorf, Baden-W\u00fcrttemberg, Germany","company_type":"public","description":"SAP SE is a German multinational software corporation that makes enterprise software to manage business operations and customer relations. SAP is headquartered in Walldorf, Baden-W\u00fcrttemberg, Germany with regional offices in 180 countries.","size":0,"created_at":"08-04-2024","links":{"show":"sap-se"}},{"name":"Grameenphone Ltd.","logo":"https:\/\/www.grameenphone.com\/sites\/all\/themes\/gp_corporate\/logo.png","cover_image":"https:\/\/www.grameenphone.com\/sites\/default\/files\/2021-01\/Banner-Main_V1_1_0.jpg","location":"Dhaka, Bangladesh","company_type":"public","description":"Grameenphone Ltd. is the leading telecommunications service provider in Bangladesh. With more than 80 million subscribers, Grameenphone is the largest mobile phone operator in the country.","size":0,"created_at":"08-04-2024","links":{"show":"grameenphone-ltd"}},{"name":"BRAC Bank Limited","logo":"https:\/\/www.bracbank.com\/media\/2769\/logo.png","cover_image":"https:\/\/www.bracbank.com\/media\/2770\/one-bank-web-banner-3-30042021.png","location":"Dhaka, Bangladesh","company_type":"public","description":"BRAC Bank Limited is a private commercial bank in Bangladesh. It is a fully owned subsidiary of BRAC, a global development organization.","size":0,"created_at":"08-04-2024","links":{"show":"brac-bank-limited"}},{"name":"bKash Limited","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/en\/4\/48\/BKash_Logo.svg","cover_image":"https:\/\/www.bkash.com\/sites\/default\/files\/2021-08\/ONE%20Bkash%20-%20Comms%20Banner-1.png","location":"Dhaka, Bangladesh","company_type":"public","description":"bKash Limited is a mobile financial service provider in Bangladesh. It offers various financial services, including money transfer, bill payment, and mobile recharge, through a mobile phone.","size":0,"created_at":"08-04-2024","links":{"show":"bkash-limited"}},{"name":"Square Pharmaceuticals Ltd.","logo":"https:\/\/squarepharma.com.bd\/assets\/images\/logo.png","cover_image":"https:\/\/squarepharma.com.bd\/assets\/images\/slider\/HP-Slider-1.jpg","location":"Dhaka, Bangladesh","company_type":"public","description":"Square Pharmaceuticals Ltd. is a pharmaceutical company in Bangladesh. It is one of the largest pharmaceutical companies in the country, manufacturing and marketing a wide range of pharmaceutical products.","size":0,"created_at":"08-04-2024","links":{"show":"square-pharmaceuticals-ltd"}},{"name":"Robi Axiata Limited","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/en\/a\/a2\/Robi_Axiata_logo.svg","cover_image":"https:\/\/robi.com.bd\/images\/elementor-pro\/thumbs\/slide-1-149i4hh55an4gb3wgp6gdv.png","location":"Dhaka, Bangladesh","company_type":"public","description":"Robi Axiata Limited is a telecommunications service provider in Bangladesh. It is a joint venture between Axiata Group Berhad of Malaysia and NTT DoCoMo Inc. of Japan.","size":0,"created_at":"08-04-2024","links":{"show":"robi-axiata-limited"}},{"name":"Gojek","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/3\/3a\/Gojek_logo.svg\/1200px-Gojek_logo.svg.png","cover_image":"https:\/\/assets.gojekapi.com\/assets\/og_image-689a0b7ad02d06bbf6fbb1b375f4d39f0d5046078d93bcb37c38ad398ca588f2.png","location":"Jakarta, Indonesia","company_type":"private","description":"Gojek is a technology startup based in Indonesia that specializes in ride-hailing, logistics, and digital payments. It offers various services, including transportation, food delivery, and online shopping.","size":0,"created_at":"08-04-2024","links":{"show":"gojek"}},{"name":"Traveloka","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c8\/Traveloka_logo_2019.svg\/1200px-Traveloka_logo_2019.svg.png","cover_image":"https:\/\/image4.owler.com\/logo\/traveloka_owler_20190410_175536_original.png","location":"Jakarta, Indonesia","company_type":"private","description":"Traveloka is an Indonesian online travel company that provides booking services for flights, hotels, trains, and activities. It operates in several countries across Southeast Asia.","size":0,"created_at":"08-04-2024","links":{"show":"traveloka"}},{"name":"Tokopedia","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/7\/70\/Tokopedia_logo_2021.svg\/1200px-Tokopedia_logo_2021.svg.png","cover_image":"https:\/\/media-exp1.licdn.com\/dms\/image\/C4D1BAQEji9EJfzA-Fw\/feedshare-shrink_800-alternative\/0\/1614396121918?e=1637798400&v=beta&t=fT6yzvNZWBKTBWJ5OH_jNpWbvT9sGtLQuNf4KvbuMP4","location":"Jakarta, Indonesia","company_type":"private","description":"Tokopedia is an Indonesian e-commerce platform that allows individuals and businesses to sell products online. It offers a wide range of products, including electronics, fashion, and groceries.","size":0,"created_at":"08-04-2024","links":{"show":"tokopedia"}},{"name":"Bukalapak","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/a\/a4\/Bukalapak_logo.svg\/1200px-Bukalapak_logo.svg.png","cover_image":"https:\/\/image.freepik.com\/free-vector\/online-shop-promotion-banner-template_52683-55578.jpg","location":"Jakarta, Indonesia","company_type":"private","description":"Bukalapak is an Indonesian e-commerce company that provides a platform for individuals and businesses to buy and sell goods online. It offers various products, including electronics, fashion, and home goods.","size":0,"created_at":"08-04-2024","links":{"show":"bukalapak"}},{"name":"Grab","logo":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/8\/8c\/Grab_Logo.svg\/1200px-Grab_Logo.svg.png","cover_image":"https:\/\/media-exp1.licdn.com\/dms\/image\/C4D1BAQE-F11Mph0_gw\/profile-displaybackgroundimage-shrink_200_800\/0\/1609940658152?e=1637193600&v=beta&t=zBbJ03y1rKfykZZjmOw4QeQKTdBpVf2R-ihYl8ygav4","location":"Jakarta, Indonesia","company_type":"private","description":"Grab is a technology company based in Singapore that offers ride-hailing, food delivery, and financial services. It operates in several countries in Southeast Asia, including Indonesia.","size":0,"created_at":"08-04-2024","links":{"show":"grab"}}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '47'
+          x-ratelimit-remaining: '46'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/languages
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"language":"English"},{"language":"Spanish"},{"language":"French"},{"language":"Chinese"},{"language":"Hindi"},{"language":"Arabic"},{"language":"Bengali"},{"language":"Portuguese"},{"language":"Russian"},{"language":"Japanese"},{"language":"German"},{"language":"Korean"},{"language":"Turkish"},{"language":"Italian"},{"language":"Vietnamese"},{"language":"Tamil"},{"language":"Urdu"},{"language":"Persian"},{"language":"Polish"},{"language":"Dutch"},{"language":"Thai"},{"language":"Swedish"},{"language":"Greek"},{"language":"Indonesian"},{"language":"Romanian"},{"language":"Hungarian"},{"language":"Czech"},{"language":"Swahili"},{"language":"Danish"},{"language":"Finnish"},{"language":"Norwegian"},{"language":"Slovak"},{"language":"Malay"},{"language":"Ukrainian"},{"language":"Catalan"},{"language":"Bulgarian"},{"language":"Lithuanian"},{"language":"Slovenian"},{"language":"Latvian"},{"language":"Estonian"},{"language":"Icelandic"},{"language":"Maltese"},{"language":"Irish"},{"language":"Albanian"},{"language":"Macedonian"},{"language":"Luxembourgish"},{"language":"Georgian"},{"language":"Basque"},{"language":"Faroese"},{"language":"Bosnian"},{"language":"Corsican"},{"language":"Kurdish"},{"language":"Haitian Creole"},{"language":"Galician"},{"language":"Manx"},{"language":"Azerbaijani"},{"language":"Armenian"},{"language":"Telugu"},{"language":"Marathi"},{"language":"Kannada"},{"language":"Gujarati"},{"language":"Odia"},{"language":"Malayalam"},{"language":"Punjabi"},{"language":"Sinhala"},{"language":"Nepali"},{"language":"Assamese"},{"language":"Maithili"},{"language":"Sundanese"},{"language":"Burmese"},{"language":"Amharic"},{"language":"Pashto"},{"language":"Oromo"},{"language":"Malagasy"},{"language":"Sesotho"},{"language":"Zulu"},{"language":"Xhosa"},{"language":"Somali"},{"language":"Chichewa"},{"language":"Tigrinya"},{"language":"Shona"},{"language":"Yoruba"},{"language":"Igbo"},{"language":"Hausa"},{"language":"Fula"},{"language":"Swati"},{"language":"Tsonga"},{"language":"Tswana"},{"language":"Kinyarwanda"},{"language":"Kirundi"},{"language":"Sango"},{"language":"Wolof"},{"language":"Kikuyu"},{"language":"Twi"},{"language":"Kinyamwezi"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '45'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -4093,12 +4234,53 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":1,"category_name":"Hermann Von"},{"id":2,"category_name":"Ms. Imelda Ruecker"},{"id":3,"category_name":"Mr. Liam Ebert MD"},{"id":4,"category_name":"Ettie Ortiz V"},{"id":5,"category_name":"Lina Bogan"},{"id":6,"category_name":"Prof. Eusebio Kovacek"},{"id":7,"category_name":"Janessa Bradtke"},{"id":8,"category_name":"Prof. Bradly Gaylord"},{"id":9,"category_name":"Ora Senger"},{"id":10,"category_name":"Bernhard Abbott"}]}'
+        content: '{"data":[{"id":1,"category_name":"Software Development"},{"id":2,"category_name":"Web Development"},{"id":3,"category_name":"Mobile App Development"},{"id":4,"category_name":"UI\/UX Design"},{"id":5,"category_name":"Data Science"},{"id":6,"category_name":"Machine Learning"},{"id":7,"category_name":"Artificial Intelligence"},{"id":8,"category_name":"Cybersecurity"},{"id":9,"category_name":"Cloud Computing"},{"id":10,"category_name":"DevOps"},{"id":11,"category_name":"Project Management"},{"id":12,"category_name":"Quality Assurance"},{"id":13,"category_name":"Database Administration"},{"id":14,"category_name":"Network Engineering"},{"id":15,"category_name":"Frontend Development"},{"id":16,"category_name":"Backend Development"},{"id":17,"category_name":"Full Stack Development"},{"id":18,"category_name":"Game Development"},{"id":19,"category_name":"Embedded Systems"},{"id":20,"category_name":"Internet of Things (IoT)"},{"id":21,"category_name":"Blockchain Development"},{"id":22,"category_name":"Digital Marketing"},{"id":23,"category_name":"Content Writing"},{"id":24,"category_name":"Graphic Design"},{"id":25,"category_name":"Video Editing"},{"id":26,"category_name":"Photography"},{"id":27,"category_name":"Animation"},{"id":28,"category_name":"Music Production"},{"id":29,"category_name":"Sales"},{"id":30,"category_name":"Customer Support"},{"id":31,"category_name":"Human Resources"},{"id":32,"category_name":"Finance"},{"id":33,"category_name":"Accounting"},{"id":34,"category_name":"Legal"},{"id":35,"category_name":"Healthcare"},{"id":36,"category_name":"Education"},{"id":37,"category_name":"Research"},{"id":38,"category_name":"Consulting"},{"id":39,"category_name":"Architecture"},{"id":40,"category_name":"Real Estate"},{"id":41,"category_name":"Construction"},{"id":42,"category_name":"Logistics"},{"id":43,"category_name":"Supply Chain Management"},{"id":44,"category_name":"Manufacturing"},{"id":45,"category_name":"Retail"},{"id":46,"category_name":"Hospitality"},{"id":47,"category_name":"Travel and Tourism"},{"id":48,"category_name":"Fitness and Wellness"}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '46'
+          x-ratelimit-remaining: '44'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/skills
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"name":"PHP"},{"name":"JavaScript"},{"name":"Python"},{"name":"Java"},{"name":"C#"},{"name":"C++"},{"name":"HTML"},{"name":"CSS"},{"name":"SQL"},{"name":"React"},{"name":"Angular"},{"name":"Vue.js"},{"name":"Node.js"},{"name":"Laravel"},{"name":"Symfony"},{"name":"Express.js"},{"name":"Django"},{"name":"Flask"},{"name":"ASP.NET"},{"name":"Ruby"},{"name":"Ruby on Rails"},{"name":"Swift"},{"name":"Kotlin"},{"name":"Flutter"},{"name":"Dart"},{"name":"Rust"},{"name":"Go"},{"name":"Scala"},{"name":"Perl"},{"name":"Haskell"},{"name":"TypeScript"},{"name":"Shell Scripting"},{"name":"GraphQL"},{"name":"MongoDB"},{"name":"MySQL"},{"name":"PostgreSQL"},{"name":"SQLite"},{"name":"Firebase"},{"name":"Docker"},{"name":"Kubernetes"},{"name":"AWS"},{"name":"Azure"},{"name":"Google Cloud Platform"},{"name":"Git"},{"name":"SVN"},{"name":"Jenkins"},{"name":"Travis CI"},{"name":"CircleCI"},{"name":"RESTful APIs"},{"name":"GraphQL APIs"},{"name":"Java Spring"},{"name":"Spring Boot"},{"name":"Hibernate"},{"name":"JPA"},{"name":"Vue.js 3"},{"name":"Nuxt.js"},{"name":"Svelte"},{"name":"Tailwind CSS"},{"name":"Bootstrap"},{"name":"Material-UI"},{"name":"Next.js"},{"name":"Gatsby"},{"name":"Electron"},{"name":"React Native"},{"name":"NativeScript"},{"name":"Ionic"},{"name":"Cordova"},{"name":"Xamarin"},{"name":"TensorFlow"},{"name":"PyTorch"},{"name":"Keras"},{"name":"Scikit-learn"},{"name":"Pandas"},{"name":"NumPy"},{"name":"Matplotlib"},{"name":"Seaborn"},{"name":"NLTK"},{"name":"Spacy"},{"name":"Scrapy"},{"name":"BeautifulSoup"},{"name":"Flask-RESTful"},{"name":"FastAPI"},{"name":"Django REST Framework"},{"name":"Fastify"},{"name":"Socket.io"},{"name":"WebSockets"},{"name":"RabbitMQ"},{"name":"Kafka"},{"name":"Redis"},{"name":"Memcached"},{"name":"Elasticsearch"},{"name":"Logstash"},{"name":"Kibana"},{"name":"Prometheus"},{"name":"Grafana"},{"name":"Splunk"},{"name":"Nginx"},{"name":"Apache"},{"name":"IIS"},{"name":"HAProxy"},{"name":"Varnish"},{"name":"Nuxt.js"},{"name":"Svelte"},{"name":"Tailwind CSS"},{"name":"Bootstrap"},{"name":"Material-UI"},{"name":"Next.js"},{"name":"Gatsby"},{"name":"Electron"},{"name":"React Native"},{"name":"NativeScript"},{"name":"Ionic"},{"name":"Cordova"},{"name":"Xamarin"},{"name":"TensorFlow"},{"name":"PyTorch"},{"name":"Keras"},{"name":"Scikit-learn"},{"name":"Pandas"},{"name":"NumPy"},{"name":"Matplotlib"},{"name":"Seaborn"},{"name":"NLTK"},{"name":"Spacy"},{"name":"Scrapy"},{"name":"BeautifulSoup"},{"name":"Flask-RESTful"},{"name":"FastAPI"},{"name":"Django REST Framework"},{"name":"Fastify"},{"name":"Socket.io"},{"name":"WebSockets"},{"name":"RabbitMQ"},{"name":"Kafka"},{"name":"Redis"},{"name":"Memcached"},{"name":"Elasticsearch"},{"name":"Logstash"},{"name":"Kibana"},{"name":"Prometheus"},{"name":"Grafana"},{"name":"Splunk"},{"name":"Nginx"},{"name":"Apache"},{"name":"IIS"},{"name":"HAProxy"},{"name":"Varnish"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '43'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -4134,12 +4316,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[]}'
+        content: '{"data":[{"id":1,"name":"employer","created_at":"08-04-2024"},{"id":2,"name":"Gustave Reinger MD","created_at":"08-04-2024"},{"id":3,"name":"Drew Boyle","created_at":"08-04-2024"},{"id":4,"name":"Lia Gleason","created_at":"08-04-2024"},{"id":5,"name":"Prof. Ollie Schowalter III","created_at":"08-04-2024"},{"id":6,"name":"Joshuah Ondricka","created_at":"08-04-2024"},{"id":7,"name":"Bryce Torphy","created_at":"08-04-2024"},{"id":8,"name":"Kolby Konopelski III","created_at":"08-04-2024"},{"id":9,"name":"Anissa Hintz","created_at":"08-04-2024"},{"id":10,"name":"Gilberto Lehner","created_at":"08-04-2024"},{"id":11,"name":"Dr. Ruby Kertzmann Sr.","created_at":"08-04-2024"}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '45'
+          x-ratelimit-remaining: '42'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -4175,12 +4357,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[],"links":{"first":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/notification?page=1","last":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/notification?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/notification?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"https:\/\/api.dev.jumpintojob.com\/api\/v1\/notification","per_page":15,"to":null,"total":0}}'
+        content: '{"data":[],"links":{"first":"https:\/\/api.jumpintojob.com\/api\/v1\/notification?page=1","last":"https:\/\/api.jumpintojob.com\/api\/v1\/notification?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https:\/\/api.jumpintojob.com\/api\/v1\/notification?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"https:\/\/api.jumpintojob.com\/api\/v1\/notification","per_page":15,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '44'
+          x-ratelimit-remaining: '41'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -4211,13 +4393,13 @@ endpoints:
         name: slug
         description: 'The slug of the show.'
         required: true
-        example: voluptatem
+        example: qui
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      slug: voluptatem
+      slug: qui
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -4687,7 +4869,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '43'
+          x-ratelimit-remaining: '40'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -4718,13 +4900,13 @@ endpoints:
         name: notification
         description: ''
         required: true
-        example: esse
+        example: commodi
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      notification: esse
+      notification: commodi
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -4732,7 +4914,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: zzhiblodnhksskdx
+        example: zopd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -4741,7 +4923,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: true
-        example: 'Hic neque suscipit error ab eveniet.'
+        example: 'Qui facilis illo qui id vero.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -4756,15 +4938,15 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: zzhiblodnhksskdx
-      description: 'Hic neque suscipit error ab eveniet.'
+      title: zopd
+      description: 'Qui facilis illo qui id vero.'
     fileParameters: []
     responses:
       -
         status: 500
         content: |-
           {
-              "message": "SQLSTATE[HY000]: General error: 1364 Field 'user_id' doesn't have a default value (Connection: mysql, SQL: insert into `notifications` (`title`, `updated_at`, `created_at`) values (eyJpdiI6InpuQzZIRTZOcHBPdnNUdEtRdlRFbnc9PSIsInZhbHVlIjoiMy9oZ1ZHR3YrWDRNRVRtbTViRWpHaUYxVWcrMVVNZmV4SkpNblZrZk45cz0iLCJtYWMiOiI0Y2FlNzY2MGRhODAzMGViYjY3YTdiZDIxMjc3OWQ4ZTk2NWNjYmQ0YzM0OTk0NmYwYTdlZDAzY2RiYTdiNzEwIiwidGFnIjoiIn0=, 2024-02-21 08:11:21, 2024-02-21 08:11:21))",
+              "message": "SQLSTATE[HY000]: General error: 1364 Field 'user_id' doesn't have a default value (Connection: mysql, SQL: insert into `notifications` (`title`, `updated_at`, `created_at`) values (eyJpdiI6ImpzUTN6WHBPMXdxUFp0ZXpuaVNEQnc9PSIsInZhbHVlIjoibkl5amJFTlA3WDArQ1F4elpBQnZkUT09IiwibWFjIjoiYWI4Nzg5YzAyNzYxZjc2M2FjZThlYTVhOTI1NmFjMWFiYWJjZjBhNDQ1Mzk2NmIxM2FlZmM2ZGUzYjVlNTk3YSIsInRhZyI6IiJ9, 2024-04-08 01:21:08, 2024-04-08 01:21:08))",
               "exception": "Illuminate\\Database\\QueryException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php",
               "line": 829,
@@ -5326,7 +5508,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '42'
+          x-ratelimit-remaining: '39'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -5357,13 +5539,13 @@ endpoints:
         name: notification_id
         description: 'The ID of the notification.'
         required: true
-        example: 20
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      notification_id: 20
+      notification_id: 14
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -5371,7 +5553,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: rdjfvwuye
+        example: uszenosgddm
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -5380,7 +5562,7 @@ endpoints:
         name: description
         description: 'Must not be greater than 1000 characters.'
         required: false
-        example: 'Cupiditate in quia nemo sint consequuntur ut delectus.'
+        example: 'Tempore est nam minus omnis voluptatem maxime.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -5395,15 +5577,15 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: rdjfvwuye
-      description: 'Cupiditate in quia nemo sint consequuntur ut delectus.'
+      title: uszenosgddm
+      description: 'Tempore est nam minus omnis voluptatem maxime.'
     fileParameters: []
     responses:
       -
         status: 404
         content: |-
           {
-              "message": "No query results for model [App\\Models\\Notification] 20",
+              "message": "No query results for model [App\\Models\\Notification] 14",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
               "line": 487,
@@ -5827,7 +6009,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '41'
+          x-ratelimit-remaining: '38'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -5858,13 +6040,13 @@ endpoints:
         name: notification_id
         description: 'The ID of the notification.'
         required: true
-        example: 12
+        example: 7
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      notification_id: 12
+      notification_id: 7
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -5875,7 +6057,7 @@ endpoints:
         status: 404
         content: |-
           {
-              "message": "No query results for model [App\\Models\\Notification] 12",
+              "message": "No query results for model [App\\Models\\Notification] 7",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
               "line": 487,
@@ -6299,7 +6481,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '40'
+          x-ratelimit-remaining: '37'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -6340,7 +6522,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '39'
+          x-ratelimit-remaining: '36'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -6371,13 +6553,13 @@ endpoints:
         name: slug
         description: 'The slug of the show.'
         required: true
-        example: nemo
+        example: qui
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      slug: nemo
+      slug: qui
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -6826,7 +7008,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '38'
+          x-ratelimit-remaining: '35'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -6861,7 +7043,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: geuhpkjowwiqroheojupwhub
+        example: avolyxrhgyoyfxq
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -6876,14 +7058,14 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: geuhpkjowwiqroheojupwhub
+      title: avolyxrhgyoyfxq
     fileParameters: []
     responses:
       -
         status: 500
         content: |-
           {
-              "message": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list' (Connection: mysql, SQL: insert into `applications` (`title`, `slug`, `updated_at`, `created_at`) values (eyJpdiI6ImMrSy9NVGFpWlpMeHFDUXJKOEhrd3c9PSIsInZhbHVlIjoid3RIMDVJNzgreHZnenZZNW9CekVMODVSbGhKa0h1cXQ2QmtMUnB5bTNtMD0iLCJtYWMiOiIzNjY4YzBhNjAzN2MxYThmNWNlZDI4YzhkZjBhZjY4ZWIzNDQ1NjdkYTc5YWUzMzY2NGFhYjhkZmI4ODQ1YzQ0IiwidGFnIjoiIn0=, geuhpkjowwiqroheojupwhub, 2024-02-21 08:11:21, 2024-02-21 08:11:21))",
+              "message": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list' (Connection: mysql, SQL: insert into `applications` (`title`, `slug`, `updated_at`, `created_at`) values (eyJpdiI6IjZjNDNiMzR0RHNUN09heVFjSm9leUE9PSIsInZhbHVlIjoiWmc4ZGZzTlVGUDRYUmo1N1d3bEZKUT09IiwibWFjIjoiNWYxNzg4YmJlMGJiZjJiYTM5ZTJmNWFhMDczNDYzNjZmYWQxNGIzZDEzMzVlMTQ0YzBmMzMyNTFlYjVkM2EwZSIsInRhZyI6IiJ9, avolyxrhgyoyfxq, 2024-04-08 01:21:08, 2024-04-08 01:21:08))",
               "exception": "Illuminate\\Database\\QueryException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php",
               "line": 829,
@@ -7445,7 +7627,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '37'
+          x-ratelimit-remaining: '34'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -7490,7 +7672,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: rmbnevbftxgip
+        example: gixhnwh
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -7505,7 +7687,7 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: rmbnevbftxgip
+      title: gixhnwh
     fileParameters: []
     responses:
       -
@@ -7936,7 +8118,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '36'
+          x-ratelimit-remaining: '33'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -7967,13 +8149,13 @@ endpoints:
         name: application_id
         description: 'The ID of the application.'
         required: true
-        example: 19
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      application_id: 19
+      application_id: 12
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -7984,7 +8166,7 @@ endpoints:
         status: 404
         content: |-
           {
-              "message": "No query results for model [App\\Models\\Application] 19",
+              "message": "No query results for model [App\\Models\\Application] 12",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
               "line": 487,
@@ -8408,7 +8590,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '35'
+          x-ratelimit-remaining: '32'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -8449,7 +8631,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '34'
+          x-ratelimit-remaining: '31'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -8480,13 +8662,13 @@ endpoints:
         name: slug
         description: 'The slug of the show.'
         required: true
-        example: architecto
+        example: perferendis
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      slug: architecto
+      slug: perferendis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -8497,7 +8679,7 @@ endpoints:
         status: 500
         content: |-
           {
-              "message": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'slug' in 'where clause' (Connection: mysql, SQL: select * from `candidates` where `slug` = architecto limit 1)",
+              "message": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'slug' in 'where clause' (Connection: mysql, SQL: select * from `candidates` where `slug` = perferendis limit 1)",
               "exception": "Illuminate\\Database\\QueryException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php",
               "line": 829,
@@ -9026,7 +9208,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '33'
+          x-ratelimit-remaining: '30'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -9061,7 +9243,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: xpnusjsdqlredbakbj
+        example: kqvgiyrfvhulebdmfe
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -9076,7 +9258,7 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: xpnusjsdqlredbakbj
+      title: kqvgiyrfvhulebdmfe
     fileParameters: []
     responses:
       -
@@ -9584,7 +9766,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '32'
+          x-ratelimit-remaining: '29'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -9615,13 +9797,13 @@ endpoints:
         name: candidate_id
         description: 'The ID of the candidate.'
         required: true
-        example: 20
+        example: 18
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      candidate_id: 20
+      candidate_id: 18
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -9629,7 +9811,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: uetnulusw
+        example: vkmzhhgjt
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -9644,14 +9826,14 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: uetnulusw
+      title: vkmzhhgjt
     fileParameters: []
     responses:
       -
         status: 404
         content: |-
           {
-              "message": "No query results for model [App\\Models\\Candidate] 20",
+              "message": "No query results for model [App\\Models\\Candidate] 18",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
               "line": 487,
@@ -10075,7 +10257,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '31'
+          x-ratelimit-remaining: '28'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -10106,13 +10288,13 @@ endpoints:
         name: candidate_id
         description: 'The ID of the candidate.'
         required: true
-        example: 6
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      candidate_id: 6
+      candidate_id: 14
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -10123,7 +10305,7 @@ endpoints:
         status: 404
         content: |-
           {
-              "message": "No query results for model [App\\Models\\Candidate] 6",
+              "message": "No query results for model [App\\Models\\Candidate] 14",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
               "line": 487,
@@ -10547,7 +10729,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '30'
+          x-ratelimit-remaining: '27'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -11037,7 +11219,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '29'
+          x-ratelimit-remaining: '26'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -11068,13 +11250,13 @@ endpoints:
         name: slug
         description: 'The slug of the show.'
         required: true
-        example: voluptatum
+        example: totam
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      slug: voluptatum
+      slug: totam
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -11537,7 +11719,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '28'
+          x-ratelimit-remaining: '25'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -11572,7 +11754,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: royicmwleuyeky
+        example: yyiobmoqomakazxabirfoz
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -11587,7 +11769,7 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: royicmwleuyeky
+      title: yyiobmoqomakazxabirfoz
     fileParameters: []
     responses:
       -
@@ -12046,7 +12228,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '27'
+          x-ratelimit-remaining: '24'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -12077,13 +12259,13 @@ endpoints:
         name: candidate-contact
         description: ''
         required: true
-        example: laborum
+        example: maiores
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      candidate-contact: laborum
+      candidate-contact: maiores
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -12091,7 +12273,7 @@ endpoints:
         name: title
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: mflgd
+        example: lbvwnyzbqdvr
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -12106,14 +12288,14 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      title: mflgd
+      title: lbvwnyzbqdvr
     fileParameters: []
     responses:
       -
         status: 404
         content: |-
           {
-              "message": "The route api/v1/candidate-contact/update/laborum could not be found.",
+              "message": "The route api/v1/candidate-contact/update/maiores could not be found.",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php",
               "line": 44,
@@ -12503,13 +12685,13 @@ endpoints:
         name: candidate-contact
         description: ''
         required: true
-        example: amet
+        example: quis
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      candidate-contact: amet
+      candidate-contact: quis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -12520,7 +12702,7 @@ endpoints:
         status: 404
         content: |-
           {
-              "message": "The route api/v1/candidate-contact/destroy/amet could not be found.",
+              "message": "The route api/v1/candidate-contact/destroy/quis could not be found.",
               "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
               "file": "C:\\laragon\\www\\jumpintojob-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php",
               "line": 44,
