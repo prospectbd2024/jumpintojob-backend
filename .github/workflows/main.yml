@@ -28,6 +28,8 @@ jobs:
 
       - name: Generate key
         run: php artisan key:generate
+      - name: Clear Cache
+        run: php artisan  optimize:clear
 
       - name: Secure Directory Permissions (Adjust as needed)
         run: chmod -R 755 storage bootstrap/cache
