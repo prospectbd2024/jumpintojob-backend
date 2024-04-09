@@ -19,20 +19,20 @@ jobs:
       #     php-version: '8.3'
       #     extensions: mbstring, intl  # Add any required extensions here
 
-      - name: Install Dependencies
-        run: composer install
+      # - name: Install Dependencies
+      #   run: composer install
 
-      - name: (Optional) Copy .env (Adjust for your framework's approach)
-        run: |
-          cp .env.example .env  # Or use your framework's environment variable injection technique
+      # - name: (Optional) Copy .env (Adjust for your framework's approach)
+      #   run: |
+      #     cp .env.example .env  # Or use your framework's environment variable injection technique
 
-      - name: Generate key
-        run: php artisan key:generate
-      - name: Clear Cache
-        run: php artisan  optimize:clear
+      # - name: Generate key
+      #   run: php artisan key:generate
+      # - name: Clear Cache
+      #   run: php artisan  optimize:clear
 
-      - name: Secure Directory Permissions (Adjust as needed)
-        run: chmod -R 755 storage bootstrap/cache
+      # - name: Secure Directory Permissions (Adjust as needed)
+      #   run: chmod -R 755 storage bootstrap/cache
 
       - name:  Sync files (excluding .env)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
