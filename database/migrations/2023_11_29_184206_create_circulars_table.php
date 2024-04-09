@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -25,6 +26,8 @@ return new class extends Migration {
             $table->string('location_type');
             $table->string('vacancies');
             $table->string('employment_type'); // Full-time, part-time, contract, etc.
+            $table->string('experience_level'); // Entry-level, mid-level, senior-level
+            $table->boolean('is_remote')->default(0);
             $table->string('salary'); // Salary range
             $table->date('deadline');
             $table->softDeletes();

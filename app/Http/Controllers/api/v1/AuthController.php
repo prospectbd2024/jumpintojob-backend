@@ -49,7 +49,7 @@ class AuthController extends Controller
         $this->authService->setRequest($request);
         $this->authService->createJobSeeker();
         $this->authService->createAddress();
-        // $this->sendVerificationCode('email', $this->authService->getUser());
+        $this->sendVerificationCode('email', $this->authService->getUser());
 
 
         // Create token
@@ -57,10 +57,10 @@ class AuthController extends Controller
 
         return response()->json([
             'result' => true,
-            'message' => (get_setting('email_verification') ===null) ?
+            'message' => (get_setting('email_verification') === null) ?
                 'Registration Successful! Please verify to use all features or log in to your account.' :
                 'Registration Successful! Please log in to your account.',
-            'is_verified' =>  (get_setting('email_verification') ===null) ? false:true,
+            'is_verified' => (get_setting('email_verification') === null) ? false : true,
             'user_id' => $this->authService->getUser()->id,
             'access_token' => $token->plainTextToken,
         ], 200);
@@ -75,7 +75,7 @@ class AuthController extends Controller
     public function employerSignup(EmployeeSignupRequest $request)
     {
         $this->authService->setRequest($request);
-       $this->authService->createCompany();
+        $this->authService->createCompany();
         $this->authService->createEmployer();
         $this->authService->createAddress();
         // $this->sendVerificationCode('email');
@@ -117,7 +117,7 @@ class AuthController extends Controller
             $user->generateVerificationCode();
 
             $this->sendVerificationCode($request->verify_by, $user);
-            
+
             return $this->verificationCodeSentResponse();
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
@@ -185,7 +185,7 @@ class AuthController extends Controller
     public function confirmCode(Request $request)
     {
         $user_id = $request->user()->id;
-        $user = User::where('id',$user_id)->first();
+        $user = User::where('id', $user_id)->first();
 
         if ($user->verification_code == $request->verification_code) {
             $user->email_verified_at = date('Y-m-d H:i:s');
@@ -246,9 +246,9 @@ class AuthController extends Controller
             if (!$user->banned) {
                 if (Hash::check(request()->password, $user->password)) {
 
-//                    if ($user->email_verified_at == null) {
-//                        return response()->json(['result' => false, 'message' => 'Please verify your account', 'user' => null], 401);
-//                    }
+                    //                    if ($user->email_verified_at == null) {
+                    //                        return response()->json(['result' => false, 'message' => 'Please verify your account', 'user' => null], 401);
+                    //                    }
                     return new LoginResource($user);
                 } else {
                     return response()->json(['result' => false, 'message' => 'Unauthorized', 'user' => null], 401);
@@ -410,7 +410,7 @@ class AuthController extends Controller
     public function account_deletion()
     {
         if (auth()->user()) {
-//            Cart::where('user_id', auth()->user()->id)->delete();
+            //            Cart::where('user_id', auth()->user()->id)->delete();
         }
 
         // if (auth()->user()->provider && auth()->user()->provider != 'apple') {
@@ -432,37 +432,35 @@ class AuthController extends Controller
             "message" => 'Your account deletion successfully done'
         ]);
     }
-    public function socialSignIn(Request $request) {
+    public function socialSignIn(Request $request)
+    {
         $userInfo = $request->userInfo['user'];
         $profile = $request->userInfo['profile'];
         $account = $request->userInfo['account'];
-        $user_type= $request->userInfo['user_type'];
-        if(!$userInfo){
+        $user_type = $request->userInfo['user_type'];
+        if (!$userInfo) {
             return response()->json(['result' => false, 'message' => 'User Not Found', 'user' => null]);
         }
         $user_profile = (object)  $userInfo;
-        $user = User::where('email',$user_profile->email)->first();
-        if($user){
+        $user = User::where('email', $user_profile->email)->first();
+        if ($user) {
             $login_resource =  new LoginResource($user);
             return   $login_resource;
         }
         $user = new User;
-        $user->user_plan_id =1;
+        $user->user_plan_id = 1;
         $user->first_name = $user_profile->name;
-        $user->last_name ="";
+        $user->last_name = "";
         $user->email = $user_profile->email;
         $user->avatar = $user_profile->image;
         $user->is_verified = 1;
         $user->password = Str::random(10);
-        $user->user_type=  $user_type;
-        $user->social_profile =json_encode($profile);
-        $user->social_account =json_encode($account);
+        $user->user_type =  $user_type;
+        $user->social_profile = json_encode($profile);
+        $user->social_account = json_encode($account);
         $user->save();
         $user->createToken('tokens');
         $login_resource =  new LoginResource($user);
         return $login_resource;
-
-        
-        
     }
 }

@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_skill', function (Blueprint $table) {
+        Schema::create('user_languages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->noActionOnDelete();
-            $table->foreignId('skill_id')->constrained()->noActionOnDelete();
+            $table->foreignId('language_id')->constrained()->noActionOnDelete();
             $table->string('level');
             $table->string('is_verified')->default('0');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_skill');
+        Schema::dropIfExists('user_languages');
     }
 };

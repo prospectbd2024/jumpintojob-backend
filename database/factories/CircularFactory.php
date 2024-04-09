@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Category;
@@ -17,11 +18,10 @@ class CircularFactory extends Factory
     {
         $employer = Employer::get()->random();
         $category = Category::get()->random();
-        $company = Company::get()->random();
         return [
             'employer_id' => $employer->id,
             'category_id' => $category->id,
-            'company_id' => $company->id,
+            'company_id' => $employer->company->id,
             'title' => $this->faker->realText(20),
             'description' => $this->faker->text(),
             'current_company_name' =>  $employer->company->name,
@@ -30,9 +30,9 @@ class CircularFactory extends Factory
             'vacancies' => $this->faker->numberBetween(1, 10),
             'employment_type' => $this->faker->randomElement(['full-time', 'part-time']),
             'salary' => $this->faker->numberBetween(10000, 150000),
-            // 'experience_level' => $this->faker->randomElement(['entry-level', 'mid-level', 'senior-level']),
+            'experience_level' => $this->faker->randomElement(['entry-level', 'mid-level', 'senior-level']),
             'deadline' => now()->format('Y-m-d'),
-            // 'is_remote' => rand(0,1),
+            'is_remote' => rand(0, 1),
             'created_at' => now(),
             'updated_at' => now(),
         ];

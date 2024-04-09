@@ -15,6 +15,7 @@ class AddressFactory extends Factory
     {
         $addressTypes = ['primary', 'permanent'];
         return [
+            'user_id' => User::get()->random()->id,
             'address' => $this->faker->address(),
             'address_type' => $addressTypes[rand(0, 1)]
         ];
