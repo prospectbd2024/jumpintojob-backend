@@ -13,11 +13,11 @@ jobs:
       - name:  Get latest code
         uses: actions/checkout@v4
 
-      - name: Use PHP 8.3
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: mbstring, intl  # Add any required extensions here
+      # - name: Use PHP 8.3
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: '8.3'
+      #     extensions: mbstring, intl  # Add any required extensions here
 
       - name: Install Dependencies
         run: composer install
