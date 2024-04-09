@@ -20,8 +20,8 @@ jobs:
         extensions: mbstring, intl # Add any required extensions here
     - name: Install Dependencies
       run: composer install
-    - name: Generate key
-      run: php artisan key:generate
+    # - name: Generate key
+    #   run: php artisan key:generate
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
 
@@ -30,5 +30,5 @@ jobs:
       with:
         server: ftp.jumpintojob.com
         username: jumpinto
-        password:  ${{ secrets.ftp_password }} #i;p93:fNnIMT14         
+        password:  ${{ secrets.ftp_password }}     
         server-dir: /api.jumpintojob.com/
