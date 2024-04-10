@@ -18,8 +18,10 @@ jobs:
       with:
         php-version: '8.3'
         extensions: mbstring, intl # Add any required extensions here
+
     - name: Install Dependencies
       run: composer install
+
     - name: Prepare Laravel Application
       run: |
         cp .env.example .env
@@ -29,17 +31,15 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
 
-
-
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftp.jumpintojob.com
         username: jumpinto
-        password:  ${{ secrets.ftp_password }}     
+        password: ${{ secrets.ftp_password }}
         server-dir: /api.jumpintojob.com/
 
-    - name: Seed
+    - name: Run Command After Syncing Files
       run: |
         cp .env.example .env
         php artisan migrate:fresh --seed
