@@ -1,32 +1,34 @@
-name: Laravel/Lumen CI/CD
+name: Server Deployment
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   web-deploy:
-    name: Deploying
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
-        with:
-          php-version: '8.3'
-      - uses: actions/checkout@v4
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Install Dependencies
-        run: composer update --ignore-platform-reqs
-      # - name: Generate key
-      #   run: | 
-      #       php artisan key:generate
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
 
-      - name: Directory Permissions
-        run: chmod -R 775 storage
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-            server: ftp.jumpintojob.com
-            username: jumpinto
-            password: ${{ secrets.ftp_password }}
-            server-dir: /api.jumpintojob.com/
- 
+    - name: Use PHP 8.3
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: mbstring, intl # Add any required extensions here
+
+    - name: Install Dependencies
+      run: composer install
+
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp.jumpintojob.com
+        username: jumpinto
+        password: ${{ secrets.ftp_password }}
+        server-dir: /api.jumpintojob.com/
