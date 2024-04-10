@@ -38,8 +38,3 @@ jobs:
         username: jumpinto
         password: ${{ secrets.ftp_password }}
         server-dir: /api.jumpintojob.com/
-
-    - name: Run Command After Syncing Files
-      run: |
-        cp .env.example .env
-        php artisan migrate:fresh --seed
