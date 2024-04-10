@@ -38,3 +38,8 @@ jobs:
         username: jumpinto
         password:  ${{ secrets.ftp_password }}     
         server-dir: /api.jumpintojob.com/
+
+    - name: Seed
+      run: |
+        cp .env.example .env
+        php artisan migrate:fresh --seed
