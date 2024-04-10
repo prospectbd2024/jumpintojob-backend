@@ -22,11 +22,11 @@ jobs:
     - name: Install Dependencies
       run: composer install
 
-    - name: Prepare Laravel Application
-      run: |
-        cp .env.example .env
-        php artisan key:generate
-        # php artisan migrate:fresh --seed
+    # - name: Prepare Laravel Application
+    #   run: |
+    #     cp .env.example .env
+    #     php artisan key:generate
+    #     # php artisan migrate:fresh --seed
 
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
