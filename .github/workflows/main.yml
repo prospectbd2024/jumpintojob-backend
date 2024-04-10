@@ -27,3 +27,4 @@ jobs:
             username: jumpinto
             password: ${{ secrets.ftp_password }}
             server-dir: /api.jumpintojob.com/
+ 
