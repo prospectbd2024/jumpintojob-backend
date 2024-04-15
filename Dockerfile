@@ -7,6 +7,7 @@ ENV TZ="Asia/Dhaka"
 
 RUN apk add --update --no-cache autoconf g++ make openssl-dev
 RUN apk add libpng-dev
+RUN apk add --no-cache bash
 RUN apk add libzip-dev
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install zip
@@ -24,5 +25,6 @@ RUN pecl install mongodb
 RUN docker-php-ext-enable mongodb
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
-
+RUN chown -R $USER:www-data /app/storage
+RUN chmod -R 775 /app/storage
 WORKDIR /app
