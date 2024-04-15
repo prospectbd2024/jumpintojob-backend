@@ -12,10 +12,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles, HasApiTokens, HasFactory, Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -26,6 +27,7 @@ class User extends Authenticatable
         'user_type',
         'first_name',
         'last_name',
+        'position',
         'regions',
         'ip',
         'country',
@@ -102,10 +104,10 @@ class User extends Authenticatable
     }
 
 
-//    public function notifications(): HasMany
-//    {
-//        return $this->hasMany(Notification::class);
-//    }
+    //    public function notifications(): HasMany
+    //    {
+    //        return $this->hasMany(Notification::class);
+    //    }
 
     public function courses(): HasMany
     {
