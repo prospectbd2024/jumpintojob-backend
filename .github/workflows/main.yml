@@ -36,7 +36,7 @@ jobs:
         server-dir: /api.jumpintojob.com/
 
 
-  windows-deploy:
+  windows-deploy: 
     runs-on: self-hosted
     steps:
       - name: Install dependencies (Optional)
