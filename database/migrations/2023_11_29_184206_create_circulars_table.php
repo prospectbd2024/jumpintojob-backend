@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('availability')->nullable();
             // $table->string('phone');
             $table->string('slug')->unique();
-            $table->string('current_company_name');
             $table->string('location');
             $table->string('location_type');
             $table->string('vacancies');

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::middleware('auth:sanctum')->group(function () {
     // user section
     Route::get('user', [AuthController::class, 'user']);
+    Route::put('user/update', [AuthController::class, 'update']);
     Route::get('user/isBanned', [AuthController::class, 'isBanned']);
     Route::get('user/isVerified', [AuthController::class, 'isVerified']);
     Route::get('logout', [AuthController::class, 'logout']);
