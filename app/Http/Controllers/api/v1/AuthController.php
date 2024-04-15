@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\api\v1\OTPVerificationController;
 use App\Http\Requests\EmployeeSignupRequest;
 use App\Http\Requests\SignupRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\UserResource;
 use App\Models\BusinessSetting;
@@ -78,7 +79,7 @@ class AuthController extends Controller
         $this->authService->createCompany();
         $this->authService->createEmployer();
         $this->authService->createAddress();
-        // $this->sendVerificationCode('email');
+        $this->sendVerificationCode('email', $this->authService->getUser());
 
 
         // Create token
@@ -103,7 +104,7 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'verify_by' => 'nullable|in:email,phone',
+                'verify_by' => 'required|in:email,phone',
                 'email_or_phone' => 'nullable',
             ]);
 
@@ -270,6 +271,21 @@ class AuthController extends Controller
             return auth()->user();
         }));
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function update(UserUpdateRequest $request)
+    {
+        // Update the authenticated user's information
+        auth()->user()->update($request->validated());
+
+        return new JsonResponse([
+            'message' => 'User information updated successfully',
+            'user' => new UserResource(auth()->user())
+        ], 200);
+    }
+
 
     public function isBanned()
     {

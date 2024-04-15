@@ -2,7 +2,7 @@
 
 use App\Models\BusinessSetting;
 use App\Utility\SendSMSUtility;
-
+use Carbon\Carbon;
 
 //sensSMS function for OTP
 if (!function_exists('sendSMS')) {
@@ -84,6 +84,31 @@ if (!function_exists('my_asset')) {
     }
 }
 
+
+
+if (!function_exists('diffForHumans')) {
+    /**
+     * Generate a human-readable time difference from the current time.
+     *
+     * @param mixed $obj
+     * @return string
+     */
+    function diffForHumans($obj, string $format = null): string
+    {
+        // Check if $obj is an instance of Carbon
+        $carbon = Carbon::parse($obj);
+        if ($format) {
+            return $carbon->format($format);
+        }
+
+        if (is_string($obj)) {
+            return $carbon->diffForHumans();
+        }
+
+        return '';
+    }
+}
+
 // In a helpers.php file or a dedicated Helpers class
 
 function errorResponse($errorCode, $message, $statusCode = 404): \Illuminate\Http\JsonResponse
@@ -150,5 +175,3 @@ function successResponse($result = true, $data = null, $statusCode = 200): \Illu
 //    }
 //    return $addslashes ? addslashes(trim($translations_en[$lang_key])) : trim($translations_en[$lang_key]);
 //}
-
-
