@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Install dependencies (Optional)
         run: |
+          cd ..
+          cd ..
           git pull origin main
           composer install
           php   artisan optimize:clear
