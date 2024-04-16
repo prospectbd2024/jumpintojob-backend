@@ -14,9 +14,27 @@ use Symfony\Component\HttpFoundation\Response;
 class CircularController extends Controller
 {
     // Display a listing of the resource.
-    public function index()
+    /**
+     * Display a listing of the circulars.
+     *
+     * @return CircularResourceCollection
+     */
+    public function index(): CircularResourceCollection
     {
         return CircularResourceCollection::make(Circular::with('category', 'employer')->latest()->paginate());
+    }
+
+    /**
+     * Display a listing of the featured circulars.
+     *
+     * @return CircularResourceCollection
+     */
+    public function featuredCircular(): CircularResourceCollection
+    {
+        return CircularResourceCollection::make(
+            Circular::with('category', 'employer')
+                ->where('is_featured', 1)->latest()->paginate()
+        );
     }
 
     // Store a newly created resource in storage.
@@ -80,6 +98,7 @@ class CircularController extends Controller
             'message' => 'Circular deleted successfully'
         ], Response::HTTP_NO_CONTENT);
     }
+
     public function show($id)
     {
         try {
@@ -100,11 +119,12 @@ class CircularController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
     public function getCompanyCirculars($slug)
     {
         try {
             // Fetch circular
-            $company = Company::where('slug',$slug)->firstOrFail();
+            $company = Company::where('slug', $slug)->firstOrFail();
             $circular = Circular::with('category', 'employer')
                 ->where('company_id', $company->id);
 
