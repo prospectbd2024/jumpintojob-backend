@@ -95,9 +95,10 @@ Route::prefix('circular')->group(function () {
     Route::get('{company}/{slug}', [CircularController::class, 'getCircular'])->name('circular.show');
     Route::get('/{slug}', [CircularController::class, 'getCompanyCirculars'])->name('circular.companyCirculars');
 });
-
-Route::get('companies', [CompanyController::class, 'index'])->name('company.list');
-
+Route::prefix('companies')->group(function () {
+    Route::get('/', [CompanyController::class, 'index'])->name('company.list');
+    Route::get('featured', [CompanyController::class, 'featuredCompanies'])->name('company.featured');
+});
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.list');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.list');

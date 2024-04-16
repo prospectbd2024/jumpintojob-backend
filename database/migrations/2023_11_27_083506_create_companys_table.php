@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone', 255)->unique()->nullable(); // Assuming phone numbers, adjust the size as needed
             $table->text('logo')->nullable();
             $table->integer('size')->default(0);
+            $table->boolean('is_featured')->default(0);
             $table->string('category_id')->nullable();
             $table->text('cover_image')->nullable();
             $table->text('location')->nullable();

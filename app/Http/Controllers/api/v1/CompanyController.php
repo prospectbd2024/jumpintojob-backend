@@ -14,13 +14,18 @@ use Symfony\Component\HttpFoundation\Response;
 class CompanyController extends Controller
 {
     // Display a listing of the resource.
-    public function index(Request $request)
-    {   
+    public function index(Request $request): CompanyResourceCollection
+    {
         $category_id =$request->category_id;
         $is_category_id = ($category_id!='all' && $category_id != null ) ;
         $category_id = $is_category_id && $category_id =='others'? null : $category_id;
         $companies = $is_category_id?  Company::where('category_id',$category_id)->get() : Company::get();
         return CompanyResourceCollection::make(($companies));
+    }
+    // Display a listing of the resource.
+    public function featuredCompanies(Request $request): CompanyResourceCollection
+    {
+        return CompanyResourceCollection::make(Company::where('is_featured',1)->paginate());
     }
 
     // Store a newly created resource in storage.
@@ -54,7 +59,7 @@ class CompanyController extends Controller
     }
     public function show_slug(Request $request)
 
-    {   
+    {
         $slug = $request->slug;
         $company = Company::where('slug',$slug)->first();
         return CompanyResource::make($company);
