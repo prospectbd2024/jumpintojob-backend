@@ -16,4 +16,10 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_get_circulars(){
+        $response = $this->get('/api/v1/circular');
+        $response->assertStatus(200);
+
+    }
 }
