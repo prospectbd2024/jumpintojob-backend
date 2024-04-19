@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('location_type');
             $table->string('vacancies');
             $table->string('employment_type'); // Full-time, part-time, contract, etc.
-            $table->string('experience_level'); // Entry-level, mid-level, senior-level
+            $table->string('experience_level')->nullable(); // Entry-level, mid-level, senior-level
             $table->boolean('is_remote')->default(0);
             $table->string('salary'); // Salary range
             $table->date('deadline');

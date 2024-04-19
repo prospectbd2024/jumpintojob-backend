@@ -28,6 +28,7 @@ class Circular extends Model
         'salary',
         'deadline',
         'created_at',
+        'company_id'
     ];
 
     protected $guarded = [
