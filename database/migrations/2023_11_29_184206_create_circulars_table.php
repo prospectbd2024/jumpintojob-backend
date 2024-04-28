@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained()->onDelete('NO ACTION');
             $table->text('title');
             $table->text('description');
+            $table->text('responsibilities')->nullable();
+            $table->text('educational_requirements')->nullable();
+            $table->text('experience')->nullable();
             $table->string('availability')->nullable();
             // $table->string('phone');
             $table->string('slug')->unique();
