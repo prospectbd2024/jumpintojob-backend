@@ -27,6 +27,9 @@ class Circular extends Model
         'employment_type',
         'salary',
         'deadline',
+        'responsibilities',
+        'educational_requirements',
+        'experience',
         'created_at',
         'company_id'
     ];

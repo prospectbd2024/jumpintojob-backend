@@ -40,6 +40,9 @@ class CircularStoreRequest extends FormRequest
             'salary' => 'required',
             'deadline' => 'required',
             'created_at' => 'nullable',
+            'responsibilities' => 'nullable',
+            'educational_requirements' => 'nullable',
+            'experience' => 'nullable'
         ];
     }
 
