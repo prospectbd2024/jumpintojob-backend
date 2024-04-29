@@ -277,9 +277,21 @@ class AuthController extends Controller
      */
     public function update(UserUpdateRequest $request)
     {
-        // Update the authenticated user's information
-        auth()->user()->update($request->validated());
+        // Receive and store the avatar image
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public'); // Store the avatar in the 'avatars' directory within the 'public' disk
+        }
 
+        // Update the authenticated user's information, including the avatar path if it exists
+        $userData = $request->validated();
+        if (isset($avatarPath)) {
+            $userData['avatar'] = 'storage/'.$avatarPath;
+        }
+        // dd($userData['avatar']);
+        auth()->user()->update($userData);
+        $user = User::find(auth()->user()->id);
+        // dd( $user );
         return new JsonResponse([
             'message' => 'User information updated successfully',
             'user' => new UserResource(auth()->user())

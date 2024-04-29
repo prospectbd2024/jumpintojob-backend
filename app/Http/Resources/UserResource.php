@@ -8,9 +8,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserResource extends JsonResource
 {
     public function toArray(Request $request): array
+
     {
         return [
             'user_plan' => $this->userPlan->name,
+            'avatar' => asset($this->avatar),
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'position' => $this->position,

@@ -55,6 +55,7 @@ class User extends Authenticatable
         'new_email_verification_code',
         'device_token',
         'referral_code',
+        'avatar'
     ];
 
     /**
