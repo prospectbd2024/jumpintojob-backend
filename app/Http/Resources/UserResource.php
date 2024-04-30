@@ -12,7 +12,7 @@ class UserResource extends JsonResource
     {
         return [
             'user_plan' => $this->userPlan->name,
-            'avatar' => asset($this->avatar),
+            'avatar' => $this->avatar? asset($this->avatar):null,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'position' => $this->position,
