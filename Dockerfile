@@ -25,6 +25,6 @@ RUN pecl install mongodb
 RUN docker-php-ext-enable mongodb
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
-RUN chown -R $USER:www-data /app/storage
-RUN chmod -R 775 /app/storage
+RUN chown -R www-data:www-data /app/storage/logs
+RUN chmod -R 775 /app/storage/logs
 WORKDIR /app
