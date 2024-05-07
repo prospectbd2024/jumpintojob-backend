@@ -43,4 +43,8 @@ class SkillsController extends Controller
         $skills = Skill::where('name', 'LIKE', '%' . $searchKey . '%')->get();
         return SkillsResource::collection($skills);
     }
+    public function suggested()
+    {
+        return SkillsResource::collection(Skill::paginate(10) );
+    }
 }
