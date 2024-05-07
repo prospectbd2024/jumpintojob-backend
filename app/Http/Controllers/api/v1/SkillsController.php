@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SkillsRequest;
 use App\Http\Resources\SkillsResource;
 use App\Models\Skill;
+use Illuminate\Http\Request;
 
 class SkillsController extends Controller
 {
     public function index()
     {
-        return SkillsResource::collection(Skill::get());
+        return SkillsResource::collection(Skill::paginate(10) );
     }
 
     public function store(SkillsRequest $request)
@@ -36,5 +37,10 @@ class SkillsController extends Controller
         $skills->delete();
 
         return response()->json();
+    }
+    public function search($searchKey)
+    {
+        $skills = Skill::where('name', 'LIKE', '%' . $searchKey . '%')->get();
+        return SkillsResource::collection($skills);
     }
 }
