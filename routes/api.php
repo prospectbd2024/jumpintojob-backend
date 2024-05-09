@@ -98,6 +98,7 @@ Route::prefix('circular')->group(function () {
 Route::get('companies', [CompanyController::class, 'index'])->name('company.list');
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.list');
+Route::get('languages/search/{searchKey}', [LanguagesController::class, 'search'])->name('languages.search');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.list');
 
