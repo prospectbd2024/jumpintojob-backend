@@ -37,4 +37,9 @@ class LanguagesController extends Controller
 
         return response()->json();
     }
+    public function search($searchKey)
+    {
+        $languages = Languages::where('language', 'LIKE', '%' . $searchKey . '%')->get();
+        return LanguagesResource::collection($languages);
+    }
 }

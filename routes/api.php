@@ -98,10 +98,13 @@ Route::prefix('circular')->group(function () {
 Route::get('companies', [CompanyController::class, 'index'])->name('company.list');
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.list');
+Route::get('languages/search/{searchKey}', [LanguagesController::class, 'search'])->name('languages.search');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.list');
 
 Route::get('skills', [SkillsController::class, 'index'])->name('skills.list');
+Route::get('skills/suggested', [SkillsController::class, 'suggested'])->name('skills.suggested');
+Route::get('skills/search/{searchKey}', [SkillsController::class, 'search'])->name('skills.search');
 
 Route::get('employers', [EmployerController::class, 'index'])->name('employer.list');
 
