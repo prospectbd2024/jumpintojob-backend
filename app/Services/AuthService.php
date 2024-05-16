@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\api\v1\EmailVerificationJob;
 use App\Models\Address;
 use App\Models\Company;
 use App\Models\Employer;
@@ -25,25 +26,31 @@ class AuthService
 
     public function createJobSeeker(): void
     {
-
         $user = new User($this->request->validated());
         $user->save();
-        // $ip = $this->request->ip();
-        //        $location = Location::get($ip);
-        $user->update([
-            //            'ip' => $location->ip,
-            'first_name' => $this->request->first_name,
-            'last_name' => $this->request->last_name,
-            //            'iso_code' => $location->isoCode,
-            //            'country' => $location->countryName,
-            //            'city' => $location->cityName,
-            //            'state' => $location->regionName,
-            //            'postal_code' => $location->postalCode,
-            //            'lat' => $location->latitude,
-            //            'lon' => $location->longitude,
-            //            'zip_code' => $location->zipCode,
-            //            'timezone' => $location->timezone,
-        ]);
+        if (!app()->environment('local')) {
+            $ip = $this->request->ip();
+            $location = Location::get($ip);
+            $user->update([
+                'ip' => $location->ip,
+                'first_name' => $this->request->first_name,
+                'last_name' => $this->request->last_name,
+                'iso_code' => $location->isoCode,
+                'country' => $location->countryName,
+                'city' => $location->cityName,
+                'state' => $location->regionName,
+                'postal_code' => $location->postalCode,
+                'lat' => $location->latitude,
+                'lon' => $location->longitude,
+                'zip_code' => $location->zipCode,
+                'timezone' => $location->timezone,
+            ]);
+        } else {
+            $user->update([
+                'first_name' => $this->request->first_name,
+                'last_name' => $this->request->last_name,
+            ]);
+        }
         $user->save();
         $this->user = $user;
     }
@@ -57,7 +64,6 @@ class AuthService
         }
     }
 
-
     public function createAddress(): void
     {
         $address = new Address([
@@ -68,20 +74,17 @@ class AuthService
         $this->user->addresses()->save($address);
     }
 
-    public static function sendVerificationCode(User $user): \Illuminate\Http\JsonResponse
+    public function sendVerificationCode($method): \Illuminate\Http\JsonResponse
     {
-        if ($user->email_verified_at == null) {
+        if ($this->user->email_verified_at == null && $method == 'email') {
             try {
-                //                EmailVerificationJob::dispatch($user);
-                //                Artisan::call('queue:work');
-                //                $user->notify(new NewUserEmailVerificationNotification($user));
-                Notification::send($user, new NewUserEmailVerificationNotification($user));
+                EmailVerificationJob::dispatch($this->user);
             } catch (\Exception $e) {
                 return errorResponse($e, 'Something went wrong sending verification email. Please try again later.', ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
             }
             //            else {
             //                $otpController = new OTPVerificationController();
-            //                $otpController->send_code($user);
+            //                $otpController->send_code($this->user);
             //            }
 
             return response()->json([
@@ -141,10 +144,10 @@ class AuthService
         // $this->company = new Company($this->request->safe()->only(['name', 'email', 'company_type', 'slug']));
         $company = new Company;
         $company->name = $this->request->name;
-        $company->email =  $this->request->email;
-        $company->company_type =  $this->request->company_type;
-        $company->slug =  $this->request->slug;
+        $company->email = $this->request->email;
+        $company->company_type = $this->request->company_type;
+        $company->slug = $this->request->slug;
         $company->save();
-        $this->company  = $company;
+        $this->company = $company;
     }
 }
