@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Template::factory(10)->create();
+        // Template::factory(10)->create();
         $this->call(SkillSeeder::class);
         $this->call(LanguageSeeder::class);
         $this->call(CategorySeeder::class);
@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployerSeeder::class);
         Employer::factory(10)->create();
         $this->call(CircularSeeder::class);
+        $this->call(TemplateSeeder::class);
     }
 }
