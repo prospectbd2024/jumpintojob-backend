@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->json('template');
-            $table->string('slug')->unique();
-            $table->boolean('is_active')->default(true);
-            $table->softDeletes();
+            $table->string('image');
+            $table->string('view_path');
+            $table->string('type');
+            $table->string('template_type');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class SkillsController extends Controller
 {
     public function index()
     {
-        return SkillsResource::collection(Skill::paginate(10) );
+        return SkillsResource::collection(Skill::all() );
     }
 
     public function store(SkillsRequest $request)
