@@ -161,6 +161,7 @@ return [
          */
         Propaganistas\LaravelDisposableEmail\DisposableEmailServiceProvider::class,
         Laravel\Telescope\TelescopeServiceProvider::class,
+        MongoDB\Laravel\MongoDBServiceProvider::class,
         /*
          * Application Service Providers...
          */
