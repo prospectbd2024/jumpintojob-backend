@@ -12,8 +12,12 @@ class TemplateController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+
     {
-        //
+
+       $templates = Template::all();
+
+       return response()->json([ 'data' => $templates]);
     }
 
     /**
@@ -62,5 +66,21 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         //
+    }
+    public function generateHtmlTemplate(Request $request)
+    {
+        // Render the Blade view to an HTML string
+        // dd($request->template_id);
+        $templateObject = Template::where('id',$request->template_id)->first();
+        $resume_data =$request->resume_data;
+        $view_path = $templateObject->view_path;
+        $template =view($view_path , compact('resume_data'))->render();
+        // Return the HTML string as part of the response
+        return response()->json([
+            'data' => [
+                'template' => $template,
+                'id' => $request->template_id
+            ]
+        ]);
     }
 }

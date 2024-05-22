@@ -13,6 +13,7 @@ use App\Http\Controllers\api\v1\LanguagesController;
 use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\PasswordResetController;
 use App\Http\Controllers\api\v1\SkillsController;
+use App\Http\Controllers\api\v1\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -144,3 +145,10 @@ Route::prefix('candidate-contact')->group(function () {
     Route::put('update/{candidate-contact}', [CandidateContactController::class, 'update'])->name('candidate-contact.update');
     Route::delete('destroy/{candidate-contact}', [CandidateContactController::class, 'destroy'])->name('candidate-contact.destroy');
 });
+Route::prefix('templates')->group(function () {
+    Route::get('/', [TemplateController::class, 'index'])->name('templates.index');
+    Route::post('/generate/html', [TemplateController::class, 'generateHtmlTemplate'])->name('templates.generateHtmlTemplate');
+
+});
+
+

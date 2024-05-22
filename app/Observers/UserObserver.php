@@ -10,7 +10,7 @@ class UserObserver
     public function created(User $user): void
     {
         cache()->forget('user_' . $user->id);
-        AuthService::sendVerificationCode($user);
+        AuthService::sendWelcomeEmailToUser($user);
     }
     public function updated(User $user): void
     {
