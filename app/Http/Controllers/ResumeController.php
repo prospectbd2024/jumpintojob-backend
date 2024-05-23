@@ -35,7 +35,7 @@ class ResumeController extends Controller
         $resume->payload = $request->payload;
         $resume->save();
 
-        return response()->json(['message' => 'Resume document stored successfully']);
+        return response()->json(['message' => 'profile document stored successfully']);
     }
 
     /**
@@ -61,18 +61,6 @@ class ResumeController extends Controller
         $resume = (new Resume)->findOrFail($id);
         $resume->payload = $request->payload;
         $resume->save();
-        return response()->json(['message' => 'Resume document updated successfully']);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public
-    function destroy($id): JsonResponse
-    {
-        $resume = (new Resume)->findOrFail($id);
-        $resume->delete();
-
-        return response()->json(['message' => 'Resume deleted successfully'], 204);
+        return response()->json(['message' => 'profile document updated successfully']);
     }
 }

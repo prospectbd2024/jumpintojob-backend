@@ -87,12 +87,11 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('destroy/{circular}', [CircularController::class, 'destroy'])->name('circular.destroy');
         });
 
-        Route::middleware('isJobSeeker')->prefix('resumes')->group(function () {
+        Route::middleware('isJobSeeker')->prefix('profile')->group(function () {
             Route::get('', [ResumeController::class, 'index']);
             Route::post('store', [ResumeController::class, 'store']);
             Route::get('show/{id}', [ResumeController::class, 'show']);
             Route::put('update/{id}', [ResumeController::class, 'update']);
-            Route::delete('destroy/{id}', [ResumeController::class, 'destroy']);
         });
     });
 });
