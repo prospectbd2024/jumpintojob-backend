@@ -13,6 +13,7 @@ return new class extends Migration {
         // create schema for mongodb connection
         Schema::connection('mongodb')->create('resumes', function (Blueprint $collection) {
             $collection->id();
+            $collection->index('user_id');
             $collection->string('name');
             $collection->string('email');
             $collection->string('phone');
