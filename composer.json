@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.1",
         "andreaselia/laravel-api-to-postman": "^1.15",
         "caneara/axiom": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
@@ -23,7 +23,8 @@
         "predis/predis": "^2.2",
         "propaganistas/laravel-disposable-email": "^2.2",
         "spatie/laravel-permission": "^6.4",
-        "stevebauman/location": "^7.0"
+        "stevebauman/location": "^7.0",
+        "mongodb/laravel-mongodb": "^4.3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9.2",
