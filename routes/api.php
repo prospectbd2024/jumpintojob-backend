@@ -14,10 +14,11 @@ use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\PasswordResetController;
 use App\Http\Controllers\api\v1\SkillsController;
 use App\Http\Controllers\api\v1\TemplateController;
+use App\Http\Controllers\ResumeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('user/login', [AuthController::class, 'login']);
+    Route::post('user/login', [AuthController::class, 'login'])->name('login');
     Route::post('job-seeker/signup', [AuthController::class, 'jobSeekerSignup']);
     Route::post('employer/signup', [AuthController::class, 'employerSignup']);
     // Route::post('social-login', [AuthController::class, 'socialLogin']);
@@ -84,6 +85,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::put('update/{circular}', [CircularController::class, 'update'])->name('circular.update');
 
             Route::delete('destroy/{circular}', [CircularController::class, 'destroy'])->name('circular.destroy');
+        });
+
+        Route::middleware('isJobSeeker')->prefix('resumes')->group(function () {
+            Route::get('', [ResumeController::class, 'index']);
+            Route::post('store', [ResumeController::class, 'store']);
+            Route::get('show/{id}', [ResumeController::class, 'show']);
+            Route::put('update/{id}', [ResumeController::class, 'update']);
+            Route::delete('destroy/{id}', [ResumeController::class, 'destroy']);
         });
     });
 });

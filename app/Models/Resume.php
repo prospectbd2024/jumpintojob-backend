@@ -13,6 +13,7 @@ class Resume extends Model
     protected $collection = 'resumes';
 
     protected $fillable = [
+        'user_id',
         'name',
         'email',
         'phone',
