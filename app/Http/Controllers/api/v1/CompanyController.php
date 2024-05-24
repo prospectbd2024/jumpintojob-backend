@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CompanyController extends Controller
 {
     // Display a listing of the resource.
+
     public function index(Request $request)
     {
         $category =$request->category_id;
@@ -28,6 +29,11 @@ class CompanyController extends Controller
             Company::where('category_id',$category)->get();
         }
         return CompanyResourceCollection::make(($companies));
+    }
+    // Display a listing of the resource.
+    public function featuredCompanies(Request $request): CompanyResourceCollection
+    {
+        return CompanyResourceCollection::make(Company::where('is_featured',1)->paginate());
     }
 
     // Store a newly created resource in storage.

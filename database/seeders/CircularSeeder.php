@@ -458,6 +458,7 @@ class CircularSeeder extends Seeder
             $employer = Employer::inRandomOrder()->first();
             $item['company_id'] = $employer->company_id;
             $item['employer_id'] = $employer->id;
+            $item['is_featured'] = rand(0, 1);
             Circular::create($item);
         }
     }
