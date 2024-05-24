@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained()->onDelete('NO ACTION');
             $table->text('title');
             $table->text('description');
+            $table->text('responsibilities')->nullable();
+            $table->text('educational_requirements')->nullable();
+            $table->text('experience')->nullable();
             $table->string('availability')->nullable();
             // $table->string('phone');
             $table->string('slug')->unique();
@@ -25,7 +28,7 @@ return new class extends Migration
             $table->string('location_type');
             $table->string('vacancies');
             $table->string('employment_type'); // Full-time, part-time, contract, etc.
-            $table->string('experience_level'); // Entry-level, mid-level, senior-level
+            $table->string('experience_level')->nullable(); // Entry-level, mid-level, senior-level
             $table->boolean('is_remote')->default(0);
             $table->boolean('is_featured')->default(0);
             $table->string('salary'); // Salary range

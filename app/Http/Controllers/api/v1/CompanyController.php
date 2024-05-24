@@ -14,12 +14,20 @@ use Symfony\Component\HttpFoundation\Response;
 class CompanyController extends Controller
 {
     // Display a listing of the resource.
-    public function index(Request $request): CompanyResourceCollection
+
+    public function index(Request $request)
     {
-        $category_id =$request->category_id;
-        $is_category_id = ($category_id!='all' && $category_id != null ) ;
-        $category_id = $is_category_id && $category_id =='others'? null : $category_id;
-        $companies = $is_category_id?  Company::where('category_id',$category_id)->get() : Company::get();
+        $category =$request->category_id;
+        $companies = [];
+        if (in_array($category, ['all',null])){
+            $companies = Company::get();
+        }
+        else if($category=='others'){
+            $companies =  Company::where('category_id',null)->get();
+        }
+        else{
+            Company::where('category_id',$category)->get();
+        }
         return CompanyResourceCollection::make(($companies));
     }
     // Display a listing of the resource.

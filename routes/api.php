@@ -13,6 +13,7 @@ use App\Http\Controllers\api\v1\LanguagesController;
 use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\PasswordResetController;
 use App\Http\Controllers\api\v1\SkillsController;
+use App\Http\Controllers\api\v1\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -100,10 +101,13 @@ Route::prefix('companies')->group(function () {
     Route::get('featured', [CompanyController::class, 'featuredCompanies'])->name('company.featured');
 });
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.list');
+Route::get('languages/search/{searchKey}', [LanguagesController::class, 'search'])->name('languages.search');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.list');
 
 Route::get('skills', [SkillsController::class, 'index'])->name('skills.list');
+Route::get('skills/suggested', [SkillsController::class, 'suggested'])->name('skills.suggested');
+Route::get('skills/search/{searchKey}', [SkillsController::class, 'search'])->name('skills.search');
 
 Route::get('employers', [EmployerController::class, 'index'])->name('employer.list');
 
@@ -143,3 +147,10 @@ Route::prefix('candidate-contact')->group(function () {
     Route::put('update/{candidate-contact}', [CandidateContactController::class, 'update'])->name('candidate-contact.update');
     Route::delete('destroy/{candidate-contact}', [CandidateContactController::class, 'destroy'])->name('candidate-contact.destroy');
 });
+Route::prefix('templates')->group(function () {
+    Route::get('/', [TemplateController::class, 'index'])->name('templates.index');
+    Route::post('/generate/html', [TemplateController::class, 'generateHtmlTemplate'])->name('templates.generateHtmlTemplate');
+
+});
+
+

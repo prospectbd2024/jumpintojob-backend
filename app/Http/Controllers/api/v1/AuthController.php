@@ -45,12 +45,12 @@ class AuthController extends Controller
      * @param SignupRequest $request
      * @return JsonResponse
      */
-    public function jobSeekerSignup(SignupRequest $request)
+    public function jobSeekerSignup(SignupRequest $request): JsonResponse
     {
         $this->authService->setRequest($request);
         $this->authService->createJobSeeker();
         $this->authService->createAddress();
-        $this->sendVerificationCode('email', $this->authService->getUser());
+        $this->authService->sendVerificationCode('email');
 
 
         // Create token
@@ -73,13 +73,13 @@ class AuthController extends Controller
      * params: first_name, last_name, email, password, password_confirmation, register_by, g-recaptcha-response
      * @return JsonResponse
      */
-    public function employerSignup(EmployeeSignupRequest $request)
+    public function employerSignup(EmployeeSignupRequest $request): JsonResponse
     {
         $this->authService->setRequest($request);
         $this->authService->createCompany();
         $this->authService->createEmployer();
         $this->authService->createAddress();
-        $this->sendVerificationCode('email', $this->authService->getUser());
+        $this->authService->sendVerificationCode('email');
 
 
         // Create token
@@ -157,18 +157,6 @@ class AuthController extends Controller
             'result' => true,
             'message' => translate('A code has been sent again'),
         ], 200);
-    }
-
-    public function sendVerificationCode($method, User $user): void
-    {
-        if ($method == 'email') {
-            // Send the verification code via email
-            $user->notify(new NewUserEmailVerificationNotification());
-            // the email was sent on another process
-        } else {
-            $otpController = new OTPVerificationController();
-            $otpController->send_code($this->authService->getUser());
-        }
     }
 
     protected function errorResponse($message)
@@ -277,9 +265,21 @@ class AuthController extends Controller
      */
     public function update(UserUpdateRequest $request)
     {
-        // Update the authenticated user's information
-        auth()->user()->update($request->validated());
+        // Receive and store the avatar image
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public'); // Store the avatar in the 'avatars' directory within the 'public' disk
+        }
 
+        // Update the authenticated user's information, including the avatar path if it exists
+        $userData = $request->validated();
+        if (isset($avatarPath)) {
+            $userData['avatar'] = 'storage/'.$avatarPath;
+        }
+        // dd($userData['avatar']);
+        auth()->user()->update($userData);
+        $user = User::find(auth()->user()->id);
+        // dd( $user );
         return new JsonResponse([
             'message' => 'User information updated successfully',
             'user' => new UserResource(auth()->user())

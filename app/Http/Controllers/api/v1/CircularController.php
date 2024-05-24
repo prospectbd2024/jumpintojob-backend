@@ -9,6 +9,7 @@ use App\Http\Resources\Circular\CircularResource;
 use App\Http\Resources\Circular\CircularResourceCollection;
 use App\Models\Circular;
 use App\Models\Company;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CircularController extends Controller
@@ -40,7 +41,13 @@ class CircularController extends Controller
     // Store a newly created resource in storage.
     public function store(CircularStoreRequest $request)
     {
-        $data = Circular::create($request->validated());
+        //get user company id
+        $user = Auth::user();
+        $employer = $user->employer;
+        $company_id = $employer->company->id;
+        $values = $request->validated();
+        $values['company_id'] = $company_id;
+        $data = Circular::create($values);
         if ($data) {
             return response()->json([
                 'success' => true,
