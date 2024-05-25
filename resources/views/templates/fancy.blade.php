@@ -75,7 +75,8 @@
         }
         .main-section{
             display: flex;
-            gap: 60px 0px;
+            gap: 100px 0px;
+            margin-top: 100px;
             flex-direction: column;
         }
         .main-section .details-container {
@@ -134,7 +135,7 @@
             
         }
         .hide{
-            display: none;
+            display: none !important;
         }
         
     </style>
