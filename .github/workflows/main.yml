@@ -43,7 +43,7 @@ jobs:
         run: |
           cd ..
           cd ..
-          git pull origin main
+          git pull
           composer install
           php   artisan optimize:clear
           php   artisan migrate:fresh --seed --force
