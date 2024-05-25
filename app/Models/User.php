@@ -17,6 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasRoles, HasApiTokens, HasFactory, Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -126,5 +127,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Skill::class)
             ->withPivot('skill_level', 'is_verified')
             ->withTimestamps();
+    }
+
+    public function profile(): HasMany
+    {
+        return $this->hasMany(Profile::class);
     }
 }

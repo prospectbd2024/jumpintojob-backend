@@ -3,44 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Profile extends Model
 {
-    use SoftDeletes, HasFactory;
+    use HasFactory;
 
-    protected $casts = [
-        'avatar' => 'string',
-    ];
+    protected $connection = 'mongodb';
+    protected $collection = 'profiles';
 
     protected $fillable = [
-        'avatar',
         'user_id',
-        'category_id',
-        'country',
-        'state',
-        'street',
-        'city',
-        'postal_code',
-        'banned',
-        'ip',
-        'iso_code',
-        'country',
-        'city',
-        'state',
-        'zip_code',
-        'postal_code',
-        'lat',
-        'lon',
-        'timezone',
-        'currency',
+        'personal_information',
+        'educations',
+        'experiences',
+        'skills',
+        'languages',
+        'hobbies',
+        'others',
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $casts = [
 
+    ];
 
+//    public function user()
+//    {
+//        return $this->belongsTo(User::class);
+//    }
 }
