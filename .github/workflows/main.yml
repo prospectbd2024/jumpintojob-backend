@@ -41,8 +41,7 @@ jobs:
     steps:
       - name: Install dependencies (Optional)
         run: |
-          cd ..
-          cd ..
+          cd C:\laragon\www\jumpintojob-backend
           git pull
           composer install
           php   artisan optimize:clear
