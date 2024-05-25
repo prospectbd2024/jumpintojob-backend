@@ -9,175 +9,234 @@
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            background-color: #f7f7f7;
+            padding: 40px 80px;
+            background-color: #ffffff;
+            color: #333;
         }
 
-        .sidebar {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            width: 300px;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 2px solid #d49548;
+            padding-bottom: 10px;
         }
 
-        .sidebar h1 {
-            margin: 0 0 10px 0;
+        .header-title {
             font-size: 28px;
+            font-weight: bold;
+            color: #333;
         }
 
-        .sidebar p {
-            margin: 5px 0;
-            font-size: 14px;
-        }
-
-        .sidebar a {
-            color: #ecf0f1;
-        }
-
-        .sidebar h2 {
-            font-size: 18px;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar li {
+        .header-subtitle {
+            color: #d49548;
+            font-size: 16px;
             margin-bottom: 10px;
         }
 
-        .main-content {
-            padding: 40px;
-            flex-grow: 1;
-            background-color: white;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: #666;
         }
 
-        .main-content h2 {
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-info i {
+            color: #d49548;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .main-section {
+            width: 48%;
+        }
+
+        h2 {
+            color: #2c3e50;
             font-size: 22px;
-            color: #2980b9;
+            border-bottom: 1px solid #d49548;
+            padding-bottom: 5px;
             margin-bottom: 15px;
         }
 
-        .main-content p {
-            margin: 5px 0;
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
         }
 
-        .main-content ul {
-            list-style-type: none;
+        .highlight {
+            color: #d49548;
+            font-weight: bold;
+        }
+
+        .experience-period,
+        .education-period {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .experience-details,
+        .education-details {
+            list-style: none;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            color: #444;
+        }
+
+        .experience-details li::before,
+        .education-details li::before {
+            content: "•";
+            color: #d49548;
+            position: absolute;
+            left: -15px;
+        }
+
+        .skills-container ul,
+        .languages-container ul,
+        .hobbies-container ul,
+        .certificates-container ul {
+            list-style: none;
             padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .main-content li {
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .main-content ul li ul {
-            list-style-type: disc;
-            margin-left: 20px;
+        .skills-container li,
+        .languages-container li,
+        .hobbies-container li,
+        .certificates-container li {
+            background-color: #f7f7f7;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: center;
         }
     </style>
-    <title>Classic Resume</title>
+    <title>Resume</title>
 </head>
 
 <body>
-    <div class="sidebar">
-        <div>
-            <div style="text-align: center;">
-                <h1>{{ $resume['personalInformation']['firstName'] }} {{ $resume['personalInformation']['lastName'] }}</h1>
-                <p>Email: {{ $resume['personalInformation']['email'] }}</p>
-                <p>Phone: {{ $resume['personalInformation']['phone'] }}</p>
-                <p>LinkedIn: <a href="{{ $resume['personalInformation']['mediaLinks'][0]['url'] }}">{{ $resume['personalInformation']['mediaLinks'][0]['url'] }}</a></p>
+    <header>
+        <h2 class="header-title">{{ $resume->personal_informations['firstName'] }} {{ $resume->personal_informations['lastName'] }}</h2>
+        <div class="header-subtitle">{{ $resume->personal_informations['title'] }}</div>
+        <div class="contact-info">
+            <div><i class="fa fa-phone"></i>{{$resume->personal_informations['phone']}}</div>
+            <div><span>@</span>{{$resume->personal_informations['email']}}</div>
+            <div><i class="fa fa-map-marker"></i> {{ $resume->personal_informations['currentAddress']['postalCode'] }}, {{ $resume->personal_informations['currentAddress']['city'] }}, {{ $resume->personal_informations['currentAddress']['state'] }}, {{ $resume->personal_informations['currentAddress']['country'] }}</div>
+        </div>
+    </header>
+    <main>
+        <div class="main-section">
+            <div class="experience-section {{ count($resume->experiences)==0 ? 'hide' : ''}}">
+                <h2>Experience</h2>
+                @foreach ($resume->experiences as $experience)
+                <div class="{{ $experience['visible_on_cv'] ? '' : 'hide' }}">
+                    <h3>{{ $experience['job_title'] }}</h3>
+                    <p class="highlight">{{ $experience['company_name'] }}</p>
+                    <div class="experience-period">
+                        <span><i class="fa fa-calendar"></i>
+                        @php
+                            echo $experience['start_date'];
+                            echo $experience['currently_working'] ? '- Present' : $experience['to_date'];
+                        @endphp
+                        </span>
+                        <span><i class="fa fa-map-marker"></i> {{$experience['company_location']}}</span>
+                    </div>
+                    <ul class="experience-details">
+                        <li>{{$experience['responsibilities']}}</li>
+                        <li>
+                            <p>Expertise</p>
+                            <ul class="experties-list">
+                                @foreach ($experience['expertises'] as $expertise)
+                                <li>{{ $expertise['name'] }} for {{ $expertise['months'] }} months</li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @endforeach
             </div>
 
-            <div>
-                <h2>Languages</h2>
+            <div class="education-section {{ count($resume->educations)==0 ? 'hide' : ''}}">
+                <h2>Education</h2>
+                @foreach ($resume->educations as $education)
+                <div class="{{ $education['visible_on_cv'] ? '' : 'hide' }}">
+                    <h3>{{ $education['degree'] }} in {{ $education['field_study'] }}</h3>
+                    <p class="highlight">{{ $education['institution_name'] }}</p>
+                    <div class="education-period">
+                        <span><i class="fa fa-calendar"></i>
+                        @php
+                            echo $education['education_starting_year'];
+                            echo $education['education_graduation_year'] ? '-' . $education['education_graduation_year'] : '- Present';
+                        @endphp
+                        </span>
+                        <span>{{ $education['institution_location'] }}</span>
+                    </div>
+                    <ul class="education-details">
+                        <li>{{ $education['education_achievements'] }}</li>
+                    </ul>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="main-section">
+            <div class="skills-container {{ count($resume->skills)==0 ? 'hide' : ''}}">
+                <h2>Skills</h2>
                 <ul>
-                    @foreach ($resume['languages'] as $language)
-                    <li>{{ $language['language'] }} - {{ $language['proficiency'] }}</li>
+                    @foreach ($resume->skills as $skill)
+                    <li>{{ $skill['name'] }}</li>
                     @endforeach
                 </ul>
             </div>
 
-            <div>
+            <div class="languages-container {{ count($resume->languages)==0 ? 'hide' : ''}}">
+                <h2>Languages</h2>
+                <ul>
+                    @foreach ($resume->languages as $language)
+                    <li>{{ $language['language'] }}</li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div class="hobbies-container {{ count($resume->hobbies)==0 ? 'hide' : ''}}">
                 <h2>Hobbies</h2>
                 <ul>
-                    @foreach ($resume['hobbies'] as $hobby)
+                    @foreach ($resume->hobbies as $hobby)
                     <li>{{ $hobby['name'] }}</li>
                     @endforeach
                 </ul>
             </div>
-        </div>
-    </div>
 
-    <div class="main-content">
-        <div>
-            <h2>Summary</h2>
-            <p>{{ $resume['personalInformation']['summary'] }}</p>
+            <div class="certificates-container {{ count($resume->certificates)==0 ? 'hide' : ''}}">
+                <h2>Certificates</h2>
+                <ul>
+                    @foreach ($resume->certificates as $certificate)
+                    <li>{{ $certificate['title'] }}</li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-
-        <div>
-            <h2>Education</h2>
-            <ul>
-                @foreach ($resume['educations'] as $education)
-                @if ($education['visible_on_cv'])
-                <li>
-                    <strong>{{ $education['degree'] }} in {{ $education['field_study'] }}</strong> - {{ $education['institution_name'] }}, {{ $education['institution_location'] }}<br>
-                    {{ $education['education_starting_year'] }} - {{ $education['education_graduation_year'] }}<br>
-                    Achievements: {{ $education['education_achievements'] }}
-                </li>
-                @endif
-                @endforeach
-            </ul>
-        </div>
-
-        <div>
-            <h2>Experience</h2>
-            <ul>
-                @foreach ($resume['experiences'] as $experience)
-                @if ($experience['visible_on_cv'])
-                <li>
-                    <strong>{{ $experience['job_title'] }}</strong> at {{ $experience['company_name'] }}, {{ $experience['company_location'] }}<br>
-                    {{ $experience['start_date'] }} - {{ $experience['currently_working'] ? 'Present' : $experience['to_date'] }}<br>
-                    <em>{{ $experience['designation'] }}, {{ $experience['department'] }}</em><br>
-                    Responsibilities:
-                    <ul>
-                        <li>{{ $experience['responsibilities'] }}</li>
-                    </ul>
-                    Expertises:
-                    <ul>
-                        @foreach ($experience['expertises'] as $expertise)
-                        <li>{{ $expertise['name'] }}: {{ $expertise['months'] }} months</li>
-                        @endforeach
-                    </ul>
-                </li>
-                @endif
-                @endforeach
-            </ul>
-        </div>
-
-        <div>
-            <h2>Skills</h2>
-            <ul>
-                @foreach ($resume['skills'] as $skill)
-                <li>{{ $skill['name'] }} - Rating: {{ $skill['rating'] }}/5</li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
+    </main>
 </body>
 
 </html>
