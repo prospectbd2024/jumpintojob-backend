@@ -129,8 +129,8 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function resumes(): HasMany
+    public function profile(): HasMany
     {
-        return $this->hasMany(Resume::class);
+        return $this->hasMany(Profile::class);
     }
 }

@@ -14,7 +14,7 @@ use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\PasswordResetController;
 use App\Http\Controllers\api\v1\SkillsController;
 use App\Http\Controllers\api\v1\TemplateController;
-use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -88,10 +88,10 @@ Route::middleware('auth:sanctum')->group(function () {
         });
 
         Route::middleware('isJobSeeker')->prefix('profile')->group(function () {
-            Route::get('', [ResumeController::class, 'index']);
-            Route::post('store', [ResumeController::class, 'store']);
-            Route::get('show/{id}', [ResumeController::class, 'show']);
-            Route::put('update/{id}', [ResumeController::class, 'update']);
+            Route::get('', [ProfileController::class, 'index']);
+            Route::post('store', [ProfileController::class, 'store']);
+            Route::get('show/{userId}', [ProfileController::class, 'show']);
+            Route::put('update/{id}', [ProfileController::class, 'update']);
         });
     });
 });

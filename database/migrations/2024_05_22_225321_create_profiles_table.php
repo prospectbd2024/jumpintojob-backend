@@ -11,24 +11,16 @@ return new class extends Migration {
     public function up(): void
     {
         // create schema for mongodb connection
-        Schema::connection('mongodb')->create('resumes', function (Blueprint $collection) {
+        Schema::connection('mongodb')->create('profiles', function (Blueprint $collection) {
             $collection->id();
             $collection->index('user_id');
-            $collection->string('name');
-            $collection->string('email');
-            $collection->string('phone');
-            $collection->string('address');
-            $collection->string('city');
-            $collection->string('state');
-            $collection->string('zip');
-            $collection->string('country');
-            $collection->string('objective');
+            $collection->string('personal_information');
             $collection->json('experience');
             $collection->json('education');
             $collection->json('skills');
             $collection->json('languages');
             $collection->json('hobbies');
-            $collection->json('references');
+            $collection->json('others');
             $collection->timestamps();
         });
 
@@ -39,6 +31,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('profiles');
     }
 };

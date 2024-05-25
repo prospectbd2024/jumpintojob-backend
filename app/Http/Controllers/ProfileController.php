@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Resume;
+use App\Models\Profile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use MongoDB\Laravel\Eloquent\Casts\ObjectId;
 
-class ResumeController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): Collection
     {
-        return (new Resume)->where('user_id', auth()->id())->get();
+        return (new Profile)->where('user_id', auth()->id())->get();
     }
 
 
@@ -26,11 +26,11 @@ class ResumeController extends Controller
     {
         // Validate request
         $request->validate([
-            'json_payload' => 'required|array'
+            'payload' => 'required|array'
         ]);
 
         // Create a new resume document
-        $resume = new Resume();
+        $resume = new Profile();
         $resume->user_id = auth()->id();
         $resume->payload = $request->payload;
         $resume->save();
@@ -41,9 +41,9 @@ class ResumeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|array|Resume|null
+    public function show($userId): Collection|array|Profile|null
     {
-        return Resume::findOrFail($id);
+        return Profile::where('user_id', auth()->id())->get();
     }
 
     /**
@@ -54,11 +54,11 @@ class ResumeController extends Controller
     {
         // Validate request
         $request->validate([
-            'json_payload' => 'required|array'
+            'payload' => 'required|array'
         ]);
 
         // Create a new resume document
-        $resume = (new Resume)->findOrFail($id);
+        $resume = (new Profile)->findOrFail($id);
         $resume->payload = $request->payload;
         $resume->save();
         return response()->json(['message' => 'profile document updated successfully']);
