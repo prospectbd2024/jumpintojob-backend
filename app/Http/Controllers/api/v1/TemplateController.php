@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Template;
 use Illuminate\Http\Request;
-
+use App\Library\Actions\ResumeBuilder;
 class TemplateController extends Controller
 {
     /**
@@ -72,9 +72,11 @@ class TemplateController extends Controller
         // Render the Blade view to an HTML string
         // dd($request->template_id);
         $templateObject = Template::where('id',$request->template_id)->first();
-        $resume_data =$request->resume_data;
         $view_path = $templateObject->view_path;
-        $template =view($view_path , compact('resume_data'))->render();
+        $resume = new  ResumeBuilder($request);
+
+        $template =view($view_path , compact('resume'))->render();
+
         // Return the HTML string as part of the response
         return response()->json([
             'data' => [

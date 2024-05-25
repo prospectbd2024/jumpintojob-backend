@@ -184,30 +184,30 @@
 <body>
 
     <header>
-        <h2 class="header-title">{{ $resume_data['personalInformation']['firstName'] }} {{ $resume_data['personalInformation']['lastName'] }}</h2>
-        <div class="header-subtitle">{{ $resume_data['personalInformation']['title'] }}</div>
+        <h2 class="header-title">{{ $resume->personal_informations['firstName'] }} {{ $resume->personal_informations['lastName'] }}</h2>
+        <div class="header-subtitle">{{ $resume->personal_informations['title'] }}</div>
         <div class="contact-info">
             <div>
-                <i class="fa fa-phone contact-item"></i>{{$resume_data['personalInformation']['phone']}}
+                <i class="fa fa-phone contact-item"></i>{{$resume->personal_informations['phone']}}
             </div>
             <div>
-                <span class="contact-item">@</span>{{$resume_data['personalInformation']['email']}}
+                <span class="contact-item">@</span>{{$resume->personal_informations['email']}}
             </div>
             <div>
                 <i class="fa fa-map-marker contact-item"></i>  
-                {{ $resume_data['personalInformation']['currentAddress']['postalCode'] }},
-                {{ $resume_data['personalInformation']['currentAddress']['city'] }},
-                {{ $resume_data['personalInformation']['currentAddress']['state'] }},
-                {{ $resume_data['personalInformation']['currentAddress']['country'] }}
+                {{ $resume->personal_informations['currentAddress']['postalCode'] }},
+                {{ $resume->personal_informations['currentAddress']['city'] }},
+                {{ $resume->personal_informations['currentAddress']['state'] }},
+                {{ $resume->personal_informations['currentAddress']['country'] }}
             </div>
         </div>
     </header>
     <main>
         <div class="left-side">
-            <div class="experience-section">
+            <div class="experience-section {{ count($resume->experiences)==0 ? 'hide' : ''}}">
                 <h2>EXPERIENCE</h2>
                 <hr>
-                @foreach ($resume_data['experiences']  as $experience)
+                @foreach ($resume->experiences  as $experience)
                 <div class="{{$experience['visible_on_cv']? '' : 'hide' }}">
                     <h3>{{ $experience['job_title'] }}</h3>
                     <p class="highlight">{{ $experience['company_name']}}</p>
@@ -240,11 +240,11 @@
                 @endforeach
             </div>
 
-            <div class="education-section">
+            <div class="education-section {{ count($resume->educations)==0 ? 'hide' : ''}}">
                 <h2>EDUCATION</h2>
                 <hr>
 
-                @foreach  ($resume_data['educations']  as $education)
+                @foreach  ($resume->educations  as $education)
                 <div class=" {{$education['visible_on_cv']? '' : 'hide' }}"> 
                     <div class="education-container ">
                         <div >
@@ -268,12 +268,12 @@
                         </div>
                         <div class="education-gpa-container">
  
-                            <div style="font-size: 14px; text-align: center; border-left: 2px solid grey; padding-left: 15px;">
+                            {{-- <div style="font-size: 14px; text-align: center; border-left: 2px solid grey; padding-left: 15px;">
        
                                     <p>GPA</p>
                                      <span style="color: #d49548;">4.0</span>/4.0
            
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -285,68 +285,62 @@
         </div>
 
         <div class="right-side">
-            <div class="certificate-section">
+            <div class="certificate-section {{ count($resume->certificates)==0 ? 'hide' : ''}}" >
                 <h2>CERTIFICATION</h2>
                 <hr>
                 
-                @foreach ($resume_data['others'] as $other)
-                @if ($other['type'] =='Certificate')                    
+                @foreach ($resume->certificates as $certificate)              
                 <div>
-                    <h3 class="header-subtitle">{{$other['title']}}</h3>
-                    <p>{{$other['description']}}</p>
-                    <hr class="subsection-end-hr">
+                    <h3 class="header-subtitle">{{$certificate['title']}}</h3>
+                    <p>{{$certificate['description']}}</p>
+                    <hr class="subsection-end-hr {{ $loop->last ? '' : 'hide' }}">
                 </div>
-                @endif
-                    
                 @endforeach
             </div>
 
 
-            <div>
+            <div class="{{ count($resume->publications)==0 ? 'hide' : ''}}">
                 <h2>PUBLICATIONS</h2>
                 <hr>
                 
-                @foreach ($resume_data['others'] as $other)
-                @if ($other['type'] =='Publication')      
+                @foreach ($resume->publications as $publication)                    
                 <div>
-                    <h3 class="publication-subtitle">Project: {{$other['title']}}</h3>
-                    <p class="header-subtitle">{{$other['journal']}}</p>
-                    <p><span> <i class="fa fa-calendar"></i> {{$other['date']}}</span></p>
-                    <p>{{$other['abstract']}}</p>
-                    <hr class="subsection-end-hr">
+                    <h3 class="publication-subtitle">Project: {{$publication['title']}}</h3>
+                    <p class="header-subtitle">{{$publication['journal']}}</p>
+                    <p><span> <i class="fa fa-calendar"></i> {{$publication['date']}}</span></p>
+                    <p>{{$publication['abstract']}}</p>
+                    <hr class="subsection-end-hr {{ $loop->last ? 'hide' : '' }}">
                 </div>
-
-                @endif
                 @endforeach
 
 
             </div>
 
-            <div class="skills-container">
+            <div class="skills-container {{ count($resume->skills)==0 ? 'hide' : ''}}">
                 <h2>SKILLS</h2>
                 <hr>
                 <ul>
-                     @foreach ($resume_data['skills'] as $skill)
+                     @foreach ($resume->skills as $skill)
                          <li>{{$skill['name']}}</li>
                      @endforeach
                 </ul>
 
             </div>
-            <div class="skills-container">
+            <div class="skills-container {{ count($resume->languages)==0 ? 'hide' : ''}}">
                 <h2>LANGUAGES</h2>
                 <hr>
                 <ul>
-                     @foreach ($resume_data['languages'] as $language)
+                     @foreach ($resume->languages as $language)
                          <li>{{$language['language']}}</li>
                      @endforeach
                 </ul>
 
             </div>
-            <div class="skills-container">
+            <div class="skills-container {{ count($resume->hobbies)==0 ? 'hide' : ''}}">
                 <h2>HOBBIES</h2>
                 <hr>
                 <ul>
-                     @foreach ($resume_data['hobbies'] as $hobby)
+                     @foreach ($resume->hobbies as $hobby)
                          <li>{{$hobby['name']}}</li>
                      @endforeach
                 </ul>
@@ -354,16 +348,16 @@
             </div>
 
 
-            <div>
+            <div  class="{{ count($resume->others)==0 ? 'hide' : ''}}">
                 <h2>OTHERS</h2>
-                @foreach ($resume_data['others'] as $other)
-                @if ($other['type'] =='Other')      
+                @foreach ($resume->others as $other)
+
                 <div>
                     <h3 class="publication-subtitle"> {{$other['title']}}</h3>
                     <p style="margin-top: 2px;"> {{$other['description']}}</p>
-                    <hr class="subsection-end-hr">
+                    <hr class="subsection-end-hr {{ $loop->last ? 'hide' : '' }}">
                 </div>
-                @endif
+
                 @endforeach
             </div>
 

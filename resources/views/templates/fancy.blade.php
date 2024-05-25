@@ -73,10 +73,15 @@
             padding-top: 5px;
             padding-bottom: 10px;
         }
+        .main-section{
+            display: flex;
+            gap: 60px 0px;
+            flex-direction: column;
+        }
         .main-section .details-container {
             display: flex;
-            gap: 0px 60px;
-            margin-bottom: 20px;
+            gap: 0px 80px;
+       
             
         }
         .main-section .details-container:nth-of-type(1) {
@@ -128,6 +133,9 @@
             color: grey;
             
         }
+        .hide{
+            display: none;
+        }
         
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -140,10 +148,10 @@
                 <img src="https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg"  alt="profile">
             </div>
             <div>
-                <p class="first-name">DAVID</h2>
-                <p class="last-name"  >ANDERON</h2>
-                <p class="title">WEB DESIGNER</p>
-                <p class="contact-info">P: +048 253 8568 58554 | E: youremail@gmail.com</p>
+                <p class="first-name">{{$resume->personal_informations['firstName'] }}</h2>
+                <p class="last-name"  >{{$resume->personal_informations['lastName'] }}</h2>
+                <p class="title"> {{$resume->personal_informations['title'] }}</p>
+                <p class="contact-info">P: {{$resume->personal_informations['phone'] }}| E: {{$resume->personal_informations['email'] }}</p>
             </div>
         </div>
         <div>
@@ -156,19 +164,17 @@
         <h1>RESUME</h1> 
     </sidebar>
     <main class="main-section">
-        <div class="details-container">
+        <div class="details-container {{$resume->personal_informations['summary']==''?'hide': '' }}" >
             <div class="details-type">
                 <div>
                     PROFILE
                 </div>
             </div>
             <div class="details">
-               My Name is Isabella lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum hase been the industry's standard dummy text ever since the 1500s,
-               when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-               but also the leap into electronic typesetting, remaining essentially unchanged.
+                {{$resume->personal_informations['summary'] }}
             </div>
         </div>
-        <div class="details-container">
+        <div class="details-container {{count($resume->educations) ==0 ?'hide': '' }}">
             <div class="details-type">
                 <div>
                     EDUCATION
@@ -177,25 +183,23 @@
             </div>
             <div class="details">
                 <ul>
+                    @foreach ($resume->educations as $education)
+                        
+                    @endforeach
                     <li>
-                        <h4>DEGREE EDUCATION</h4>
-                        <p>JUNE 2008 - DEC 2014</p>
-                        <p>Lorem ipsum dolor sit. amet consectet gelit.</p>
-                    </li>
-                    <li>
-                        <h4>HIGHER SECIBDARY</h4>
-                        <p>JUNE 2008 - DEC 2014</p>
-                        <p>Lorem ipsum dolor sit. amet consectet gelit.</p>
-                    </li>
-                    <li>
-                        <h4>HIGH SCHOOL</h4>
-                        <p>JUNE 2008 - DEC 2014</p>
-                        <p>Lorem ipsum dolor sit. amet consectet gelit.</p>
+                        <h4>{{$education['field_study']}}</h4>
+                        <p>
+                        @php
+                            echo   $education['education_starting_year'];
+                            echo   $education['education_graduation_year']!=""?$education['education_graduation_year']:"- Present";
+                        @endphp
+                        </p>
+                        <p>{{ $education['education_achievements']}}</p>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="details-container">
+        <div class="details-container {{count($resume->experiences) ==0 ?'hide': '' }}">
             <div class="details-type"> 
                 <div>
                     WORK EXPERIENCE
@@ -203,17 +207,101 @@
             </div>
             <div class="details">
                 <ul>
+                    @foreach ($resume->experiences as $experience)                        
                     <li>
-                        <h4>ENTER YOUR POSITION TITLE HERE</h4>
-                        <p>Company Name / 2014 - Present</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, nam fugiat. Sit odio debitis ex amet architecto explicabo sunt ipsa.</p>
+                        <h4>{{  $experience['company_name'] }}</h4>
+                        <p>{{  $experience['job_title'] }} /                       
+                        @php
+                            echo $experience['start_date'] ;
+                            echo  $experience['currently_working'] ? '- Present' : $experience['to_date']; 
+                        @endphp
+                        </p>
+                        <p>{{$experience['responsibilities']}}</p>
+                        <p>
+                            @foreach ($experience['expertises'] as $expertise)
+                                     
+                            <li>
+                                {{$expertise['name']}} for {{$expertise['months']}} months
+                            </li>   
+                            @endforeach
+                        </p>
 
                     </li>
+                    @endforeach
+                </ul>
+
+            </div>
+        </div>
+        <div class="details-container {{count($resume->skills) ==0 ?'hide': '' }}">
+            <div class="details-type"> 
+                <div>
+                    SKILLS
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    @foreach ($resume->skills as $skill)                        
                     <li>
-                        <h4>ENTER YOUR POSITION TITLE HERE</h4>
-                        <p>Company Name / 2014 - Present</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, nam fugiat. Sit odio debitis ex amet architecto explicabo sunt ipsa.</p>
+                       <h3>{{$skill['name']}}</h3> 
                     </li>
+                    @endforeach
+                </ul>
+
+            </div>
+        </div>
+        <div class="details-container {{count($resume->languages) ==0 ?'hide': '' }}">
+            <div class="details-type"> 
+                <div>
+                    LANGUAGES
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    @foreach ($resume->languages as $language) 
+                    <li>                        
+                        <h3>
+    
+                            {{$language['language']}}
+                        </h3>
+                    </li>                      
+                    @endforeach
+                </ul>
+
+            </div>
+        </div>
+        <div class="details-container {{count($resume->hobbies) ==0 ?'hide': '' }}">
+            <div class="details-type"> 
+                <div>
+                    HOBBIES
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    @foreach ($resume->hobbies as $hobby) 
+                    <li>    
+                        <h3>
+                            {{$hobby['name']}}
+                        </h3>
+                    </li>                       
+                    @endforeach
+                </ul>
+
+            </div>
+        </div>
+        <div class="details-container {{count($resume->certificates) ==0 ?'hide': '' }}">
+            <div class="details-type"> 
+                <div>
+                    Certificates
+                </div>
+            </div>
+            <div class="details">
+                <ul>
+                    @foreach ($resume->certificates as $certificate)                        
+                    <li>
+                        <h3>{{$certificate['title']}}</h3>
+                        <p>{{ $certificate['description']}}</p>
+                    </li>
+                    @endforeach
                 </ul>
 
             </div>
