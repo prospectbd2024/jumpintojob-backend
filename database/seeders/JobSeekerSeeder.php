@@ -22,13 +22,53 @@ class JobSeekerSeeder extends Seeder
             'remember_token' => Str::random(10),
             'user_plan_id' => 2,
             'user_type' => 'job_seeker',
-
         ]);
-
         Address::create([
             'user_id' => $user->id,
             'address' => 'Dhaka',
             'address_type' => 'permanent',
         ]);
+        $profileResource = [
+            'status' => 'done',
+            'educations' =>[],
+            'experiences' => [],
+            'skills' => [],
+            'languages' => [],
+            'hobbies' => [],
+            'personalInformation' => [
+                'title' => "",
+                'firstName' =>$user->first_name,
+                'userType' => $user->user_type,
+                'lastName' => $user->last_name,
+                'avatar' => $user->profile->avatar,
+                'cvProfileImage' => $user->cv_profile_image,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'currentAddress' => [
+                    'city' => $user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postalCode' =>$user->postal_code,
+                ],
+                'permanentAddress' => [
+                    'city' =>$user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postalCode' => $user->postal_code,
+                ],
+                'dateOfBirth' => null,
+                'gender' => null,
+                'nationality' => null,
+                'religion' => null,
+                'maritalStatus' => null,
+                'summary' => null,
+                'mediaLinks' => [],
+            ],
+            'others' => [],
+        ];
+
+   
+    \App\http\Controllers\ProfileController::create( $profileResource,$user->id );
+
     }
 }
