@@ -492,9 +492,9 @@ class AuthController extends Controller
             'hobbies' => [],
             'personalInformation' => [
                 'title' => "",
-                'firstName' =>$user->firstName,
-                'userType' => $user->userType,
-                'lastName' => $user->lastName,
+                'firstName' =>$user->first_name,
+                'userType' => $user->user_type,
+                'lastName' => $user->last_name,
                 'avatar' => $user->avatar,
                 'cvProfileImage' => $user->cv_profile_image,
                 'email' => $user->email,
@@ -523,7 +523,7 @@ class AuthController extends Controller
         ];
         
    
-    \App\http\Controllers\ProfileController::create( $profileResource,$user->user_id );
+    \App\http\Controllers\ProfileController::create( $profileResource,$user->id );
 
 
     }
