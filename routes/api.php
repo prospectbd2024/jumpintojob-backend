@@ -88,7 +88,7 @@ Route::middleware('auth:sanctum')->group(function () {
         });
 
         Route::middleware('isJobSeeker')->prefix('profile')->group(function () {
-            Route::get('show/{userId}', [ProfileController::class, 'show']);
+            Route::get('/{userId}', [ProfileController::class, 'show']);
             Route::put('update/{id}', [ProfileController::class, 'update']);
         });
     });
