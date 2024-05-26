@@ -5,18 +5,18 @@ services:
     volumes:
       - .:/app
     ports:
-      - "9003:9003" #xdebug port
+      - "9003:9003" # xdebug port
     working_dir: /app
     image: laravel/app
     restart: unless-stopped
 
   queue:
     depends_on:
-     - backend
-     - mariadb
-     - nginx
+      - backend
+      - mariadb
+      - nginx
     image: laravel/app
-    command: php artisan queue:work --sleep=3 --tries=3   --timeout=120
+    command: php artisan queue:work --sleep=3 --tries=3 --timeout=120
     working_dir: /app
     volumes:
       - .:/app
@@ -49,18 +49,43 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     ports:
-      - 9001:80
+      - "9001:80"
     depends_on:
       - mariadb
+      - backend
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mariadb
       - PMA_USER=root
       - PMA_PASSWORD=app
     restart: unless-stopped
-    
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - mongodb-data:/data/db
+    restart: unless-stopped
+
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    restart: unless-stopped
+
+volumes:
+  mongodb-data:
+
 networks:
   default:
     name: backend-network
-    
-

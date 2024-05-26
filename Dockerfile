@@ -20,9 +20,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN pecl install redis
 RUN docker-php-ext-enable redis
 
-# Install Mongodb
-RUN pecl install mongodb
-RUN docker-php-ext-enable mongodb
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 RUN chown -R www-data:www-data /app/storage/logs
