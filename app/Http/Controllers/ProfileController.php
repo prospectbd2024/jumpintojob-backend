@@ -37,9 +37,17 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($userId): Collection|array|Profile|null
-    {
-        return Profile::where('user_id', auth()->id())->get();
+    public function show($userId)
+    {   
+
+        if(auth()->user()->id !== (int) $userId){
+            return response()->json([
+                'status' => false,
+                'message' => 'User does not have permission'
+            ]);
+        }
+
+        return Profile::where('user_id',(int) $userId)->firstOrFail();
     }
 
     /**
@@ -54,7 +62,7 @@ class ProfileController extends Controller
         ]);
 
         // Create a new resume document
-        $resume = (new Profile)->findOrFail($id);
+        $resume = (new Profile)->where('user_id',(int) $id)->firstOrFail();
         $resume->payload = $request->payload;
         $resume->save();
         return response()->json(['message' => 'profile document updated successfully']);
