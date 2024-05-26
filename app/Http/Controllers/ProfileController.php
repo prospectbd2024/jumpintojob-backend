@@ -22,18 +22,14 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): JsonResponse
+    public static function create($profileResource,$user_id): JsonResponse
     {
-        // Validate request
-        $request->validate([
-            'payload' => 'required|array'
-        ]);
 
         // Create a new resume document
-        $resume = new Profile();
-        $resume->user_id = auth()->id();
-        $resume->payload = $request->payload;
-        $resume->save();
+        $profile = new Profile();
+        $profile->user_id = $user_id;
+        $profile->payload = $profileResource;
+        $profile->save();
 
         return response()->json(['message' => 'profile document stored successfully']);
     }

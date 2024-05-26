@@ -54,7 +54,9 @@ class AuthController extends Controller
 
 
         // Create token
-        $token = $this->authService->getUser()->createToken('tokens');
+        $user = $this->authService->getUser();
+        $this->createProfile( $user);
+        $token = $user->createToken('tokens');
 
         return response()->json([
             'result' => true,
@@ -479,4 +481,53 @@ class AuthController extends Controller
         $login_resource =  new LoginResource($user);
         return $login_resource;
     }
-}
+
+    public function createProfile($user){
+        $profileResource = [
+            'status' => 'done',
+            'educations' =>[],
+            'experiences' => [],
+            'skills' => [],
+            'languages' => [],
+            'hobbies' => [],
+            'personalInformation' => [
+                'title' => "",
+                'firstName' =>$user->firstName,
+                'userType' => $user->userType,
+                'lastName' => $user->lastName,
+                'avatar' => $user->avatar,
+                'cvProfileImage' => $user->cv_profile_image,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'currentAddress' => [
+                    'city' => $user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postalCode' =>$user->postal_code,
+                ],
+                'permanentAddress' => [
+                    'city' =>$user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postalCode' => $user->postal_code,
+                ],
+                'dateOfBirth' => null,
+                'gender' => null,
+                'nationality' => null,
+                'religion' => null,
+                'maritalStatus' => null,
+                'summary' => null,
+                'mediaLinks' => [],
+            ],
+            'others' => [],
+        ];
+        
+   
+    \App\http\Controllers\ProfileController::create( $profileResource,$user->user_id );
+
+
+    }
+
+
+    }
+
