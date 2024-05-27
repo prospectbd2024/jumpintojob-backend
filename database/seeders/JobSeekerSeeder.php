@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -30,28 +31,28 @@ class JobSeekerSeeder extends Seeder
         ]);
         $profileResource = [
             'status' => 'done',
-            'educations' =>[],
+            'educations' => [],
             'experiences' => [],
             'skills' => [],
             'languages' => [],
             'hobbies' => [],
             'personalInformation' => [
                 'title' => "",
-                'firstName' =>$user->first_name,
+                'firstName' => $user->first_name,
                 'userType' => $user->user_type,
                 'lastName' => $user->last_name,
-                'avatar' => $user->profile->avatar,
-                'cvProfileImage' => $user->cv_profile_image,
+                'avatar' => fake()->imageUrl(200, 200, 'people', true),
+                'cvProfileImage' => fake()->imageUrl(200, 200, 'people', true),
                 'email' => $user->email,
                 'phone' => $user->phone,
                 'currentAddress' => [
                     'city' => $user->city,
                     'state' => $user->state,
                     'country' => $user->country,
-                    'postalCode' =>$user->postal_code,
+                    'postalCode' => $user->postal_code,
                 ],
                 'permanentAddress' => [
-                    'city' =>$user->city,
+                    'city' => $user->city,
                     'state' => $user->state,
                     'country' => $user->country,
                     'postalCode' => $user->postal_code,
@@ -67,8 +68,9 @@ class JobSeekerSeeder extends Seeder
             'others' => [],
         ];
 
-   
-    \App\http\Controllers\ProfileController::create( $profileResource,$user->id );
-
+        (new Profile)->create([
+            'user_id' => $user->id,
+            'payload' => $profileResource
+        ]);
     }
 }
