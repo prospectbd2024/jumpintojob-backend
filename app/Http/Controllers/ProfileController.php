@@ -25,10 +25,7 @@ class ProfileController extends Controller
     
         $profile = Profile::where('user_id', (int) $userId)->firstOrFail();
     
-        return response()->json([
-            'status' => true,
-            'data' => $profile
-        ]);
+        return $profile;
     }
     /**
      * Update the specified resource in storage.
