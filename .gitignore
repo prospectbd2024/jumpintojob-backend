@@ -25,3 +25,7 @@ _update.cmd
 /_PipelineMapping
 /_temp
 /_tool
+/.phpstorm.meta.php
+/_ide_helper.php
+/_ide_helper_models.php
+/dd.json

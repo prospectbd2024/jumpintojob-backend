@@ -7,43 +7,23 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use MongoDB\Laravel\Eloquent\Casts\ObjectId;
+use MongoDB\Laravel\Eloquent\Model;
 
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index(): Collection
-    {
-        return (new Profile)->where('user_id', auth()->id())->get();
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): JsonResponse
-    {
-        // Validate request
-        $request->validate([
-            'payload' => 'required|array'
-        ]);
-
-        // Create a new resume document
-        $resume = new Profile();
-        $resume->user_id = auth()->id();
-        $resume->payload = $request->payload;
-        $resume->save();
-
-        return response()->json(['message' => 'profile document stored successfully']);
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show($userId): Collection|array|Profile|null
+    public function show($userId): Model|JsonResponse|Profile
     {
-        return Profile::where('user_id', auth()->id())->get();
+        if(auth()->id() !== (int) $userId){
+            return response()->json([
+                'status' => false,
+                'message' => 'User does not have permission'
+            ]);
+        }
+
+        return Profile::where('user_id',(int) $userId)->firstOrFail();
     }
 
     /**
@@ -57,10 +37,10 @@ class ProfileController extends Controller
             'payload' => 'required|array'
         ]);
 
-        // Create a new resume document
-        $resume = (new Profile)->findOrFail($id);
-        $resume->payload = $request->payload;
-        $resume->save();
+        // Create a new Profile document
+        $profile = (new Profile)->where('user_id',(int) $id)->firstOrFail();
+        $profile->payload = $request->payload;
+        $profile->save();
         return response()->json(['message' => 'profile document updated successfully']);
     }
 }

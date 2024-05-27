@@ -27,6 +27,18 @@ class Profile extends Model
 
     ];
 
+    /**
+     * Convert the model's attributes to an array.
+     * Wrap MongoDB data within 'data' key
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $data = parent::toArray();
+
+        return ['data' => $data];
+    }
+
 //    public function user()
 //    {
 //        return $this->belongsTo(User::class);

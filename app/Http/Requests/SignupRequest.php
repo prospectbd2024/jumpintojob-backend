@@ -17,8 +17,7 @@ class SignupRequest extends FormRequest
             'last_name' => 'required',
             'password' => [
                 'required',
-                Password::defaults(),
-                'confirmed'],
+                Password::defaults()],
             'user_type' => [
                 'nullable',
                 Rule::in(['job_seeker']),

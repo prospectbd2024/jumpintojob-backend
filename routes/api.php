@@ -41,6 +41,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('account-deletion', [AuthController::class, 'accountDeletion']);
 
+    Route::middleware('isJobSeeker')->prefix('profile')->group(function () {
+        Route::get('/{userId}', [ProfileController::class, 'show']);
+        Route::put('update/{id}', [ProfileController::class, 'update']);
+    });
+
     Route::middleware('isEmailVerified')->group(function () {
         //cv section
         Route::group(['prefix' => 'cv'], function () {
@@ -85,13 +90,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::put('update/{circular}', [CircularController::class, 'update'])->name('circular.update');
 
             Route::delete('destroy/{circular}', [CircularController::class, 'destroy'])->name('circular.destroy');
-        });
-
-        Route::middleware('isJobSeeker')->prefix('profile')->group(function () {
-            Route::get('', [ProfileController::class, 'index']);
-            Route::post('store', [ProfileController::class, 'store']);
-            Route::get('show/{userId}', [ProfileController::class, 'show']);
-            Route::put('update/{id}', [ProfileController::class, 'update']);
         });
     });
 });

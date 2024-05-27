@@ -6,6 +6,7 @@ use App\Jobs\api\v1\EmailVerificationJob;
 use App\Models\Address;
 use App\Models\Company;
 use App\Models\Employer;
+use App\Models\Profile;
 use App\Models\User;
 use App\Notifications\NewUserEmailVerificationNotification;
 use App\Notifications\WelcomeEmailNotification;
@@ -149,5 +150,14 @@ class AuthService
         $company->slug = $this->request->slug;
         $company->save();
         $this->company = $company;
+    }
+
+    // Create a new profile document for jobSeeker
+    public function createJobSeekerProfile(): void
+    {
+        $profile = new Profile();
+        $profile->user_id = $this->user->id;
+        $profile->payload = User::jobSeekerProfileResource($this->user);
+        $profile->save();
     }
 }
