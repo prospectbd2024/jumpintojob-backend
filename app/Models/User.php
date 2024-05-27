@@ -79,6 +79,48 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public static function jobSeekerProfileResource($user): array
+    {
+        return [
+            'status' => 'done',
+            'educations' => [],
+            'experiences' => [],
+            'skills' => [],
+            'languages' => [],
+            'hobbies' => [],
+            'personalInformation' => [
+                'title' => "",
+                'firstName' => $user->first_name,
+                'userType' => $user->user_type,
+                'lastName' => $user->last_name,
+                'avatar' => $user->avatar,
+                'cvProfileImage' => $user->cv_profile_image,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'currentAddress' => [
+                    'city' => $user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postalCode' => $user->postal_code,
+                ],
+                'permanentAddress' => [
+                    'city' => $user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postalCode' => $user->postal_code,
+                ],
+                'dateOfBirth' => null,
+                'gender' => null,
+                'nationality' => null,
+                'religion' => null,
+                'maritalStatus' => null,
+                'summary' => null,
+                'mediaLinks' => [],
+            ],
+            'others' => [],
+        ];
+    }
+
     public function generateVerificationCode(): void
     {
         $this->verification_code = rand(100000, 999999);

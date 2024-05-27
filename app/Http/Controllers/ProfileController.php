@@ -7,40 +7,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use MongoDB\Laravel\Eloquent\Casts\ObjectId;
+use MongoDB\Laravel\Eloquent\Model;
 
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index(): Collection
-    {
-        return (new Profile)->where('user_id', auth()->id())->get();
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public static function create($profileResource,$user_id): JsonResponse
-    {
-
-        // Create a new resume document
-        $profile = new Profile();
-        $profile->user_id = $user_id;
-        $profile->payload = $profileResource;
-        $profile->save();
-
-        return response()->json(['message' => 'profile document stored successfully']);
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show($userId)
-    {   
-
-        if(auth()->user()->id !== (int) $userId){
+    public function show($userId): Model|JsonResponse|Profile
+    {
+        if(auth()->id() !== (int) $userId){
             return response()->json([
                 'status' => false,
                 'message' => 'User does not have permission'
@@ -61,10 +37,10 @@ class ProfileController extends Controller
             'payload' => 'required|array'
         ]);
 
-        // Create a new resume document
-        $resume = (new Profile)->where('user_id',(int) $id)->firstOrFail();
-        $resume->payload = $request->payload;
-        $resume->save();
+        // Create a new Profile document
+        $profile = (new Profile)->where('user_id',(int) $id)->firstOrFail();
+        $profile->payload = $request->payload;
+        $profile->save();
         return response()->json(['message' => 'profile document updated successfully']);
     }
 }

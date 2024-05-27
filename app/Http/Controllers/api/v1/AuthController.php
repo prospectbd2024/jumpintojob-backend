@@ -50,13 +50,11 @@ class AuthController extends Controller
         $this->authService->setRequest($request);
         $this->authService->createJobSeeker();
         $this->authService->createAddress();
+        $this->authService->createJobSeekerProfile();
         $this->authService->sendVerificationCode('email');
 
-
         // Create token
-        $user = $this->authService->getUser();
-        $this->createProfile( $user);
-        $token = $user->createToken('tokens');
+        $token = $this->authService->getUser()->createToken('tokens');
 
         return response()->json([
             'result' => true,
@@ -276,7 +274,7 @@ class AuthController extends Controller
         // Update the authenticated user's information, including the avatar path if it exists
         $userData = $request->validated();
         if (isset($avatarPath)) {
-            $userData['avatar'] = 'storage/'.$avatarPath;
+            $userData['avatar'] = 'storage/' . $avatarPath;
         }
         // dd($userData['avatar']);
         auth()->user()->update($userData);
@@ -450,6 +448,7 @@ class AuthController extends Controller
             "message" => 'Your account deletion successfully done'
         ]);
     }
+
     public function socialSignIn(Request $request)
     {
         $userInfo = $request->userInfo['user'];
@@ -459,11 +458,11 @@ class AuthController extends Controller
         if (!$userInfo) {
             return response()->json(['result' => false, 'message' => 'User Not Found', 'user' => null]);
         }
-        $user_profile = (object)  $userInfo;
+        $user_profile = (object)$userInfo;
         $user = User::where('email', $user_profile->email)->first();
         if ($user) {
-            $login_resource =  new LoginResource($user);
-            return   $login_resource;
+            $login_resource = new LoginResource($user);
+            return $login_resource;
         }
         $user = new User;
         $user->user_plan_id = 1;
@@ -473,61 +472,15 @@ class AuthController extends Controller
         $user->avatar = $user_profile->image;
         $user->is_verified = 1;
         $user->password = Str::random(10);
-        $user->user_type =  $user_type;
+        $user->user_type = $user_type;
         $user->social_profile = json_encode($profile);
         $user->social_account = json_encode($account);
         $user->save();
         $user->createToken('tokens');
-        $login_resource =  new LoginResource($user);
+        $login_resource = new LoginResource($user);
         return $login_resource;
     }
 
-    public function createProfile($user){
-        $profileResource = [
-            'status' => 'done',
-            'educations' =>[],
-            'experiences' => [],
-            'skills' => [],
-            'languages' => [],
-            'hobbies' => [],
-            'personalInformation' => [
-                'title' => "",
-                'firstName' =>$user->first_name,
-                'userType' => $user->user_type,
-                'lastName' => $user->last_name,
-                'avatar' => $user->avatar,
-                'cvProfileImage' => $user->cv_profile_image,
-                'email' => $user->email,
-                'phone' => $user->phone,
-                'currentAddress' => [
-                    'city' => $user->city,
-                    'state' => $user->state,
-                    'country' => $user->country,
-                    'postalCode' =>$user->postal_code,
-                ],
-                'permanentAddress' => [
-                    'city' =>$user->city,
-                    'state' => $user->state,
-                    'country' => $user->country,
-                    'postalCode' => $user->postal_code,
-                ],
-                'dateOfBirth' => null,
-                'gender' => null,
-                'nationality' => null,
-                'religion' => null,
-                'maritalStatus' => null,
-                'summary' => null,
-                'mediaLinks' => [],
-            ],
-            'others' => [],
-        ];
-        
-   
-    \App\http\Controllers\ProfileController::create( $profileResource,$user->id );
 
-
-    }
-
-
-    }
+}
 
