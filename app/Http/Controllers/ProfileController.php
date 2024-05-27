@@ -22,10 +22,14 @@ class ProfileController extends Controller
                 'message' => 'User does not have permission'
             ]);
         }
-
-        return Profile::where('user_id',(int) $userId)->firstOrFail();
+    
+        $profile = Profile::where('user_id', (int) $userId)->firstOrFail();
+    
+        return response()->json([
+            'status' => true,
+            'data' => $profile
+        ]);
     }
-
     /**
      * Update the specified resource in storage.
      */
