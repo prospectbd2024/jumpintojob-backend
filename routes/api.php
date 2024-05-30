@@ -99,14 +99,13 @@ Route::prefix('circular')->group(function () {
     Route::get('/', [CircularController::class, 'index'])->name('circular.index');
     Route::get('featured-jobs', [CircularController::class, 'featuredCircular'])->name('circular.featured');
     Route::get('show/{id}', [CircularController::class, 'show'])->name('circular.getCircular');
+    Route::get('{company}/{slug}', [CircularController::class, 'getCircular'])->name('circular.show');
 
 });
 Route::prefix('companies')->group(function () {
     Route::get('/', [CompanyController::class, 'index'])->name('company.list');
     Route::get('featured', [CompanyController::class, 'featuredCompanies'])->name('company.featured');
-
-    Route::get('/{slug}/circulars', [CircularController::class, 'getCircular'])->name('company.circulars');
-    Route::get('/{slug}', [CircularController::class, 'getCompanyCirculars'])->name('circular.companyCirculars');
+    Route::get('/{slug}/circulars', [CircularController::class, 'getCompanyCirculars'])->name('circular.companyCirculars');
 });
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.list');
 Route::get('languages/search/{searchKey}', [LanguagesController::class, 'search'])->name('languages.search');
