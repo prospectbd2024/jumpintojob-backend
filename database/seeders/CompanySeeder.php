@@ -30,7 +30,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Oracle Corporation',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_Corporation_logo.svg/1280px-Oracle_Corporation_logo.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg',
                 'email' => 'contact@oracle.com',
                 'phone' => '+1 (650) 506-7000',
                 'cover_image' => 'https://images.idgesg.net/images/article/2020/09/oracle-cloud-platform-nocloud-100857485-large.jpg',
@@ -44,7 +44,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Adobe Inc.',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Adobe_Systems_logo_and_wordmark.svg/1200px-Adobe_Systems_logo_and_wordmark.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg',
                 'email' => 'contact@adobe.com',
                 'phone' => '+1 (408) 536-6000',
                 'cover_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Adobe_HQ_building.jpg/1200px-Adobe_HQ_building.jpg',
@@ -58,7 +58,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Salesforce.com, Inc.',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Salesforce_logo.svg/1200px-Salesforce_logo.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg',
                 'email' => 'contact@salesforce.com',
                 'phone' => '+1 (415) 901-7000',
                 'cover_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Salesforce_Tower%2C_San_Francisco.jpg/1200px-Salesforce_Tower%2C_San_Francisco.jpg',
@@ -72,7 +72,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'SAP SE',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/1280px-SAP_2011_logo.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg',
                 'email' => 'contact@sap.com',
                 'phone' => '+1 (800) 872-1727',
                 'cover_image' => 'https://images.idgesg.net/images/article/2019/01/04_SAP_HQ_Plastic.jpg',
@@ -86,7 +86,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Grameenphone Ltd.',
-                'logo' => 'https://www.grameenphone.com/sites/all/themes/gp_corporate/logo.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/9/98/Grameenphone_Logo_GP_Logo.svg',
                 'email' => 'info@grameenphone.com',
                 'phone' => '+880 17 11 300 300',
                 'cover_image' => 'https://www.grameenphone.com/sites/default/files/2021-01/Banner-Main_V1_1_0.jpg',
@@ -100,7 +100,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'BRAC Bank Limited',
-                'logo' => 'https://www.bracbank.com/media/2769/logo.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/4/4c/BRAC_Bank_Limited_Logo.svg',
                 'email' => 'info@bracbank.com',
                 'phone' => '+880 2 883 3003',
                 'cover_image' => 'https://www.bracbank.com/media/2770/one-bank-web-banner-3-30042021.png',
@@ -114,7 +114,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'bKash Limited',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/en/4/48/BKash_Logo.svg',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/6/68/BKash_logo.svg',
                 'email' => 'info@bkash.com',
                 'phone' => '+880 192 556 6222',
                 'cover_image' => 'https://www.bkash.com/sites/default/files/2021-08/ONE%20Bkash%20-%20Comms%20Banner-1.png',
@@ -128,7 +128,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Square Pharmaceuticals Ltd.',
-                'logo' => 'https://squarepharma.com.bd/assets/images/logo.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/b/bb/Square_pharma80.png',
                 'email' => 'info@squarepharma.com',
                 'phone' => '+880 2 9859007',
                 'cover_image' => 'https://squarepharma.com.bd/assets/images/slider/HP-Slider-1.jpg',
@@ -142,7 +142,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Robi Axiata Limited',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/en/a/a2/Robi_Axiata_logo.svg',
+                'logo' => 'https://en.wikipedia.org/wiki/Robi_(company)#/media/File:Logo_of_Robi_Axiata.svg',
                 'email' => 'info@robi.com',
                 'phone' => '+880 1819-400-400',
                 'cover_image' => 'https://robi.com.bd/images/elementor-pro/thumbs/slide-1-149i4hh55an4gb3wgp6gdv.png',
@@ -156,7 +156,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Gojek',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gojek_logo.svg/1200px-Gojek_logo.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/1/18/Gojek_logo_2022.svg',
                 'email' => 'info@gojek.com',
                 'phone' => '+62 21 50258888',
                 'cover_image' => 'https://assets.gojekapi.com/assets/og_image-689a0b7ad02d06bbf6fbb1b375f4d39f0d5046078d93bcb37c38ad398ca588f2.png',
@@ -170,7 +170,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Traveloka',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Traveloka_logo_2019.svg/1200px-Traveloka_logo_2019.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/5/51/Traveloka_Primary_Logo.png',
                 'email' => 'info@traveloka.com',
                 'phone' => '+62 21 39730488',
                 'cover_image' => 'https://image4.owler.com/logo/traveloka_owler_20190410_175536_original.png',
@@ -184,7 +184,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Tokopedia',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Tokopedia_logo_2021.svg/1200px-Tokopedia_logo_2021.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Tokopedia.svg',
                 'email' => 'info@tokopedia.com',
                 'phone' => '+62 21 50505400',
                 'cover_image' => 'https://media-exp1.licdn.com/dms/image/C4D1BAQEji9EJfzA-Fw/feedshare-shrink_800-alternative/0/1614396121918?e=1637798400&v=beta&t=fT6yzvNZWBKTBWJ5OH_jNpWbvT9sGtLQuNf4KvbuMP4',
@@ -198,7 +198,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Bukalapak',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Bukalapak_logo.svg/1200px-Bukalapak_logo.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Bukalapak_%282020%29.svg',
                 'email' => 'info@bukalapak.com',
                 'phone' => '+62 21 12345678',
                 'cover_image' => 'https://image.freepik.com/free-vector/online-shop-promotion-banner-template_52683-55578.jpg',
@@ -212,7 +212,7 @@ class CompanySeeder extends Seeder
             ],
             [
                 'name' => 'Grab',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Grab_Logo.svg/1200px-Grab_Logo.svg.png',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/1/12/Grab_%28application%29_logo.svg',
                 'email' => 'info@grab.com',
                 'phone' => '+62 21 12345679',
                 'cover_image' => 'https://media-exp1.licdn.com/dms/image/C4D1BAQE-F11Mph0_gw/profile-displaybackgroundimage-shrink_200_800/0/1609940658152?e=1637193600&v=beta&t=zBbJ03y1rKfykZZjmOw4QeQKTdBpVf2R-ihYl8ygav4',

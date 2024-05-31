@@ -21,11 +21,20 @@ class CircularController extends Controller
      *
      * @return CircularResourceCollection
      */
-    public function index(): CircularResourceCollection
+    public function index() : array 
     {
-        return CircularResourceCollection::make(Circular::with('category', 'employer')->latest()->paginate());
+        $circulars = Circular::with('category', 'employer')->latest()->paginate(10);
+        return [
+            'data' => CircularResourceCollection::make($circulars),
+            'pagination' => [
+                'currentPage' => $circulars->currentPage(),  // Correct method name
+                'totalPages' => $circulars->lastPage(),      // Correct method name
+                'perPage' => $circulars->perPage(),          // Correct method name
+                'total' => $circulars->total(),              // Total items available
+            ]
+        ];
     }
-    public function search(Request $request): CircularResourceCollection
+    public function search(Request $request): array
 {
     // Retrieve the search key and location from the request
     $searchKey = $request->searchKey;
@@ -53,10 +62,18 @@ class CircularController extends Controller
     }
     
     // Execute the query with pagination
-    $circulars = $query->latest()->paginate();
+    $circulars = $query->latest()->paginate(10);
     
     // Return the collection
-    return CircularResourceCollection::make($circulars);
+    return [
+        'data' => CircularResourceCollection::make($circulars),
+        'pagination' => [
+            'currentPage' => $circulars->currentPage(),  // Correct method name
+            'totalPages' => $circulars->lastPage(),      // Correct method name
+            'perPage' => $circulars->perPage(),          // Correct method name
+            'total' => $circulars->total(),              // Total items available
+        ]
+    ];
 }
 
     
