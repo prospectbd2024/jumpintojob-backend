@@ -9,6 +9,7 @@ use App\Http\Resources\Circular\CircularResource;
 use App\Http\Resources\Circular\CircularResourceCollection;
 use App\Models\Circular;
 use App\Models\Company;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,7 +25,41 @@ class CircularController extends Controller
     {
         return CircularResourceCollection::make(Circular::with('category', 'employer')->latest()->paginate());
     }
+    public function search(Request $request): CircularResourceCollection
+{
+    // Retrieve the search key and location from the request
+    $searchKey = $request->searchKey;
+    $location = $request->location ;
+    
+    // Build the query
+    $query = Circular::with('category', 'employer.company');
+    
+    // Add conditions based on searchKey and location if they are provided
+    if ($searchKey) {
+        $query->where(function ($query) use ($searchKey) {
+            $query->where('title', 'like', '%' . $searchKey . '%')
+                  ->orWhereHas('category', function ($query) use ($searchKey) {
+                      $query->where('category_name', 'like', '%' . $searchKey . '%');
+                  })
+                  ->orWhereHas('employer.company', function ($query) use ($searchKey) {
+                      $query->where('name', 'like', '%' . $searchKey . '%');
+                  })
+                  ->orWhere('description', 'like', '%' . $searchKey . '%');
+        });
+    }
+    
+    if ($location) {
+        $query->where('location', 'like', '%' . $location . '%');
+    }
+    
+    // Execute the query with pagination
+    $circulars = $query->latest()->paginate();
+    
+    // Return the collection
+    return CircularResourceCollection::make($circulars);
+}
 
+    
     /**
      * Display a listing of the featured circulars.
      *

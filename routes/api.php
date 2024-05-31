@@ -97,6 +97,7 @@ Route::middleware('auth:sanctum')->group(function () {
 // public section
 Route::prefix('circular')->group(function () {
     Route::get('/', [CircularController::class, 'index'])->name('circular.index');
+    Route::get('/search', [CircularController::class, 'search'])->name('circular.search');
     Route::get('featured-jobs', [CircularController::class, 'featuredCircular'])->name('circular.featured');
     Route::get('show/{id}', [CircularController::class, 'show'])->name('circular.getCircular');
     Route::get('{company}/{slug}', [CircularController::class, 'getCircular'])->name('circular.show');
