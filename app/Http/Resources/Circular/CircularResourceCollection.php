@@ -6,11 +6,9 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CircularResourceCollection extends ResourceCollection
 {
-    public function toArray(Request $request): array
+    public function toArray(Request $request) : ResourceCollection
     {
         $serial = 1;
-        return [
-            'data' => CircularResource::collection($this->collection),
-        ];
+        return CircularResource::collection($this->collection);
     }
 }

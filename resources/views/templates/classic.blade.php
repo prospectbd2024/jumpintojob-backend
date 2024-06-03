@@ -38,7 +38,7 @@
         .contact-info {
             display: flex;
             justify-content: space-between;
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .contact-item {
