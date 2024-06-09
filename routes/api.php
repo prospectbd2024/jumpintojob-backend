@@ -43,20 +43,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('isJobSeeker')->prefix('profile')->group(function () {
         Route::get('/{userId}', [ProfileController::class, 'show']);
+        Route::get('/{userId}/resume', [ProfileController::class, 'showResume']);
         Route::put('update/{id}', [ProfileController::class, 'update']);
     });
 
     Route::middleware('isEmailVerified')->group(function () {
-        //cv sectionf
-        Route::group(['prefix' => 'cv'], function () {
-            Route::post('create', [CVController::class, 'create']);
-            Route::put('update/{id}', [CVController::class, 'update']);
-            Route::delete('delete/{Cv}', [CVController::class, 'delete']);
-            Route::get('get', [CVController::class, 'getUserCvList']);
-            Route::get('get/all-details/{Cv}', [CVController::class, 'getCvDetails']);
-        });
-
-
         Route::prefix('company')->group(function () {
 
             Route::get('/', [CompanyController::class, 'index'])->name('company.index');
@@ -162,3 +153,7 @@ Route::prefix('templates')->group(function () {
 });
 
 
+Route::prefix('cv')->group(function (){
+    Route::get('/{cv_id}', [CVController::class,'getCV']);
+    Route::post('/store', [CVController::class,'saveCV'])->middleware(['auth:sanctum']);
+});

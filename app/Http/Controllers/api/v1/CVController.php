@@ -9,79 +9,57 @@ use App\Http\Requests\CvUpdateFormRequest;
 use App\Http\Resources\CVResource;
 use App\Http\Resources\CvResourceCollection;
 use App\Models\Cv;
+use App\Models\CV as ModelsCV;
 use App\Services\UserPlanService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CVController extends Controller
 {
-    private UserPlanService $userPlanService;
-
-    public function __construct(UserPlanService $userPlanService)
-    {
-        $this->userPlanService = $userPlanService;
-    }
-
-    public function create(CVRequest $request)
-    {
-        if ($this->userPlanService->hasReachedCvPlanLimit()) {
-            return errorResponse(
-                'plan_limit_reached',
-                'You have reached the Cv creation limit for the Free plan.',
-                403);
+     
+    public function getCV($cv_id) {
+        $cv = Cv::find($cv_id);
+        if (!$cv){
+            return  response()->json([
+                'status' => false,
+                'message' => 'CV not found'
+            ],Response::HTTP_NOT_FOUND);
         }
-
-        $cv = new Cv($request->validated());
-        $cv->save();
-        return CVResource::make($cv);
+        return  response()->json([
+        'status' => true,
+        'data' => $cv->cv_html,
+         ]);
     }
 
-    public function getUserCvList()
-    {
-        $cv = auth()->user()->cvs;
+    public function saveCV(Request $request){
+        $user_id = Auth::user()->id;
 
-        if ($cv->isEmpty()) {
-            throw new AppException('Cv collection is empty', Response::HTTP_NO_CONTENT);
+        $cv_html = $request->cv_html;
+        $cv = ModelsCV::where('user_id' , $user_id) ->first();
+        if(!$cv){
+            $cv = new ModelsCV();
         }
-        return new CvResourceCollection($cv);
+        $cv-> cv_html =  $cv_html;
+        $cv->user_id = $user_id;              
+        $cv->save();        
+             
+         
+        return response()->json(
+            ['status' => true,
+            'message' => 'CV saved',
+            'cv_html' =>   $cv->cv_html,  
+            ]
+        );
     }
 
-    public function getCvDetails(Cv $CV)
-    {
-        if ($CV->user_id !== auth()->id()) {
-            return errorResponse(
-                'unauthorized',
-                'You are not authorized to view this Cv.',
-                Response::HTTP_UNAUTHORIZED
-            );
-        }
-        return new CVResource($CV);
-    }
+    
 
-    public function update(CvUpdateFormRequest $request, $id)
-    {
-        $cvModel = Cv::where('id', $id)
-            ->where('user_id', Auth::id())
-            ->first();
+     
 
-        if (!$cvModel) {
-            return errorResponse(
-                'not_found',
-                'Cv not found.',
-                404);
-        }
+     
 
-        $cvModel->update($request->validated());
-
-        return new CVResource($cvModel);
-    }
-
-    public function delete(Cv $CV)
-    {
-        $CV->delete();
-
-        return response()->json();
-    }
+     
 }
