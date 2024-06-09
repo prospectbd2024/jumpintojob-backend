@@ -30,20 +30,27 @@ class CVController extends Controller
         }
         return  response()->json([
         'status' => true,
-        'data' => $cv->cv_html,
+        'data' => [ 
+            'cv_html' => $cv->cv_html,
+            'cv_id' => $cv->id
+    ],
          ]);
     }
 
     public function saveCV(Request $request){
+        
         $user_id = Auth::user()->id;
 
-        $cv_html = $request->cv_html;
+
+
         $cv = ModelsCV::where('user_id' , $user_id) ->first();
         if(!$cv){
             $cv = new ModelsCV();
         }
-        $cv-> cv_html =  $cv_html;
+        $cv-> cv_html = $request->cv_html;
         $cv->user_id = $user_id;              
+        $cv->profile_data =json_encode( $request->profile_data);              
+        $cv->applicant_status = $request->applicant_status;              
         $cv->save();        
              
          

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('c_v_s', function (Blueprint $table) {
+        Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->json('profile_data')->nullable();
-            $table->string('applicant_status')->nullable();
-            $table->longText('cv_html');
+            $table->string('job_id');
+            $table->string('cv_id');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('c_v_s');
+        Schema::dropIfExists('job_applications');
     }
 };

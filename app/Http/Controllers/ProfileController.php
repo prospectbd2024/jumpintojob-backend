@@ -68,7 +68,10 @@ class ProfileController extends Controller
         }
         return  response()->json([
         'status' => true,
-        'data' => $cv->cv_html,
+        'data' => [ 
+            'cv_html' => $cv->cv_html,
+            'cv_id' => $cv->id
+    ],
          ]);
  
     }
