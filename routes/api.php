@@ -124,12 +124,11 @@ Route::prefix('notification')->group(function () {
     Route::delete('destroy/{notification}', [NotificationController::class, 'destroy'])->name('notification.destroy');
 });
 
-Route::prefix('application')->group(function () {
-    Route::get('/', [ApplicationController::class, 'index'])->name('application.index');
-    Route::get('show/{slug}', [ApplicationController::class, 'show'])->name('application.show');
-    Route::post('store', [ApplicationController::class, 'store'])->name('application.store');
-    Route::put('update/{application}', [ApplicationController::class, 'update'])->name('application.update');
-    Route::delete('destroy/{application}', [ApplicationController::class, 'destroy'])->name('application.destroy');
+Route::prefix('applications')->group(function () {
+    Route::get('/{user_id}', [JobApplicationController::class, 'index'])->name('application.index')->middleware(['auth:sanctum']);
+   
+
+    Route::post('/apply-for-job', [JobApplicationController::class,'apply'])->middleware(['auth:sanctum']);
 });
 
 Route::prefix('candidate')->group(function () {
@@ -158,6 +157,4 @@ Route::prefix('cv')->group(function (){
     Route::get('/{cv_id}', [CVController::class,'getCV']);
     Route::post('/store', [CVController::class,'saveCV'])->middleware(['auth:sanctum']);
 });
-Route::prefix('apply-for-job')->group(function (){
-    Route::post('/', [JobApplicationController::class,'apply'])->middleware(['auth:sanctum']);
-});
+ 

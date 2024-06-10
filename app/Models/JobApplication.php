@@ -9,5 +9,5 @@ class JobApplication extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cv_id','job_id'];
+    protected $fillable = ['cv_id','job_id','forwarding_letter_type','forwarding_letter'];
 }
