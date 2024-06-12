@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CV;
 use App\Models\Profile;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -43,5 +45,34 @@ class ProfileController extends Controller
         $profile->payload = $request->payload;
         $profile->save();
         return response()->json(['message' => 'profile document updated successfully']);
+    }
+        /**
+     * Display the specified resource.
+     */
+    public function showResume($userId) 
+    {
+        if(auth()->id() !== (int) $userId){
+            return response()->json([
+                'status' => false,
+                'message' => 'User does not have permission'
+            ]);
+        }
+    
+        $cv = CV::where('user_id',$userId)->firstOrFail();
+        if (!$cv){
+            return  response()->json([
+                'status' => false,
+                'message' => 'CV not found',
+                
+            ]);
+        }
+        return  response()->json([
+        'status' => true,
+        'data' => [ 
+            'cv_html' => $cv->cv_html,
+            'cv_id' => $cv->id
+    ],
+         ]);
+ 
     }
 }
