@@ -19,7 +19,7 @@ class CompanySeeder extends Seeder
                 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1200px-Microsoft_logo.svg.png',
                 'email' => 'contact@microsoft.com',
                 'phone' => '+1 (425) 882-8080',
-                'cover_image' => 'https://www.microsoft.com/en-us/BrandStore/Content/images/hero/hero_brand_microsoft_1x.jpg',
+                'cover_image' => 'https://workforcesolutions.net/wp-content/uploads/2020/10/0001.jpg',
                 'description' => 'Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.',
                 'category_id' => 1, // Assuming category_id 1 corresponds to Technology
                 'location' => 'Redmond, Washington, United States',
@@ -47,7 +47,7 @@ class CompanySeeder extends Seeder
                 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg',
                 'email' => 'contact@adobe.com',
                 'phone' => '+1 (408) 536-6000',
-                'cover_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Adobe_HQ_building.jpg/1200px-Adobe_HQ_building.jpg',
+                'cover_image' => 'https://blog.adobe.com/en/publish/2023/03/08/media_19e2658fa72b04ede2f1092315544646387b22e39.png',
                 'description' => 'Adobe Inc. is an American multinational computer software company headquartered in San Jose, California. It has historically focused upon the creation of multimedia and creativity software products, with a more recent foray towards digital marketing software.',
                 'category_id' => 1, // Assuming category_id 1 corresponds to Technology
                 'location' => 'San Jose, California, United States',
@@ -61,7 +61,7 @@ class CompanySeeder extends Seeder
                 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg',
                 'email' => 'contact@salesforce.com',
                 'phone' => '+1 (415) 901-7000',
-                'cover_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Salesforce_Tower%2C_San_Francisco.jpg/1200px-Salesforce_Tower%2C_San_Francisco.jpg',
+                'cover_image' => 'https://i.insider.com/5c79b85fbde70f7918281273?width=1000&format=jpeg&auto=webp',
                 'description' => 'Salesforce.com, Inc. is an American cloud-based software company headquartered in San Francisco, California. It provides customer relationship management (CRM) service and also sells a complementary suite of enterprise applications focused on customer service, marketing automation, analytics, and application development.',
                 'category_id' => 1, // Assuming category_id 1 corresponds to Technology
                 'location' => 'San Francisco, California, United States',
