@@ -16,11 +16,12 @@
 
       .container {
         width: 800px;
-        height: 1000px;        
+        height: 1000px;
         margin: 20px auto;
         padding: 40px;
         background-color: #ffffff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* Add this */
       }
 
       header {
@@ -51,8 +52,11 @@
       }
 
       .social-media {
-        text-align: right;
+        text-align: center; /* Update this */
         margin-top: 20px;
+        position: absolute; /* Add this */
+        bottom: 20px; /* Add this */
+        width: 100%; /* Add this */
       }
 
       .social-media a {
@@ -355,4 +359,3 @@
     </div>
   </body>
 </html>
-
