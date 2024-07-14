@@ -13,6 +13,7 @@ class ResumeBuilder {
     public $projects;
     public $certificates;
     public $publications;
+    public $awards;
     public $others;
     public function __construct(Request $request) {
         $resume_data = $request->resume_data;
@@ -27,6 +28,7 @@ class ResumeBuilder {
         $this->certificates = $this->get_items($resume_data,"Certificate");
         $this->publications = $this->get_items($resume_data,"Publication");
         $this->others = $this->get_items($resume_data,"Other");
+        $this->awards = [];
     }
 
     private function get_items($resume_data,$type){
