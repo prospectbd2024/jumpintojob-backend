@@ -1,236 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        color: #698389;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
 
-        .container {
-            max-width: 800px;
-            background: #fff;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+      .container {
+        width: 800px;
+        height: 1000px;
+        margin: 20px auto;
+        padding: 50px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-        header {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f4b400;
-        }
+      header {
+        text-align: left;
+        margin-left: 28px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        position: relative;
+      }
 
-        .header-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #333;
-        }
+      h1 {
+        font-size: 36px;
+        margin: 0;
+      }
 
-        .header-subtitle {
-            font-size: 20px;
-            color: #f4b400;
-            margin-bottom: 10px;
-        }
+      hr {
+        border: 0;
+        height: 2px;
+        background-color: #11c8d5;
+        margin: 10px 0;
+      }
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-            color: #666;
-        }
+      .contact-info {
+        font-size: 14px;
+        margin-top: 20px;
+      }
 
-        .contact-info div {
-            margin: 0 10px;
-        }
+      .contact-info span {
+        margin: 0 10px;
+      }
 
-        .contact-info i {
-            color: #f4b400;
-            margin-right: 5px;
-        }
+      .social-media {
+        position: absolute;
+        top: 75%;
+        right: 20px;
+        transform: translateY(-50%);
+      }
 
-        .main-content {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
+      .social-media a {
+        text-decoration: none;
+        margin: 0 5px;
+        /* font-size: large; */
+      }
 
-        .main-content .section {
-            width: 48%;
-        }
+      .social-media i {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ff5722; /* Orange background */
+        color: white;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        h2 {
-            font-size: 24px;
-            color: #f4b400;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #f4b400;
-            padding-bottom: 5px;
-        }
+      .profile,
+      .experience,
+      .skills,
+      .education,
+      .projects {
+        margin-bottom: 20px;
+      }
 
-        h3 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 5px;
-        }
+      h2 {
+        font-size: 24px;
+        color: #5a959e;
+        position: relative; /* Positioning the element relatively for the ::after pseudo-element */
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        margin-left: 30px;
+      }
 
-        .highlight {
-            color: #f4b400;
-            font-weight: bold;
-        }
+      h2::after {
+        content: ""; /* This is necessary to generate a pseudo-element */
+        display: block;
+        width: 10%; /* Adjust this value to 20% or 30% as needed */
+        border-bottom: 2px solid #5a959e; /* Border style */
+        position: absolute;
+        left: 0; /* Align to the left */
+        bottom: 7px; /* Align to the bottom */
+      }
 
-        .experience, .education {
-            margin-bottom: 20px;
-        }
+      .content {
+        display: flex;
+        justify-content: space-between;
+      }
 
-        .experience .job-title, .education .degree {
-            font-weight: bold;
-            color: #333;
-        }
+      .left-column,
+      .right-column {
+        width: 48%;
+      }
 
-        .experience .company, .education .institution {
-            color: #666;
-        }
+      .experience .job,
+      .education .education-item,
+      .projects .project {
+        margin-bottom: 30px;
+        margin-left: 30px;
+      }
 
-        .experience .period, .education .period {
-            color: #999;
-        }
+      .experience .job h3,
+      .education .education-item h3,
+      .projects .project h3 {
+        font-size: 18px;
+        margin: 5px 0;
+      }
 
-        .experience ul, .education ul {
-            list-style: disc;
-            padding-left: 20px;
-            color: #555;
-        }
+      .experience .job p,
+      .education .education-item p,
+      .projects .project p {
+        font-size: 14px;
+        margin: 15px 0;
+      }
 
-        .skills, .languages, .hobbies, .certificates {
-            margin-bottom: 20px;
-        }
+      .experience .job ul,
+      .projects .project ul {
+        margin: 0;
+        padding-left: 20px;
+      }
 
-        .skills ul, .languages ul, .hobbies ul, .certificates ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-        }
+      .experience .job ul li,
+      .projects .project ul li {
+        font-size: 14px;
+        margin-bottom: 3px;
+        list-style-type: disc;
+      }
 
-        .skills li, .languages li, .hobbies li, .certificates li {
-            background: #f4f4f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 5px;
-            flex: 1 1 45%;
-            text-align: center;
-            color: #333;
+      .skills p {
+        font-size: 14px;
+      }
+
+      .blob-wrapper {
+        position: fixed; /* Position fixed to keep them in place */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Place behind all content */
+        overflow: hidden; /* Ensure no overflow */
+        pointer-events: none; /* Make sure the blobs are not interactive */
+      }
+      .blob {
+        width: 20vw;
+        height: 40vh;
+        position: absolute;
+      }
+      .blob-1 {
+        top: 15%;
+        left: 57%;
+        opacity: 0.5;
+      }
+      .blob-2 {
+        top: 70%;
+        left: 23%;
+        opacity: 0.2;
+      }
+      .blob-3 {
+        top: 20%;
+        left: 25%;
+        opacity: 0.2;
+      }
+      @media (max-width: 768px) {
+        .blob {
+          width: 60vw;
+          height: 60vh;
         }
+        .blob-1 {
+          top: 5%;
+          left: 5%;
+        }
+        .blob-2 {
+          top: 40%;
+          left: 20%;
+        }
+        .blob-3 {
+          top: 15%;
+          left: 55%;
+        }
+      }
+      @media (max-width: 480px) {
+        .blob {
+          width: 80vw;
+          height: 80vh;
+        }
+        .blob-1 {
+          top: 2%;
+          left: 2%;
+        }
+        .blob-2 {
+          top: 30%;
+          left: 10%;
+        }
+        .blob-3 {
+          top: 10%;
+          left: 35%;
+        }
+      }
     </style>
-    <title>Stylish CV</title>
-</head>
-
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1 class="header-title">{{ $resume->personal_informations['firstName'] }} {{ $resume->personal_informations['lastName'] }}</h1>
-            <div class="header-subtitle">{{ $resume->personal_informations['title'] }}</div>
-            <div class="contact-info">
-                <div><i class="fa fa-phone"></i>{{$resume->personal_informations['phone']}}</div>
-                <div><i class="fa fa-envelope"></i>{{$resume->personal_informations['email']}}</div>
-                <div><i class="fa fa-map-marker"></i>{{ $resume->personal_informations['currentAddress']['city'] }}, {{ $resume->personal_informations['currentAddress']['state'] }}, {{ $resume->personal_informations['currentAddress']['country'] }}</div>
-            </div>
-        </header>
-        <div class="main-content">
-            <div class="section">
-                <div class="experience">
-                    <h2>Experience</h2>
-                    @foreach ($resume->experiences as $experience)
-                    <div class="{{ $experience['visible_on_cv'] ? '' : 'hide' }}">
-                        <div class="job-title">{{ $experience['job_title'] }}</div>
-                        <div class="company">{{ $experience['company_name'] }}</div>
-                        <div class="period">
-                            <i class="fa fa-calendar"></i>
-                            @php
-                                echo $experience['start_date'];
-                                echo $experience['currently_working'] ? ' - Present' : ' - ' . $experience['to_date'];
-                            @endphp
-                        </div>
-                        <ul>
-                            <li>{{ $experience['responsibilities'] }}</li>
-                            <li>Expertise:
-                                <ul>
-                                    @foreach ($experience['expertises'] as $expertise)
-                                    <li>{{ $expertise['name'] }} for {{ $expertise['months'] }} months</li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="education">
-                    <h2>Education</h2>
-                    @foreach ($resume->educations as $education)
-                    <div class="{{ $education['visible_on_cv'] ? '' : 'hide' }}">
-                        <div class="degree">{{ $education['degree'] }} in {{ $education['field_study'] }}</div>
-                        <div class="institution">{{ $education['institution_name'] }}</div>
-                        <div class="period">
-                            <i class="fa fa-calendar"></i>
-                            @php
-                                echo $education['education_starting_year'];
-                                echo $education['education_graduation_year'] ? ' - ' . $education['education_graduation_year'] : ' - Present';
-                            @endphp
-                        </div>
-                        <ul>
-                            <li>{{ $education['education_achievements'] }}</li>
-                        </ul>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="section">
-                <div class="skills">
-                    <h2>Skills</h2>
-                    <ul>
-                        @foreach ($resume->skills as $skill)
-                        <li>{{ $skill['name'] }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="languages">
-                    <h2>Languages</h2>
-                    <ul>
-                        @foreach ($resume->languages as $language)
-                        <li>{{ $language['language'] }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="hobbies">
-                    <h2>Hobbies</h2>
-                    <ul>
-                        @foreach ($resume->hobbies as $hobby)
-                        <li>{{ $hobby['name'] }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="certificates">
-                    <h2>Certificates</h2>
-                    <ul>
-                        @foreach ($resume->certificates as $certificate)
-                        <li>{{ $certificate['title'] }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+      <header>
+        <h1>Your Name</h1>
+        <hr />
+        <div class="contact-info">
+          <span>Address</span>
+          <span>|</span>
+          <span>Phone</span>
+          <span>|</span>
+          <span>Email</span>
         </div>
-    </div>
-</body>
+        <div class="social-media">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+      </header>
 
+      <section class="profile">
+        <h2>Professional Profile</h2>
+        <p style="margin-left: 30px">
+            {{$resume->personal_informations['summary']}}
+        </p>
+      </section>
+      <div class="content">
+        <div class="blob-wrapper">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blob blob-1">
+            <path
+              fill="#FFAA44"
+              d="M43.2,25.1C29.3,49,-27.1,48.6,-41.3,24.5C-55.6,0.3,-27.8,-47.5,0.4,-47.3C28.5,-47,57.1,1.2,43.2,25.1Z"
+              transform="translate(100 100)" />
+          </svg>
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blob blob-2">
+            <path
+              fill="#77DD"
+              d="M43.2,25.1C29.3,49,-27.1,48.6,-41.3,24.5C-55.6,0.3,-27.8,-47.5,0.4,-47.3C28.5,-47,57.1,1.2,43.2,25.1Z"
+              transform="translate(100 100)" />
+          </svg>
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blob blob-3">
+            <path
+              fill="#698389"
+              d="M43.2,25.1C29.3,49,-27.1,48.6,-41.3,24.5C-55.6,0.3,-27.8,-47.5,0.4,-47.3C28.5,-47,57.1,1.2,43.2,25.1Z"
+              transform="translate(100 100)" />
+          </svg>
+        </div>
+        <section class="left-column">
+          <section class="experience {{ count($resume->experiences)==0 ? 'hide' : ''}}">
+            <div class="experience section ">
+                <h2>Experience</h2>
+                @foreach ($resume->experiences as $experience)
+                <div class="job" class="{{ $experience['visible_on_cv'] ? '' : 'hide' }}">
+              <h3>{{ $experience['job_title'] }}, {{ $experience['company_name'] }}</h3>
+              <p>
+                @php
+                    echo $experience['start_date'];
+                    echo $experience['currently_working'] ? '- Present' : ' - '.$experience['to_date'];
+                @endphp
+            </p>
+            @if (count($experience['expertises']) > 0)
+            <ul>
+                @foreach ($experience['expertises'] as $expertise)
+                    <li>{{ $expertise['name'] }} for {{ $expertise['months'] }} months</li>
+                @endforeach
+            </ul>
+        @endif
+      </div>
+      @endforeach
+            </div>
+
+          </section>
+          <section class="skills">
+            <h2>Skills</h2>
+            <p style="margin-left: 30px"> 
+              @foreach ($resume->skills as $skill)
+              {{ $skill['name'] }}{{$loop->last?"":", "}}
+          @endforeach</p>
+          </section>
+        </section>
+        <section class="right-column">
+          <section class="education">
+            <h2>Education</h2>
+            @foreach ($resume->educations as $education)
+            <div class="education-item">
+              <h3>{{ $education['institution_name'] }}</h3>
+              <p>{{ $education['field_study'] }}</p>
+              <p>{{ $education['education_starting_year'] }} - {{ $education['education_graduation_year'] ? $education['education_graduation_year'] : 'Present' }}</p>
+            </div>
+        @endforeach
+          </section>
+          <section class="projects">
+            <h2>Projects & Volunteer</h2>
+            @foreach ($resume->projects as $project)
+             
+            <div class="project">
+              <h3>{{ $project['title'] }}</h3> 
+              <p>{{$project['startDate'] }} - {{ $project['present'] ?"Present": $project['endDate'] }}</p>
+              <p>{{ $project['description'] }}</p>
+            </div>
+            @endforeach
+          </section>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>

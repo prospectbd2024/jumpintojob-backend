@@ -227,6 +227,7 @@
                 <div class="section projects {{ count($resume->projects) == 0 ? 'hide' : '' }}">
                     <h3>Projects</h3>
                     @foreach ($resume->projects as $project)
+                   
                         <p><strong>{{ $project['title'] }}</strong><br>{{ $project['description'] }}</p>
                     @endforeach
                 </div>

@@ -102,7 +102,7 @@
             <div class="left-column">
                 <div class="summary section">
                     <h2>Summary</h2>
-                    <p>Lorem ipsum In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available</p>
+                    <p>{{$resume->personal_informations['summary']}}</p>
                 </div>
                 <div class="education section {{ count($resume->educations)==0 ? 'hide' : ''}}">
                     <h2>Education</h2>
@@ -124,8 +124,8 @@
                     <ul>
                         @foreach ($resume->projects as $project)
                         <li class="{{ $project['visible_on_cv'] ? '' : 'hide' }}">
-                            <strong>{{ $project['title'] }} — Detail</strong><br>
-                            {{ $project['description'] }}
+                            <strong>{{ $project['title'] }} —   {{ $project['description'] }}</strong><br>
+                             
                         </li>
                         @endforeach
                     </ul>
