@@ -45,7 +45,7 @@
       }
 
       .contact-info {
-        font-size: 14px;
+        font-size: 12px;
         margin-top: 20px;
       }
 
@@ -227,21 +227,17 @@
   <body>
     <div class="container">
       <header>
-        <h1>Your Name</h1>
+        <h1>{{ $resume->personal_informations['firstName'] }} {{ $resume->personal_informations['lastName'] }}</h1>
         <hr />
         <div class="contact-info">
-          <span>Address</span>
+          <span>{{$resume->personal_informations['currentAddress']['city']}}, {{$resume->personal_informations['currentAddress']['country']}}</span>
           <span>|</span>
-          <span>Phone</span>
+          <span>{{$resume->personal_informations['phone']}}</span>
           <span>|</span>
-          <span>Email</span>
+          <span>{{$resume->personal_informations['email']}}</span>
         </div>
-        <div class="social-media">
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-        </div>
+  
+
       </header>
 
       <section class="profile">
@@ -327,6 +323,12 @@
             @endforeach
           </section>
         </section>
+      </div>
+      <div class="social-media">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
   </body>
