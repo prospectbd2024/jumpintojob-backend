@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Circular;
 use App\Models\Company;
 use App\Models\Employer;
 use App\Models\Template;
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(JobSeekerSeeder::class);
         $this->call(EmployerSeeder::class);
         Employer::factory(10)->create();
-        $this->call(CircularSeeder::class);
+//        $this->call(CircularSeeder::class);
+        Circular::factory(10000)->create();
         $this->call(TemplateSeeder::class);
     }
 }

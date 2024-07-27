@@ -13,10 +13,11 @@ class EmployerSeeder extends Seeder
 {
     public function run(): void
     {
+        $email = fake()->safeEmail();
         $user = User::create([
             'first_name' => 'employer',
             'last_name' => 'test',
-            'email' => 'employer@test.com',
+            'email' => $email,
             'email_verified_at' => now(),
             'is_verified' => 1,
             'password' => bcrypt('123456'), // password
@@ -29,8 +30,8 @@ class EmployerSeeder extends Seeder
             'company_id' => Company::get()->random()->first()->id,
             'user_id' => $user->id,
             'name' => 'employer',
-            'email' => 'employer@test.com',
-            'phone' => '01700000000',
+            'email' => $email,
+            'phone' => fake()->randomDigit(10),
             'position' => fake()->jobTitle(),
             'avatar' => fake()->imageUrl(),
         ]);
