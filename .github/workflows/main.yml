@@ -22,7 +22,7 @@ jobs:
     - name: Install Dependencies
       run: composer install
     - name: Copy env
-      run: cp .env.example .env
+      run: cp .env.example-dev .env
 
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
