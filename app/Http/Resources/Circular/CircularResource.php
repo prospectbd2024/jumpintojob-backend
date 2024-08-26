@@ -20,6 +20,7 @@ class CircularResource extends JsonResource
             'email' => $this->employer->company->email,
             'availability' => $this->availability,
             'image' => $this->employer->company->logo,
+            'cover_image' => $this->employer->company->cover_image,
             'description' => $this->description,
             'responsibilities'=> $this->responsibilities,
             'educational_requirements' => $this->educational_requirements,
@@ -30,7 +31,7 @@ class CircularResource extends JsonResource
             'job_type' => $this->employment_type,
             'salary' => $this->salary,
             'deadline' => $this->deadline,
-            'created_at' => Carbon::parse($this->created_at)->format('d/m/Y'),
+            'created_at' => $this->formatCreatedAt($this->created_at),
             'links' => [
                 'show' => $this->unless(Route::currentRouteName() === 'circular.show', function () {
                     return route('circular.show', [
@@ -42,5 +43,22 @@ class CircularResource extends JsonResource
                 'delete' => route('circular.destroy', ['circular' => $this->id]),
             ]
         ];
+    }
+	 private function formatCreatedAt($created_at)
+    {
+        $createdAt = Carbon::parse($created_at);
+        $now = Carbon::now();
+
+        $daysDiff = $createdAt->diffInDays($now);
+
+        if ($daysDiff === 0) {
+            return 'posted: Today';
+        } elseif ($daysDiff === 1) {
+            return 'posted: Yesterday';
+        } elseif ($now->isTomorrow($createdAt)) {
+            return 'posted: Tomorrow';
+        } else {
+            return 'posted: ' . $daysDiff . ' days ago';
+        }
     }
 }
