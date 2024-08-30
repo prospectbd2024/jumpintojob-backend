@@ -451,6 +451,16 @@ class AuthController extends Controller
 
     public function socialSignIn(Request $request)
     {
+        $secret = $request->nextSecret; 
+        if($secret !==env("NEXTAUTH_SECRET","randomStrongString")){
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Request not allowed'
+            ],403);
+
+        }
+
         $userInfo = $request->userInfo['user'];
         $profile = $request->userInfo['profile'];
         $account = $request->userInfo['account'];
