@@ -44,8 +44,8 @@ class CircularResource extends JsonResource
             ]
         ];
     }
-	 private function formatCreatedAt($created_at)
-    {
+	 private function formatCreatedAt($created_at): string
+     {
         $createdAt = Carbon::parse($created_at);
         $now = Carbon::now();
 
@@ -55,8 +55,6 @@ class CircularResource extends JsonResource
             return 'posted: Today';
         } elseif ($daysDiff === 1) {
             return 'posted: Yesterday';
-        } elseif ($now->isTomorrow($createdAt)) {
-            return 'posted: Tomorrow';
         } else {
             return 'posted: ' . $daysDiff . ' days ago';
         }

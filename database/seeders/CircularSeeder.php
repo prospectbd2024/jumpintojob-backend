@@ -233,17 +233,18 @@ class CircularSeeder extends Seeder
                 'deadline' => '2024-10-30',
                 ],
                 ];
-                
+
 
         // Loop through the jobs array and create Circular instances
-        foreach ($jobs as $item) {
-            $employer = Employer::inRandomOrder()->first();
-            $item['company_id'] = $employer->company_id;
-            $item['category_id'] = Category::inRandomOrder()->first()->id;
-            $item['employer_id'] = $employer->id;
-            $item['is_featured'] = rand(0, 1);
-            Circular::create($item);
-        }
+//        foreach ($jobs as $item) {
+//            $employer = Employer::inRandomOrder()->first();
+//            $item['company_id'] = $employer->company_id;
+//            $item['category_id'] = Category::inRandomOrder()->first()->id;
+//            $item['employer_id'] = $employer->id;
+//            $item['is_featured'] = rand(0, 1);
+//            Circular::create($item);
+//        }
+        Circular::factory(1000)->create();
     }
 }
 
