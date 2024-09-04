@@ -23,9 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPlansTableSeeder::class);
         $this->call(JobSeekerSeeder::class);
         $this->call(EmployerSeeder::class);
-        Employer::factory(10)->create();
-//        $this->call(CircularSeeder::class);
-        Circular::factory(10000)->create();
+        $this->call(CircularSeeder::class);
         $this->call(TemplateSeeder::class);
     }
 }

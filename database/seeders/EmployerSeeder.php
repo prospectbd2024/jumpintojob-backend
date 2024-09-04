@@ -41,5 +41,7 @@ class EmployerSeeder extends Seeder
             'address' => 'Dhaka',
             'address_type' => 'present',
         ]);
+
+        Employer::factory(100)->create();
     }
 }

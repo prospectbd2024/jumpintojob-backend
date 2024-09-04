@@ -17,7 +17,7 @@ use SoftDeletes, HasFactory;
     ];
 
     protected $guarded = [
-        // 'admin_only_field', // Add attributes that should not be mass-assigned here
+        // 'admin_only_field', // Add attributes that should not be mass-assigned here.
     ];
 
     protected array $dates = [

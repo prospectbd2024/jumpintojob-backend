@@ -26,13 +26,13 @@ class EmployerFactory extends Factory
             'address' => $this->faker->address(),
             'address_type' => $addressTypes[rand(0, 1)]
         ]);
-
+        $email = fake()->safeEmail();
         return [
-            'company_id' =>  $company->id,
+            'company_id' => $company->id,
             'user_id' => $user->id,
             'name' => $this->faker->name(),
-            'email' => $this->faker->email(),
-            'phone' => fake()->phoneNumber(),
+            'email' => $email,
+            'phone' => fake()->randomDigit(10),
             'position' => $this->faker->jobTitle(),
             'avatar' => $this->faker->imageUrl(),
             'created_at' => now(),

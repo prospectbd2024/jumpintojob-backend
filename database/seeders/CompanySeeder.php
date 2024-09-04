@@ -230,6 +230,7 @@ class CompanySeeder extends Seeder
         // Insert the companies into the database
         foreach ($companies as $company) {
             $company['is_featured'] = rand(0, 1);
+            $company['cover_image'] = fake()->imageUrl(800, 400, 'business', true);
             Company::create($company);
         }
     }
