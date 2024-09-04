@@ -234,7 +234,6 @@ class CircularSeeder extends Seeder
                 ],
                 ];
 
-
         // Loop through the jobs array and create Circular instances
 //        foreach ($jobs as $item) {
 //            $employer = Employer::inRandomOrder()->first();
@@ -245,6 +244,7 @@ class CircularSeeder extends Seeder
 //            Circular::create($item);
 //        }
         Circular::factory(1000)->create();
+
     }
 }
 
