@@ -31,7 +31,7 @@ class Template {
         $data = [
             'source' => $content,
             'format' => $format,
-            ...$options
+            'options' => $options
         ];
     
         // Initialize cURL session
