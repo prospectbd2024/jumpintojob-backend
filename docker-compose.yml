@@ -82,7 +82,12 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=example
       - ME_CONFIG_MONGODB_SERVER=mongodb
     restart: unless-stopped
-
+  htmltoimage:
+    image: 'monkeyphysics/html-to-image' 
+    ports:
+      - "3033:3033"
+    restart: unless-stopped
+      
 volumes:
   mongodb-data:
 
