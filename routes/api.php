@@ -148,9 +148,7 @@ Route::prefix('candidate-contact')->group(function () {
 });
 Route::prefix('templates')->group(function () {
     Route::get('/', [TemplateController::class, 'index'])->name('templates.index');
-    Route::post('/generate/html', [TemplateController::class, 'generateHtmlTemplate'])->name('templates.generateHtmlTemplate');
-    Route::post('/generate/img', [TemplateController::class, 'generateTemplateImg'])->name('templates.generateTemplateImg');
-    Route::post('/generate/pdf', [TemplateController::class, 'generateTemplatePdf'])->name('templates.generateTemplatePdf');
+    Route::post('/generator', [TemplateController::class, 'templateGenerator'])->name('templates.templateGenerator'); 
 
 });
 
