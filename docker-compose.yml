@@ -18,8 +18,7 @@ services:
     image: laravel/app 
     working_dir: /app
     volumes:
-      - .:/app
-    restart: unless-stopped
+      - .:/app 
 
   mariadb:
     image: mariadb:10.5.7
