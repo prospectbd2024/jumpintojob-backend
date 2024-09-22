@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\Recaptcha;
+use App\Rules\ValidEmail;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -24,6 +25,7 @@ class SignupRequest extends FormRequest
             ],
             'email' => [
                 'required_if:register_by,email',
+                new ValidEmail,
                 'unique:users,email',
                 Rule::unique('users', 'email')
                     ->whereNotNull('deleted_at')
