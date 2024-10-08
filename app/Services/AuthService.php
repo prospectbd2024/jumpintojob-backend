@@ -147,6 +147,8 @@ class AuthService
         $company->name = $this->request->name;
         $company->email = $this->request->email;
         $company->company_type = $this->request->company_type;
+        $company->logo = $this->request->logo;
+        $company->cover_image = $this->request->cover_image; 
         $company->slug = $this->request->slug;
         $company->save();
         $this->company = $company;
