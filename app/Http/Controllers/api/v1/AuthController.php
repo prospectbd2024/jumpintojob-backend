@@ -25,6 +25,7 @@ use Hash;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -231,23 +232,19 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if ($user != null) {
-            if (!$user->banned) {
-                if (Hash::check(request()->password, $user->password)) {
+        if (!$user || !FacadesHash::check(request()->password, $user->password)) {
+            return response()->json(['result' => false, 'message' => 'Incorrect credentials', 'user' => null], 401);
+        } 
+        if ($user->banned) {
+            return response()->json(['result' => false, 'message' => 'User is banned', 'user' => null], 401);
+           
+        }   
+        if ($user->user_type!=="job_seeker") {
+            return response()->json(['result' => false, 'message' => 'Please login with Job seeker credentials', 'user' => null], 401);
+           
+        } 
 
-                    //                    if ($user->email_verified_at == null) {
-                    //                        return response()->json(['result' => false, 'message' => 'Please verify your account', 'user' => null], 401);
-                    //                    }
-                    return new LoginResource($user);
-                } else {
-                    return response()->json(['result' => false, 'message' => 'Unauthorized', 'user' => null], 401);
-                }
-            } else {
-                return response()->json(['result' => false, 'message' => 'User is banned', 'user' => null], 401);
-            }
-        } else {
-            return response()->json(['result' => false, 'message' => 'User not found', 'user' => null], 401);
-        }
+        return new LoginResource($user);
     }
 
     /**

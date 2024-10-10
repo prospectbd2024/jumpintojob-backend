@@ -20,12 +20,12 @@ use Symfony\Component\HttpFoundation\Response;
 class CVController extends Controller
 {
      
-    public function getCV($cv_id) {
-        $cv = Cv::find($cv_id);
+    public function getCV($user_id) {
+        $cv = Cv::where('user_id',$user_id)->first();
         if (!$cv){
             return  response()->json([
                 'status' => false,
-                'message' => 'CV not found'
+                'message' => 'No CV found for the user!'
             ],Response::HTTP_NOT_FOUND);
         }
         return  response()->json([
@@ -50,7 +50,7 @@ class CVController extends Controller
         $cv-> cv_html = $request->cv_html;
         $cv->user_id = $user_id;              
         $cv->profile_data =json_encode( $request->profile_data);              
-        $cv->applicant_status = $request->applicant_status;              
+        $cv->applicant_status = $request->applicant_status;         
         $cv->save();        
              
          

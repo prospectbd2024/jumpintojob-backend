@@ -154,7 +154,7 @@ Route::prefix('templates')->group(function () {
 
 
 Route::prefix('cv')->group(function (){
-    Route::get('/{cv_id}', [CVController::class,'getCV']);
+    Route::get('/{user_id}', [CVController::class,'getCV']);
     Route::post('/store', [CVController::class,'saveCV'])->middleware(['auth:sanctum']);
 });
  
