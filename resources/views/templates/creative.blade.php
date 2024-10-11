@@ -160,7 +160,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{asset("resume/profile.jpg")}}" alt="Profile Picture">
+            <img src="{{ $resume->personal_informations['cv_profile_image'] }}" alt="Profile Picture">
             <div>
                 <h1>{{ $resume->personal_informations['firstName'] }} {{ $resume->personal_informations['lastName'] }}</h1>
                 <h2>{{ $resume->personal_informations['title'] }}</h2>

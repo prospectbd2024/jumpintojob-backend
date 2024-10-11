@@ -123,7 +123,7 @@
                     <h2>Projects</h2>
                     <ul>
                         @foreach ($resume->projects as $project)
-                        <li class="{{ $project['visible_on_cv'] ? '' : 'hide' }}">
+                        <li>
                             <strong>{{ $project['title'] }} —   {{ $project['description'] }}</strong><br>
                              
                         </li>
