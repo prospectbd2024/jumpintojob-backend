@@ -39,6 +39,7 @@
         }
         header .profile-image-container{
             position: relative;
+            background-color: white;
         }
         header .profile-image-container img{
             width: 150px;
@@ -146,7 +147,7 @@
     <header>
         <div class="header-left-side">
             <div class="profile-image-container"  >
-                <img src="https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg"  alt="profile">
+                <img src="{{ $resume->personal_informations['cv_profile_image'] }}"  alt="profile">
             </div>
             <div>
                 <p class="first-name">{{$resume->personal_informations['firstName'] }}</h2>
