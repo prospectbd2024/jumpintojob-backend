@@ -38,4 +38,8 @@ class Company extends Model
     {
         return $this->hasMany(Employer::class);
     }
+
+    public function jobs(){
+        return $this->hasMany(Circular::class,"company_id","id");
+    }
 }

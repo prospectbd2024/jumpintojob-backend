@@ -241,7 +241,9 @@ class AuthController extends Controller
            
         }   
         if ($user->user_type!==$request->userType) {
-            return response()->json(['result' => false, 'message' => 'Please login with Job seeker credentials', 'user' => null], 401);
+            $userType = $request->userType; 
+            $formattedString = ucwords(str_replace('_', ' ', $userType));
+            return response()->json(['result' => false, 'message' => "You Can not login  with {$formattedString} credentials", 'user' => null], 401);
            
         } 
 
