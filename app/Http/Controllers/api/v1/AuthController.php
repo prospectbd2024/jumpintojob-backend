@@ -240,7 +240,7 @@ class AuthController extends Controller
             return response()->json(['result' => false, 'message' => 'User is banned', 'user' => null], 401);
            
         }   
-        if ($request->userType!=="job_seeker") {
+        if ($user->user_type!==$request->userType) {
             return response()->json(['result' => false, 'message' => 'Please login with Job seeker credentials', 'user' => null], 401);
            
         } 
