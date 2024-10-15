@@ -22,7 +22,8 @@ class CompanyResource extends JsonResource
                 'show' =>  $this->slug,
 //                'update' => route('company.update', $id),
 //                'delete' => route('company.destroy', $id),
-            ]
+            ],
+            'jobCount' => $this->jobs->count()
         ];
     }
 }

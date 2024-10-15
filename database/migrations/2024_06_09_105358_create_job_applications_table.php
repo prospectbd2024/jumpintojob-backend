@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('job_id');
-            $table->string('cv_id');
+            $table->string('cv_id')->nullable();
             $table->string('forwarding_letter_type');
             $table->longText('forwarding_letter');
             $table->string('cv_file')->nullable();
