@@ -19,9 +19,9 @@ class CircularController extends Controller
     /**
      * Display a listing of the circulars.
      *
-     * @return CircularResourceCollection
+     * @return array
      */
-    public function index() : array 
+    public function index(): array
     {
         $circulars = Circular::with('category', 'employer')->latest()->paginate(10);
         return [
@@ -34,49 +34,71 @@ class CircularController extends Controller
             ]
         ];
     }
-    public function search(Request $request): array
-{
-    // Retrieve the search key and location from the request
-    $searchKey = $request->searchKey;
-    $location = $request->location ;
-    
-    // Build the query
-    $query = Circular::with('category', 'employer.company');
-    
-    // Add conditions based on searchKey and location if they are provided
-    if ($searchKey) {
-        $query->where(function ($query) use ($searchKey) {
-            $query->where('title', 'like', '%' . $searchKey . '%')
-                  ->orWhereHas('category', function ($query) use ($searchKey) {
-                      $query->where('category_name', 'like', '%' . $searchKey . '%');
-                  })
-                  ->orWhereHas('employer.company', function ($query) use ($searchKey) {
-                      $query->where('name', 'like', '%' . $searchKey . '%');
-                  })
-                  ->orWhere('description', 'like', '%' . $searchKey . '%');
-        });
-    }
-    
-    if ($location) {
-        $query->where('location', 'like', '%' . $location . '%');
-    }
-    
-    // Execute the query with pagination
-    $circulars = $query->latest()->paginate(10);
-    
-    // Return the collection
-    return [
-        'data' => CircularResourceCollection::make($circulars),
-        'pagination' => [
-            'currentPage' => $circulars->currentPage(),  // Correct method name
-            'totalPages' => $circulars->lastPage(),      // Correct method name
-            'perPage' => $circulars->perPage(),          // Correct method name
-            'total' => $circulars->total(),              // Total items available
-        ]
-    ];
-}
 
-    
+
+    /**
+     * Display a listing of the circulars from its own creator.
+     *
+     * @return array
+     */
+    public function employerjobs(): array
+    {
+        $circulars = Circular::with('category', 'employer')
+            ->where('employer_id', auth()->user()->employer->id)->latest()->paginate(10);
+        return [
+            'data' => CircularResourceCollection::make($circulars),
+            'pagination' => [
+                'currentPage' => $circulars->currentPage(),  // Correct method name
+                'totalPages' => $circulars->lastPage(),      // Correct method name
+                'perPage' => $circulars->perPage(),          // Correct method name
+                'total' => $circulars->total(),              // Total items available
+            ]
+        ];
+    }
+
+    public function search(Request $request): array
+    {
+        // Retrieve the search key and location from the request
+        $searchKey = $request->searchKey;
+        $location = $request->location;
+
+        // Build the query
+        $query = Circular::with('category', 'employer.company');
+
+        // Add conditions based on searchKey and location if they are provided
+        if ($searchKey) {
+            $query->where(function ($query) use ($searchKey) {
+                $query->where('title', 'like', '%' . $searchKey . '%')
+                    ->orWhereHas('category', function ($query) use ($searchKey) {
+                        $query->where('category_name', 'like', '%' . $searchKey . '%');
+                    })
+                    ->orWhereHas('employer.company', function ($query) use ($searchKey) {
+                        $query->where('name', 'like', '%' . $searchKey . '%');
+                    })
+                    ->orWhere('description', 'like', '%' . $searchKey . '%');
+            });
+        }
+
+        if ($location) {
+            $query->where('location', 'like', '%' . $location . '%');
+        }
+
+        // Execute the query with pagination
+        $circulars = $query->latest()->paginate(10);
+
+        // Return the collection
+        return [
+            'data' => CircularResourceCollection::make($circulars),
+            'pagination' => [
+                'currentPage' => $circulars->currentPage(),  // Correct method name
+                'totalPages' => $circulars->lastPage(),      // Correct method name
+                'perPage' => $circulars->perPage(),          // Correct method name
+                'total' => $circulars->total(),              // Total items available
+            ]
+        ];
+    }
+
+
     /**
      * Display a listing of the featured circulars.
      *
