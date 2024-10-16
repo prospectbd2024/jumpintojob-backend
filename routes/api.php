@@ -126,7 +126,7 @@ Route::prefix('notification')->group(function () {
 });
 
 Route::prefix('applications')->group(function () {
-    Route::get('/{user_id}', [JobApplicationController::class, 'index'])->name('application.index')->middleware(['auth:sanctum']);
+    Route::get('/', [JobApplicationController::class, 'index'])->name('application.index')->middleware(['auth:sanctum']);
 
 
     Route::post('/apply-for-job', [JobApplicationController::class,'apply'])->middleware(['auth:sanctum']);
