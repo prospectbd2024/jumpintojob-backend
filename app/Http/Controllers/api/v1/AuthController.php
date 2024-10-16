@@ -234,15 +234,15 @@ class AuthController extends Controller
 
         if (!$user || !FacadesHash::check(request()->password, $user->password)) {
             return response()->json(['result' => false, 'message' => 'Incorrect credentials', 'user' => null], 401);
-        } 
+        }
         if ($user->banned) {
             return response()->json(['result' => false, 'message' => 'User is banned', 'user' => null], 401);
-           
-        }   
-        if ($user->user_type!=="job_seeker") {
-            return response()->json(['result' => false, 'message' => 'Please login with Job seeker credentials', 'user' => null], 401);
-           
-        } 
+
+        }
+//        if ($user->user_type!=="job_seeker") {
+//            return response()->json(['result' => false, 'message' => 'Please login with Job seeker credentials', 'user' => null], 401);
+//
+//        }
 
         return new LoginResource($user);
     }
@@ -448,7 +448,7 @@ class AuthController extends Controller
 
     public function socialSignIn(Request $request)
     {
-        $secret = $request->nextSecret; 
+        $secret = $request->nextSecret;
         if($secret !==env("NEXTAUTH_SECRET","randomStrongString")){
 
             return response()->json([
