@@ -13,14 +13,21 @@ return new class extends Migration
     {
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('job_id');
-            $table->string('cv_id')->nullable();
-            $table->string('forwarding_letter_type');
-            $table->longText('forwarding_letter');
-            $table->string('cv_file')->nullable();
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id'); // user applying for the job
+            $table->unsignedBigInteger('job_id'); // job being applied to
+            $table->enum('status', ['pending', 'shortlisted', 'rejected', 'interviewed'])->default('pending'); // application status
+            $table->string('cv_id')->nullable(); // reference to the CV
+            $table->string('forwarding_letter_type'); // type of cover letter
+            $table->longText('forwarding_letter'); // actual forwarding letter content
+            $table->string('cv_file')->nullable(); // path to the uploaded CV file
+            $table->timestamp('submitted_at')->useCurrent(); // when the application was submitted
+            $table->timestamp('interview_time')->nullable(); // scheduled interview time (if applicable)
+            $table->text('interview_notes')->nullable(); // notes related to the interview
+            $table->text('rejection_reason')->nullable(); // reason for rejecting the application (if applicable)
+            $table->timestamps(); // created_at and updated_at timestamps
+            $table->softDeletes(); // enables soft deletes
         });
+
     }
 
     /**

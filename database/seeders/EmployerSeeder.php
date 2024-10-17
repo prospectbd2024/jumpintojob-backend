@@ -13,7 +13,7 @@ class EmployerSeeder extends Seeder
 {
     public function run(): void
     {
-        $email = fake()->safeEmail();
+        $email = "employer@test.com";
         $user = User::create([
             'first_name' => 'employer',
             'last_name' => 'test',
