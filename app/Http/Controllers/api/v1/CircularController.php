@@ -7,8 +7,10 @@ use App\Http\Requests\Circular\CircularStoreRequest;
 use App\Http\Requests\Circular\CircularUpdateRequest;
 use App\Http\Resources\Circular\CircularResource;
 use App\Http\Resources\Circular\CircularResourceCollection;
+use App\Http\Resources\JobApplicantResource;
 use App\Models\Circular;
 use App\Models\Company;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,6 +56,33 @@ class CircularController extends Controller
                 'total' => $circulars->total(),              // Total items available
             ]
         ];
+    }
+
+    /**
+     * Display a listing of the circular with job applicants.
+     *
+     * @return JsonResponse
+     */
+    public function indexWithApplicants(): JsonResponse
+    {
+        $employerId = auth()->user()->employer->id;
+        $jobs = Circular::where('employer_id', $employerId)
+            ->with('jobApplications')
+            ->get();
+
+
+        $data = $jobs->map(function ($job) {
+            return [
+                'id' => $job->id,
+                'job_title' => $job->title,
+                'applicants_count' => $job->jobApplications->count(),
+                'applicants' => JobApplicantResource::collection($job->jobApplications),
+            ];
+        });
+
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     public function search(Request $request): array

@@ -64,6 +64,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::prefix('employer')->group(function () {
             Route::get('/jobs', [CircularController::class, 'employerjobs']);
+            Route::get('/jobs-with-applicants', [CircularController::class, 'indexWithApplicants']);
+
 
             Route::get('/', [EmployerController::class, 'index'])->name('employer.index');
 

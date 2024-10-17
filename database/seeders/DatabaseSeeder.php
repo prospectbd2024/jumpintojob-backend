@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobSeekerSeeder::class);
         $this->call(EmployerSeeder::class);
         $this->call(CircularSeeder::class);
+        $this->call(JobApplicationSeeder::class);
         $this->call(TemplateSeeder::class);
     }
 }
