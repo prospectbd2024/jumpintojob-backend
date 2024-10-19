@@ -238,7 +238,7 @@ class AuthController extends Controller
         }
         if ($user->banned) {
             return response()->json(['result' => false, 'message' => 'User is banned', 'user' => null], 401);
-
+        }
 
         return new LoginResource($user);
     }
