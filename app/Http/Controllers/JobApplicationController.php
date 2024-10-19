@@ -72,7 +72,7 @@ class JobApplicationController extends Controller
     public function index(Request $request)
     {
 
-        $job_applications = JobApplication::where('user_id', auth()->user()->id)->get();
+        $job_applications = JobApplication::where('user_id', auth()->user()->id)->paginate(10);
 
         return JobApplicationResource::collection($job_applications);
     }
