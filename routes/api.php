@@ -63,6 +63,9 @@ Route::middleware('auth:sanctum')->group(function () {
         });
 
         Route::prefix('employer')->group(function () {
+            Route::get('/jobs', [CircularController::class, 'employerjobs']);
+            Route::get('/jobs-with-applicants', [CircularController::class, 'indexWithApplicants']);
+
 
             Route::get('/', [EmployerController::class, 'index'])->name('employer.index');
 
@@ -125,8 +128,8 @@ Route::prefix('notification')->group(function () {
 });
 
 Route::prefix('applications')->group(function () {
-    Route::get('/{user_id}', [JobApplicationController::class, 'index'])->name('application.index')->middleware(['auth:sanctum']);
-   
+    Route::get('/', [JobApplicationController::class, 'index'])->name('application.index')->middleware(['auth:sanctum']);
+
 
     Route::post('/apply-for-job', [JobApplicationController::class,'apply'])->middleware(['auth:sanctum']);
 });
@@ -148,7 +151,7 @@ Route::prefix('candidate-contact')->group(function () {
 });
 Route::prefix('templates')->group(function () {
     Route::get('/', [TemplateController::class, 'index'])->name('templates.index');
-    Route::post('/generator', [TemplateController::class, 'templateGenerator'])->name('templates.templateGenerator'); 
+    Route::post('/generator', [TemplateController::class, 'templateGenerator'])->name('templates.templateGenerator');
 
 });
 
@@ -157,4 +160,3 @@ Route::prefix('cv')->group(function (){
     Route::get('/{user_id}', [CVController::class,'getCV']);
     Route::post('/store', [CVController::class,'saveCV'])->middleware(['auth:sanctum']);
 });
- 

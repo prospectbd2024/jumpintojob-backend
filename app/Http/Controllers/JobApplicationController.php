@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobApplicationResource;
 use App\Models\CV;
 use App\Models\JobApplication;
 use Exception;
@@ -68,19 +69,11 @@ class JobApplicationController extends Controller
             'message' => 'Applied successfully!'
         ]);
     }
-    public function index($user_id, Request $request)
+    public function index(Request $request)
     {
-        $user = Auth::user();
-        if ($user->id != $user_id) {
-            return response()->json([
-                'status' => false,
-                'message' => 'User does not have permission'
-            ]);
-        }
-        $job_applications = JobApplication::where('user_id', $user_id)->get();
 
-        return [
-            'data' => $job_applications
-        ];
+        $job_applications = JobApplication::where('user_id', auth()->user()->id)->paginate(10);
+
+        return JobApplicationResource::collection($job_applications);
     }
 }
