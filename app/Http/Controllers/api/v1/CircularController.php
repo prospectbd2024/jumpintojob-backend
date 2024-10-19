@@ -68,10 +68,9 @@ class CircularController extends Controller
         $employerId = auth()->user()->employer->id;
         $jobs = Circular::where('employer_id', $employerId)
             ->with('jobApplications')
-            ->get();
+            ->paginate(10); // Adjust '10' to the number of records you want per page.
 
-
-        $data = $jobs->map(function ($job) {
+        $data = $jobs->getCollection()->map(function ($job) {
             return [
                 'id' => $job->id,
                 'job_title' => $job->title,
@@ -80,8 +79,15 @@ class CircularController extends Controller
             ];
         });
 
+        // Modify the pagination response to include the transformed data.
         return response()->json([
-            'data' => $data
+            'data' => $data,
+            'meta' => [
+                'current_page' => $jobs->currentPage(),
+                'last_page' => $jobs->lastPage(),
+                'per_page' => $jobs->perPage(),
+                'total' => $jobs->total(),
+            ],
         ]);
     }
 
