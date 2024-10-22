@@ -14,6 +14,7 @@ use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\PasswordResetController;
 use App\Http\Controllers\api\v1\SkillsController;
 use App\Http\Controllers\api\v1\TemplateController;
+use App\Http\Controllers\BookMarkController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -159,4 +160,9 @@ Route::prefix('templates')->group(function () {
 Route::prefix('cv')->group(function (){
     Route::get('/{user_id}', [CVController::class,'getCV']);
     Route::post('/store', [CVController::class,'saveCV'])->middleware(['auth:sanctum']);
+});
+
+Route::group(['prefix' => 'bookmark'], function () {
+    Route::get('/{user_id}', [BookMarkController::class, 'getBookMark']);
+    Route::put('/{user_id}/update', [BookMarkController::class, 'updateBookMark']);
 });
