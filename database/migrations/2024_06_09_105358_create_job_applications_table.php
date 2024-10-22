@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // user applying for the job
             $table->unsignedBigInteger('job_id'); // job being applied to
-            $table->enum('status', ['pending', 'shortlisted', 'rejected', 'interviewed'])->default('pending'); // application status
+            $table->enum('status', ['pending', 'shortlisted', 'rejected', 'hired', 'interviewed'])->default('pending'); // application status
             $table->string('cv_id')->nullable(); // reference to the CV
             $table->string('forwarding_letter_type'); // type of cover letter
             $table->longText('forwarding_letter'); // actual forwarding letter content
