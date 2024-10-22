@@ -32,7 +32,8 @@ class Circular extends Model
         'educational_requirements',
         'experience',
         'created_at',
-        'company_id'
+        'company_id',
+        'is_featured'
     ];
 
     protected $guarded = [
