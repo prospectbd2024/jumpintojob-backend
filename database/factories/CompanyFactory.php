@@ -21,6 +21,7 @@ class CompanyFactory extends Factory
             'description' => $this->faker->realText(200),
             'category_id' => random_int(1,10),
             'location' => $this->faker->city(),
+            'is_featured' => [0,1] [random_int(0,1)] ,
             'company_type' => $this->faker->randomElement(['private', 'public']),
             'slug' => $this->faker->slug(),
             'created_at' => now(),

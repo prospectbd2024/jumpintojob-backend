@@ -37,6 +37,7 @@ class CircularFactory extends Factory
             'is_remote' => rand(0, 1),
             'created_at' => now(),
             'updated_at' => now(),
+            'is_featured' => [0,1][random_int(0,1)]
         ];
     }
 }

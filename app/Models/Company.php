@@ -19,6 +19,7 @@ class Company extends Model
         'location',
         'company_type',
         'slug',
+        'is_featured'
     ];
 
     protected array $dates = [
