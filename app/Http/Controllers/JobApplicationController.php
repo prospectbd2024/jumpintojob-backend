@@ -15,7 +15,13 @@ class JobApplicationController extends Controller
     public function apply(Request $request)
     {
 
-
+        $user = Auth::user();
+        if($user->user_type!=="job_seeker"){
+            return response()->json([
+                "success" => false,
+                "message" => "User is not a job seeker!"
+            ]);
+        }
         // Validate the request
         $request->validate([
             'cv_id' => 'nullable|integer',
@@ -24,7 +30,7 @@ class JobApplicationController extends Controller
             'forwarding_letter' => 'nullable',
             'forwarding_letter_type' => 'nullable' // You can adjust the validation rules as needed
         ]);
-        $user = Auth::user();
+        
         if ($request->input('cv_id')) {
             try {
                 $cv = CV::find($request->input('cv_id'));
