@@ -41,7 +41,9 @@ class CircularResource extends JsonResource
                 }),
                 'update' => route('circular.update', ['circular' => $this->id]),
                 'delete' => route('circular.destroy', ['circular' => $this->id]),
-            ]
+                'dashboard' =>  "/companies/{$this->employer->company->slug}"
+            ],
+            
         ];
     }
 	 private function formatCreatedAt($created_at): string
