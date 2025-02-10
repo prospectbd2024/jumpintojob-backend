@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'shortlisted', 'rejected', 'hired', 'interviewed'])->default('pending'); // application status
             $table->string('cv_id')->nullable(); // reference to the CV
             $table->string('forwarding_letter_type'); // type of cover letter
-            $table->longText('forwarding_letter'); // actual forwarding letter content
+            $table->longText('forwarding_letter')->nullable(); // actual forwarding letter content
             $table->string('cv_file')->nullable(); // path to the uploaded CV file
             $table->timestamp('submitted_at')->useCurrent(); // when the application was submitted
             $table->timestamp('interview_time')->nullable(); // scheduled interview time (if applicable)
@@ -27,7 +27,6 @@ return new class extends Migration
             $table->timestamps(); // created_at and updated_at timestamps
             $table->softDeletes(); // enables soft deletes
         });
-
     }
 
     /**

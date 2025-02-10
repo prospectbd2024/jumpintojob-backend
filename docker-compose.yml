@@ -41,7 +41,7 @@ services:
     depends_on:
       - backend
     volumes:
-      - .:/app
+       - .:/app
     restart: unless-stopped
     
   phpmyadmin:
