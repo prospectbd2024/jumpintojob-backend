@@ -10,3 +10,8 @@ docker compose exec backend sh ./bin/update_dev.sh
 sleep 60
 docker compose  exec -d queue  php artisan queue:work --sleep=3 --tries=3 --timeout=120
 echo 'http://localhost:8090/'
+
+docker compose exec bakend sh /
+      chown -R www-data:www-data /app/storage /app/bootstrap/cache \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
+    && chmod -R 777 /app/storage/logs
