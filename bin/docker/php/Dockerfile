@@ -1,17 +1,33 @@
 FROM php:8.2-fpm-alpine
 
-# Update app
-RUN apk update && apk add --no-cache tzdata
+# Set timezone and install system dependencies
+RUN apk update && apk add --no-cache \
+    tzdata \
+    autoconf \
+    g++ \
+    make \
+    openssl-dev \
+    libpng-dev \
+    libzip-dev \
+    linux-headers \
+    curl \
+    libtool \
+    pkgconfig \
+    pcre-dev \
+    icu-dev \
+    zlib-dev \
+    oniguruma-dev \
+    bash
+
 # Set timezone
 ENV TZ="Asia/Dhaka"
 
-RUN apk add --update --no-cache autoconf g++ make openssl-dev
-RUN apk add libpng-dev
-RUN apk add libzip-dev
-RUN apk add --update linux-headers
+# Install PHP extensions
+RUN docker-php-ext-install gd zip bcmath sockets
 
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install sockets
+# Install PECL extensions: mongodb and redis
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+RUN pecl install redis && docker-php-ext-enable redis
+
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
