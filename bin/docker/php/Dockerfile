@@ -17,13 +17,14 @@ RUN apk update && apk add --no-cache \
     icu-dev \
     zlib-dev \
     oniguruma-dev \
-    bash
+    bash \
+    mariadb-dev  # Required for pdo_mysql
 
 # Set timezone
 ENV TZ="Asia/Dhaka"
 
-# Install PHP extensions
-RUN docker-php-ext-install gd zip bcmath sockets
+# Install PHP extensions (including pdo_mysql)
+RUN docker-php-ext-install gd zip bcmath sockets pdo pdo_mysql
 
 # Install PECL extensions: mongodb and redis
 RUN pecl install mongodb && docker-php-ext-enable mongodb
