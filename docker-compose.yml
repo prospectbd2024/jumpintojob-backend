@@ -42,6 +42,7 @@ services:
             - backend
         volumes:
             - .:/app
+            - ./storage:/app/storage:delegated
         restart: unless-stopped
 
     phpmyadmin:
