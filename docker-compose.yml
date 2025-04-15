@@ -9,6 +9,8 @@ services:
         working_dir: /app
         image: laravel/app
         restart: unless-stopped
+        depends_on:
+            - mariadb
 
     queue:
         depends_on:
@@ -22,8 +24,6 @@ services:
 
     mariadb:
         image: mariadb:10.5.7
-        depends_on:
-            - backend
         ports:
             - "3308:3306"
         environment:
