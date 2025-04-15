@@ -11,16 +11,19 @@ services:
         restart: unless-stopped
         depends_on:
             - mariadb
+            - mongodb
 
     queue:
-        depends_on:
-            - backend
-            - mariadb
-            - nginx
         image: laravel/app
         working_dir: /app
         volumes:
             - .:/app
+        restart: unless-stopped
+        depends_on:
+            - backend
+            - mariadb
+            - mongodb
+            - nginx
 
     mariadb:
         image: mariadb:10.5.7
@@ -39,26 +42,25 @@ services:
         ports:
             - "80:80"
             - "443:80"
-        depends_on:
-            - backend
         volumes:
             - .:/app
             - ./storage:/app/storage:delegated
         restart: unless-stopped
+        depends_on:
+            - backend
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         ports:
             - "9001:80"
-        depends_on:
-            - mariadb
-            - backend
         environment:
             - PMA_ARBITRARY=1
             - PMA_HOST=mariadb
             - PMA_USER=root
             - PMA_PASSWORD=app
         restart: unless-stopped
+        depends_on:
+            - mariadb
 
     mongodb:
         image: mongo:latest
@@ -75,13 +77,14 @@ services:
         image: mongo-express:latest
         ports:
             - "8081:8081"
-        depends_on:
-            - mongodb
         environment:
             - ME_CONFIG_MONGODB_ADMINUSERNAME=root
             - ME_CONFIG_MONGODB_ADMINPASSWORD=example
             - ME_CONFIG_MONGODB_SERVER=mongodb
         restart: unless-stopped
+        depends_on:
+            - mongodb
+
     htmltoimage:
         image: "monkeyphysics/html-to-image"
         ports:
