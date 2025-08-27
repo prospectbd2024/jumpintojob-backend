@@ -1,99 +1,75 @@
 services:
-    backend:
-        build:
-            context: ./bin/docker/php
-        volumes:
-            - .:/app
-        ports:
-            - "9003:9003" # xdebug port
-        working_dir: /app
-        image: laravel/app
-        restart: unless-stopped
-        depends_on:
-            - mariadb
-            - mongodb
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/production/nginx/Dockerfile
+    volumes:
+      # -----------------------------------------------------------
+      - laravel-storage-production:/var/www/storage:ro
+      - laravel-public-assets:/var/www/public/build:ro
+    networks:
+      - laravel-production
+    ports:
+      # -----------------------------------------------------------
+      - "${NGINX_PORT:-8089}:80"
+    depends_on:
+      - php-fpm
+    restart: unless-stopped
 
-    queue:
-        image: laravel/app
-        working_dir: /app
-        volumes:
-            - .:/app
-        restart: unless-stopped
-        depends_on:
-            - backend
-            - mariadb
-            - mongodb
-            - nginx
-
-    mariadb:
-        image: mariadb:10.5.7
-        ports:
-            - "3308:3306"
-        environment:
-            - MYSQL_ROOT_PASSWORD=app
-            - MYSQL_USER=root
-            - MYSQL_PASSWORD=app
-            - MYSQL_DATABASE=jumpinto_db
-        restart: unless-stopped
-
-    nginx:
-        build:
-            context: ./bin/docker/nginx
-        ports:
-            - "80:80"
-            - "443:80"
-        volumes:
-            - .:/app
-            - ./storage:/app/storage:delegated
-        restart: unless-stopped
-        depends_on:
-            - backend
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:latest
-        ports:
-            - "9001:80"
-        environment:
-            - PMA_ARBITRARY=1
-            - PMA_HOST=mariadb
-            - PMA_USER=root
-            - PMA_PASSWORD=app
-        restart: unless-stopped
-        depends_on:
-            - mariadb
-
-    mongodb:
-        image: mongo:latest
-        ports:
-            - "27017:27017"
-        environment:
-            - MONGO_INITDB_ROOT_USERNAME=root
-            - MONGO_INITDB_ROOT_PASSWORD=example
-        volumes:
-            - mongodb-data:/data/db
-        restart: unless-stopped
-
-    mongo-express:
-        image: mongo-express:latest
-        ports:
-            - "8081:8081"
-        environment:
-            - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-            - ME_CONFIG_MONGODB_ADMINPASSWORD=example
-            - ME_CONFIG_MONGODB_SERVER=mongodb
-        restart: unless-stopped
-        depends_on:
-            - mongodb
-
-    htmltoimage:
-        image: "monkeyphysics/html-to-image"
-        ports:
-            - "3033:3033"
-        restart: unless-stopped
-
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/common/php-fpm/Dockerfile
+      target: production
+    volumes:
+      - laravel-public-assets:/var/www/public/build
+      - laravel-storage-production:/var/www/storage
+    env_file:
+      - .env
+    networks:
+      - laravel-production
+    depends_on:
+      mariadb:
+        condition: service_started
+      mongodb:
+        condition: service_started
+  mariadb:
+    image: mariadb:10.5.7
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=app
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=app
+      - MYSQL_DATABASE=jumpinto_db
+    restart: unless-stopped
+    networks:
+      - laravel-production
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - mongodb-data:/data/db
+    restart: unless-stopped
+    networks:
+      - laravel-production
+  htmltoimage:
+    image: "monkeyphysics/html-to-image"
+    ports:
+      - "3033:3033"
+    restart: unless-stopped
+    networks:
+      - laravel-production
 volumes:
-    mongodb-data:
+  mongodb-data:
+  laravel-storage-production:
+  laravel-public-assets:
 
 networks:
-    default:
-        name: backend-network
+  default:
+    name: backend-network
+  laravel-production:
