@@ -5,8 +5,8 @@ services:
       dockerfile: ./docker/production/nginx/Dockerfile
     volumes:
       # -----------------------------------------------------------
-      - laravel-storage-production:/var/www/storage:ro
-      - laravel-public-assets:/var/www/public/build:ro
+      - laravel-storage-production:/var/www/storage
+      - laravel-public-assets:/var/www/public/build
     networks:
       - laravel-production
     ports:
