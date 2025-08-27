@@ -1,9 +1,11 @@
 {
     "cSpell.words": [
+        "healthcheck",
         "htmltoimage",
         "INITDB",
         "jumpinto",
         "laravel",
-        "monkeyphysics"
+        "monkeyphysics",
+        "mysqladmin"
     ]
 }

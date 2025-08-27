@@ -28,6 +28,14 @@ services:
     restart: unless-stopped
     networks:
       - laravel-production
+    healthcheck:
+      test:
+        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-papp"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+      start_period: 30s
+
   mongodb:
     image: mongo:latest
     ports:
@@ -40,6 +48,13 @@ services:
     restart: unless-stopped
     networks:
       - laravel-production
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      timeout: 10s
+      retries: 5
+      interval: 10s
+      start_period: 30s
+
   htmltoimage:
     image: "monkeyphysics/html-to-image"
     ports:
@@ -47,6 +62,7 @@ services:
     restart: unless-stopped
     networks:
       - laravel-production
+
   php-fpm:
     build:
       context: .
@@ -61,9 +77,11 @@ services:
       - laravel-production
     depends_on:
       mariadb:
-        condition: service_started
+        condition: service_healthy
       mongodb:
-        condition: service_started
+        condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   mongodb-data:
   laravel-storage-production:
