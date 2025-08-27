@@ -1,5 +1,5 @@
 #!/bin/bash
-files='-f docker-compose.yml'
+files='-f docker-compose.yaml'
 if [[ ! -e .env ]]
 then
     cp .env.example-dev .env
