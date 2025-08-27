@@ -49,11 +49,11 @@ services:
     networks:
       - laravel-production
     healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand({ping: 1})"]
       timeout: 10s
-      retries: 5
-      interval: 10s
-      start_period: 30s
+      retries: 10
+      interval: 5s
+      start_period: 40s
 
   htmltoimage:
     image: "monkeyphysics/html-to-image"
