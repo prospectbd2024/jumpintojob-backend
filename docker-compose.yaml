@@ -16,23 +16,6 @@ services:
       - php-fpm
     restart: unless-stopped
 
-  php-fpm:
-    build:
-      context: .
-      dockerfile: ./docker/common/php-fpm/Dockerfile
-      target: production
-    volumes:
-      - laravel-public-assets:/var/www/public/build
-      - laravel-storage-production:/var/www/storage
-    env_file:
-      - .env
-    networks:
-      - laravel-production
-    depends_on:
-      mariadb:
-        condition: service_started
-      mongodb:
-        condition: service_started
   mariadb:
     image: mariadb:10.5.7
     ports:
@@ -64,6 +47,23 @@ services:
     restart: unless-stopped
     networks:
       - laravel-production
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/common/php-fpm/Dockerfile
+      target: production
+    volumes:
+      - laravel-public-assets:/var/www/public/build
+      - laravel-storage-production:/var/www/storage
+    env_file:
+      - .env
+    networks:
+      - laravel-production
+    depends_on:
+      mariadb:
+        condition: service_started
+      mongodb:
+        condition: service_started
 volumes:
   mongodb-data:
   laravel-storage-production:
